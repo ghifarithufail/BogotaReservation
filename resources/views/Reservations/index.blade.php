@@ -69,6 +69,7 @@
                         <option value="">-- Payment Status --</option>
                         <option value="done">Done </option>
                         <option value="unpaid"> Unpaid </option>
+                        <option value="unpaid"> Unpaid exampel </option>
                     </select>
                     {{-- <input type="text" class="form-control" placeholder="Status payment" name="payment" id="payment"> --}}
                 </div>
