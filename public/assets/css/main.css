@@ -1,0 +1,167 @@
+/* ---------
+   * imports *
+----------*/
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('/assets/font/Roboto-Black.ttf') format('truetype'),
+    url('/assets/font/Roboto-BlackItalic.ttf') format('truetype'),
+    url('/assets/font/Roboto-Bold.ttf') format('truetype'),
+    url('/assets/font/Roboto-BoldItalic.ttf') format('truetype'),
+    url('/assets/font/Roboto-Italic.ttf') format('truetype'),
+    url('/assets/font/Roboto-Light.ttf') format('truetype'),
+    url('/assets/font/Roboto-LightItalic.ttf') format('truetype'),
+    url('/assets/font/Roboto-Medium.ttf') format('truetype'),
+    url('/assets/font/Roboto-MediumItalic.ttf') format('truetype'),
+    url('/assets/font/Roboto-Regular.ttf') format('truetype'),
+    url('/assets/font/Roboto-Thin.ttf') format('truetype'),
+    url('/assets/font/Roboto-ThinItalic.ttf') format('truetype');
+}
+
+
+/* ---------
+ * Common *
+--------- */
+
+:root {
+
+    /* --------------
+    *Jangan Diganti!*
+    *Do not Change! *
+    --------------- */
+
+    scroll-behavior: smooth;
+
+    /* 
+    *Colors*
+    */
+    --black: hsl(0, 0%, 0%,);
+    --white: hsl(0, 0%, 100%);
+    --whitegrey: hsl(0, 0%, 94%);
+    --red: hsl(3, 99%, 35%);
+    --redmaroon: hsl(3, 100%, 31%);
+}
+
+body{
+    font-family: "Open Sans", sans-serif;
+    background-color: #F3F3F3;
+}
+
+/* navbar */
+.navbar-brand{
+    font-size: 25px;
+    font-weight: 700;
+}
+.nav-link{
+    font-size: 18px;
+}
+.nav-link.active{
+    font-weight: 700;
+}
+/* end navbar */
+
+/* hero section */
+#hero{
+    background-color: #F3F3F3;
+    height: 100vh;
+    width: 100%;
+}
+
+
+/* end hero section */
+
+
+/* about section */
+
+/* end about section */
+
+/* pencapaian section */
+.pencapaian{
+    background-size: cover;
+    min-height: 90vh;
+}
+.inner{
+    overflow: hidden;
+}
+.inner img{
+    transition: all 1.5s ease-in;
+}
+.inner:hover img{
+    transform: scale(1.5);
+}
+/* end pencapaian section */
+
+
+/* Footer */
+#footer{
+    background-color: #9C0800;
+}
+.develope-by{
+    padding: 1rem;
+    text-align: center;
+    font-size: 17px;
+    color: black;
+}
+.wrapper-last-footer{
+    padding: 1rem;
+}
+.wrapper-col-1 h1{
+    font-weight: 900;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+.wrapper-col-1 p{
+    width: 90%;
+    font-size: 14px;
+}
+.wrapper-icon img{
+    width: 25px;
+    margin-right: 1rem;
+}
+.wrapper-col-2{
+    display: flex;
+    flex-direction: column;
+}
+.wrapper-col-2 h1{
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+.wrapper-col-2 a{
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+}
+.wrapper-col-3{
+    display: flex;
+    flex-direction: column;
+}
+.wrapper-col-3 h1{
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+.wrapper-col-3 a{
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+}
+.wrapper-col-4{
+    display: flex;
+    flex-direction: column;
+}
+.wrapper-col-4 h1{
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+.wrapper-col-4 a{
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+}
+.wrapper-last-footer{
+    display: flex;
+    justify-content: space-between;
+}
+/* end footer */

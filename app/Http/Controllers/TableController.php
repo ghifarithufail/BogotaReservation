@@ -26,6 +26,9 @@ class TableController extends Controller
         return view('Tables.create_table');
     }
 
+    public function contoh(){
+        return view('Tables.template');
+    }
     /**
      * Store a newly created resource in storage.
      */
