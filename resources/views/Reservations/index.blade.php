@@ -7,7 +7,7 @@
             </div>
                 <form action="">
                     <div class="card-body">
-                        <div class="form-group row">
+                        <div class="form-group row ml-3">
                             {{-- <div class="col-sm-2">
                         <label class="control-label p-2">Name:</label>
                     </div> --}}
@@ -21,16 +21,16 @@
                                 <input type="text" style="height: 40px" class="form-control" placeholder="tables" name="tables"
                                     id="tables">
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 <select name="payment" style="height: 40px" id="payment" class="form-control">
-                                    <option value="">-- Payment Status --</option>
+                                    <option value="">-- Status --</option>
                                     <option value="done">Done </option>
                                     <option value="unpaid"> Unpaid </option>
                                 </select>
                                 {{-- <input type="text" class="form-control" placeholder="Status payment" name="payment" id="payment"> --}}
                             </div>
-                            <div>
-                                <button type="submit" class="btn rounded text-white" style="background-color: #D9B282; height: 40px">Search</button>
+                            <div class="col-sm-1">
+                                <button type="submit" class="btn rounded text-white" style="background-color: #D9B282; height: 40px;">Search</button>
                             </div>
                         </div>
                     </div>
