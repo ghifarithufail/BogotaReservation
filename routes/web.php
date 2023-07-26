@@ -22,6 +22,8 @@ Route::get('/', function () {
 });
 
 Route::get('/data', [ReservationController::class, 'data']);
+
+Route::get('/contoh', [TableController::class, 'contoh']);
 // reservations
 Route::group(['prefix' => 'reservation'], function () {
     Route::get('/', [ReservationController::class, 'index'])->name('reservations');
