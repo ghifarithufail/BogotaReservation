@@ -21,19 +21,27 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/data', [ReservationController::class, 'data']);
 
 Route::get('/contoh', [TableController::class, 'contoh']);
 // reservations
 Route::group(['prefix' => 'reservation'], function () {
     Route::get('/', [ReservationController::class, 'index'])->name('reservations');
-    Route::get('/data', [ReservationController::class, 'index'])->name('reservations.data');
     Route::get('/create', [ReservationController::class, 'create'])->name('reservations.create');
     Route::post('/store', [ReservationController::class, 'store'])->name('reservations.store');
 });
 Route::get('/reservation/update/{id}', [ReservationController::class, 'update'])->name('reservations.update');
 Route::post('/reservation/{id}', [ReservationController::class, 'post'])->name('reservations.post');
 Route::get('/invoice/{id}', [ReservationController::class, 'invoice'])->name('invoice');
+Route::get('/reservation-arrival', [ReservationController::class, 'arrival'])->name('reservations.arrival');
+Route::get('/reservation-report', [ReservationController::class, 'report'])->name('reservations.report');
+
+Route::post('/reservation-arrival/{id}', [ReservationController::class, 'updateArriving'])->name('update.reservation.arrival');
+Route::post('/reservation-download', [ReservationController::class, 'download'])->name('reservation.download');
+
+
+
+
+
 
 
 

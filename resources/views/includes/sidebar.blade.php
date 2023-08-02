@@ -52,7 +52,19 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="/user" class="collapsed" aria-expanded="false">
+                    <a href="{{ route('reservations.arrival') }}" class="collapsed" aria-expanded="false">
+                        <i class="fa fa-user"></i>
+                        <p>Arrival</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('reservations') }}" class="collapsed" aria-expanded="false">
+                        <i class="fa fa-user"></i>
+                        <p>Data</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('reservations.report') }}" class="collapsed" aria-expanded="false">
                         <i class="fa fa-user"></i>
                         <p>Report</p>
                     </a>

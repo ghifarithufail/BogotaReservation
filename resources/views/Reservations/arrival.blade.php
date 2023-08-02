@@ -3,20 +3,19 @@
     <div class="container mt-5">
         <div class="card shadow">
             <div class="card-header">
-                <h1 class="text-center">Reservations</h1>
+                <h1 class="text-center">Arrival Guest</h1>
             </div>
             <form action="">
                 <div class="card-body">
                     <div class="form-group row ml-3">
-                        <div class="col-sm-3">
+                        {{-- <div class="col-sm-2">
+                        <label class="control-label p-2">Name:</label>
+                    </div> --}}
+                        <div class="col-sm-4">
                             <input type="text" style="height: 40px" class="form-control" placeholder="Name" name="search"
                                 id="search">
                         </div>
-                        <div class="col-sm-3">
-                            <input type="date" style="height: 40px" class="form-control" placeholder="Name"
-                                name="date" id="date">
-                        </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-4">
                             <select type="text" style="height: 40px" class="form-control"
                                 placeholder="tables" name="tables" id="tables">
                                 <option value="">-- Table --</option>
@@ -26,14 +25,7 @@
                             </select>
 
                         </div>
-                        <div class="col-sm-2">
-                            <select name="payment" style="height: 40px" id="payment" class="form-control">
-                                <option value="">-- Status --</option>
-                                <option value="done" @if(request()->payment == 'done') selected @endif>Done</option>
-                                <option value="unpaid" @if(request()->payment == 'unpaid') selected @endif>Unpaid</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-1">
+                        <div class="col-sm-4">
                             <button type="submit" class="btn rounded text-white"
                                 style="background-color: #D9B282; height: 40px;">Search</button>
                         </div>
@@ -53,7 +45,7 @@
                             <th scope="col">Reservation Table</th>
                             <th scope="col">Reservation Date</th>
                             <th scope="col" class="text-center">Status</th>
-                            <th scope="col">Actions</th>
+                            <th scope="col">Arrival</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -79,10 +71,16 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('reservations.update', $data->id) }}"
-                                        class="btn btn-warning edit m-1" style="width: 90px">Edit</a>
-                                    <a href="#" class="btn btn-danger delete m-1"
-                                        data-id="{{ $data->id }}">Delete</a>
+                                    @if ($data->arriving == "pre_arrival")
+                                    <form action="{{ route('update.reservation.arrival', ['id' => $data->id]) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn text-white" style="background-color: #D9B282 !important; border-radius: 10px;">
+                                            <i class="fa fa-user-plus"></i>
+                                        </button>
+                                    </form>
+                                    @else
+                                        Customer has Arrived
+                                    @endif
                                 </td>
                             </tr>
                         @empty

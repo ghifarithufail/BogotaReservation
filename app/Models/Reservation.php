@@ -16,7 +16,7 @@ class Reservation extends Model
     ];
 
     public function Tables(){
-        return $this->belongsTo(Table::class,'table_id');
+        return $this->belongsTo(Table::class,'table_id', 'id');
     }
     
 }

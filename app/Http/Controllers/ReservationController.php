@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Events\NotifReservation;
+use App\Exports\ReservationExport;
 use App\Models\Reservation;
 use App\Models\Table;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Excel;
 
 class ReservationController extends Controller
 {
@@ -14,53 +17,113 @@ class ReservationController extends Controller
     {
         $reservations = Reservation::with('Tables')->OrderBy('created_at', 'desc');
 
+        $this->filter($request, $reservations);
+
+        $today = Carbon::today();
         $datas = Reservation::sum('guest');
-
-        if ($request->has('search')) {
-            $search = $request->search;
-            $reservations = $reservations->where(function ($query) use ($search) {
-                $query->where('name', 'like', '%' . $search . '%')
-                    ->orWhere(function ($query) use ($search) {
-                        $query->whereHas('Tables', function ($Tables) use ($search) {
-                            $Tables->where('name', 'like', '%' . $search . '%');
-                        });
-                    });
-            });
-        }
-
-        if ($request->has('tables')) {
-            $tables = $request->tables;
-            $reservations = $reservations->whereHas('Tables', function ($query) use ($tables) {
-                $query->where('name', 'like', '%' . $tables . '%');
-            });
-        }
-
-        if ($request->has('date')) {
-            $date = $request->date;
-            $reservations = $reservations->where('date', 'like', '%' . $date . '%');
-        }
-
-        if ($request->has('payment')) {
-            $payment = $request->payment;
-            $reservations = $reservations->where('status', 'like', '%' . $payment . '%');
-        }
+        $table = Table::orderBy('tables_name', 'asc')->get();
 
         $reservations = $reservations->paginate(5);
 
-        if ($request->has('search')) {
-            $reservations->appends(['search' => $search]);
-        }
-        if ($request->has('tables')) {
-            $reservations->appends(['tables' => $tables]);
-        }
-        if ($request->has('date')) {
-            $reservations->appends(['date' => $date]);
-        }
-        if ($request->has('payment')) {
-            $reservations->appends(['payment' => $payment]);
-        }
+        $reservations->appends($request->all());
 
-        return view('Reservations.index', compact('reservations', 'datas'));
+        return view('Reservations.index', compact('reservations', 'datas', 'table'));
+    }
+
+    public function download()
+    {
+        return Excel::download(new ReservationExport(), 'reservation.xlsx');
+    }
+
+    public function report(Request $request)
+    {
+        $reservations = Reservation::with('tables')->orderBy('created_at', 'desc');
+        $today = Carbon::today();
+        $datas = Reservation::sum('guest');
+        $table = Table::orderBy('tables_name', 'asc')->get();
+        $filter = $this->filter($request, $reservations);
+        
+        $report['sukses'] = Reservation::with('Tables')
+        ->where('status', 'done')
+        ->selectRaw('sum(guest) as total, count(CASE WHEN arriving = "done" THEN 1 ELSE NULL END) as datang, tables.tables_name')
+        ->join('tables', 'reservations.table_id', '=', 'tables.id')
+        ->groupBy('tables.tables_name')
+        ->orderBy('tables.tables_name', 'asc');
+
+        $report['sukses'] = $this->filter($request, $report['sukses'])->get();
+
+        $report['gagal'] = Reservation::with('Tables')
+            ->where('status', 'unpaid')
+            ->selectRaw('sum(guest) as total, count(CASE WHEN arriving = "pre_arrival" THEN 1 ELSE NULL END) as pre_arrival, tables.tables_name')
+            ->join('tables', 'reservations.table_id', '=', 'tables.id')
+            ->groupBy('tables.tables_name')
+            ->orderBy('tables.tables_name', 'asc');
+
+        $report['gagal'] = $this->filter($request, $report['gagal'])->get();
+
+        
+
+        $reservations = $reservations->paginate(5);
+        $reservations->appends($request->all());
+
+        return view('Reservations.report', compact('reservations', 'datas', 'table', 'report'));
+    }
+
+    private function filter(Request $request, $query)
+{
+    if ($request->has('search')) {
+        $search = $request->search;
+        $query = $query->where('name', 'like', '%' . $search . '%');
+    }
+
+    if ($request->has('tables')) {
+        $tables = $request->tables;
+        $query = $query->whereHas('tables', function ($q) use ($tables) {
+            $q->where('tables_name', 'like', '%' . $tables . '%');
+        });
+    }
+
+    if ($request->has('date')) {
+        $date = $request->date;
+        $query = $query->where('date', 'like', '%' . $date . '%');
+    }
+
+    if ($request->has('payment')) {
+        $payment = $request->payment;
+        $query = $query->where('status', 'like', '%' . $payment . '%');
+    }
+
+    return $query;
+}
+
+    public function arrival(Request $request)
+    {
+        $today = Carbon::today();
+        $reservations = Reservation::with('Tables')->where('date', '>=', $today)->where('status', 'done')->OrderBy('name', 'asc');
+        $this->filter($request, $reservations);
+
+        $datas = Reservation::sum('guest');
+        $table = Table::orderBy('tables_name', 'asc')->get();
+
+        $reservations = $reservations->paginate(5);
+        $reservations->appends($request->all());
+
+        return view('Reservations.arrival', compact('reservations', 'datas', 'table'));
+    }
+
+    public function updateArriving($id)
+    {
+        // Find the reservation by ID
+        $reservation = Reservation::with('Tables')->findOrFail($id);
+
+        if ($reservation->arriving === 'pre_arrival') {
+            // Update the status to "done"
+            $reservation->arriving = 'done';
+            $reservation->save();
+
+            return redirect()->route('reservations.arrival')
+                ->with('success', 'Reservation marked as done successfully!');
+        }
     }
 
     public function notif()
@@ -90,22 +153,27 @@ class ReservationController extends Controller
         $currentDate = Carbon::now();
         $daysDifference = $currentDate->diffInDays($reservationDate);
 
+        // code untuk mencari table yang terisi
         $existingReservation = Reservation::where('table_id', $request->table_id)
             ->whereDate('date', $date)
             ->first();
 
+        //validasi limit orang
         if ($recordCount + $request->guest > $limit) {
             return back()->with('limit', 'You have reached the maximum limit of records for today.');
         }
 
+        //validasi bisa reservasi jika h-2
         if ($daysDifference < 2) {
             return back()->with('dateReservation', 'Cannot update reservation within 2 days of the reservation date.');
         }
 
+        // validasi untuk table yang terisi
         if ($existingReservation) {
             return back()->with('warning', 'This table is already reserved.');
         }
 
+        //validasi untuk tidak lebih dari limit table
         if ($request->guest > $table->table_guest) {
             return back()->with('guest', 'please choose the table base on guest.');
         }
@@ -156,29 +224,41 @@ class ReservationController extends Controller
             'date.required' => 'tanggal harus diisi.',
         ]);
 
+        //memgambil tanggal
         $date = $request->input('date');
+
+        //menghitung jumlah limit orang
         $limit = Table::sum('table_guest');
+
+        //code minimum reservasi 2 hari sebelumnya
         $minimumDate = Carbon::now()->addDays(2)->startOfDay();
+
+        //menghitung jumlah tamu
         $recordCount = Reservation::whereDate('date', $date)->sum('guest');
+
         $table = Table::findOrFail($request->table_id);
 
+        //code untuk mencari table reservasi
         $existingReservation = Reservation::where('table_id', $request->table_id)
             ->whereDate('date', $date)
             ->first();
 
+        // validasi untuk table yang sudah di reservasi
         if ($existingReservation) {
             return back()->with('warning', 'This table is already reserved.');
         }
 
+        // validasi memilih meja sesuai dengan kapasisatas ornag
         if ($request->guest > $table->table_guest) {
             return back()->with('guest', 'please choose the table base on guest.');
         }
 
+        //validasi untuk minimum reservasi 2 hari sebelumnya
         if (Carbon::parse($date)->isBefore($minimumDate)) {
             return back()->with('date', 'Minimum reservation is 2 days in advance');
         }
 
-        // Check if the count exceeds the limit of 10
+        //validasi untuk limit reservasi 
         if ($recordCount + $request->guest > $limit) {
             return back()->with('date', 'You have reached the maximum limit of records for today.');
         }
