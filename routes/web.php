@@ -27,20 +27,23 @@ Route::get('/contoh', [TableController::class, 'contoh']);
 Route::group(['prefix' => 'reservation'], function () {
     Route::get('/', [ReservationController::class, 'index'])->name('reservations');
     Route::get('/create', [ReservationController::class, 'create'])->name('reservations.create');
-    Route::post('/store', [ReservationController::class, 'store'])->name('reservations.store');
+    Route::post('/store', [ReservationController::class, 'payment'])->name('reservations.payment');
 });
 Route::get('/reservation/update/{id}', [ReservationController::class, 'update'])->name('reservations.update');
 Route::post('/reservation/{id}', [ReservationController::class, 'post'])->name('reservations.post');
 Route::get('/invoice/{id}', [ReservationController::class, 'invoice'])->name('invoice');
 Route::get('/reservation-arrival', [ReservationController::class, 'arrival'])->name('reservations.arrival');
-Route::get('/reservation-report', [ReservationController::class, 'report'])->name('reservations.report');
+Route::get('/reservation-report', [ReportController::class, 'report'])->name('reservations.report');
 
 Route::post('/reservation-arrival/{id}', [ReservationController::class, 'updateArriving'])->name('update.reservation.arrival');
-Route::post('/reservation-download', [ReservationController::class, 'download'])->name('reservation.download');
+Route::get('/reservation-cencel/{id}', [ReservationController::class, 'cencel'])->name('reservation.cencel');
+// Route::post('/reservation-download', [ReservationController::class, 'download'])->name('reservation.download');
 
 
-
-
+Route::get('/reservation/download', [ReportController::class, 'download'])->name('reservations.download');
+Route::post('/report_table', [ReportController::class, 'report_table'])->name('reservations.report.table');
+Route::post('/report_sukses', [ReportController::class, 'report_success'])->name('reservations.report.sukses');
+Route::post('/report_gagal', [ReportController::class, 'report_failed'])->name('reservations.report.gagal');
 
 
 
@@ -57,7 +60,8 @@ Route::get('notif', [ReservationController::class, 'notif']);
 
 
 //REPORT
-Route::get('/report', [ReportController::class, 'index'])->name('report');
+// Route::get('/report', [ReportController::class, 'index'])->name('report');
+Route::get('/index', [ReportController::class, 'index'])->name('chart');
 
 //home
 Route::get('/home', [HomeController::class, 'index'])->name('home');

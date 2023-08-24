@@ -46,6 +46,7 @@
                 <table class="table" id="data-table" style="zoom: 0.85;">
                     <thead>
                         <tr>
+                            <th scope="col">NO</th>
                             <th scope="col">ID</th>
                             <th scope="col" class="text-left">Name</th>
                             <th scope="col" class="text-left">Email</th>
@@ -57,8 +58,12 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                            $startingRow = ($reservations->currentPage() - 1) * $reservations->perPage() + 1;
+                        @endphp
                         @forelse  ($reservations as $data)
                             <tr>
+                                <td>{{$startingRow ++}}</td>
                                 <td>{{ $data->id }}</td>
                                 <td class="text-left">{{ $data->name }}</td>
                                 <td class="text-left">{{ $data->email }}</td>
@@ -81,8 +86,8 @@
                                 <td>
                                     <a href="{{ route('reservations.update', $data->id) }}"
                                         class="btn btn-warning edit m-1" style="width: 90px">Edit</a>
-                                    <a href="#" class="btn btn-danger delete m-1"
-                                        data-id="{{ $data->id }}">Delete</a>
+                                    <a href="{{ route('reservation.cencel', $data->id) }}" class="btn btn-danger delete m-1"
+                                        data-id="{{ $data->id }}">Cencel</a>
                                 </td>
                             </tr>
                         @empty

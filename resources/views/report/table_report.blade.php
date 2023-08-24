@@ -1,0 +1,68 @@
+<table class="table" id="data-table" style="zoom: 0.85;">
+    <thead>
+        <tr>
+            <th scope="col">No</th>
+            <th scope="col" class="text-left">Name</th>
+            <th scope="col" class="text-left">Email</th>
+            <th scope="col">Guest</th>
+            <th scope="col" class="text-center">Status</th>
+            <th scope="col">Reservation Table</th>
+            <th scope="col" class="text-center">Payment</th>
+            <th scope="col">Reservation Date</th>
+            {{-- <th scope="col">Actions</th> --}}
+        </tr>
+    </thead>
+    <tbody id="load_report_table">
+        @php
+            $counter = 1;
+        @endphp
+        @forelse  ($reservations as $data)
+            <tr>
+                <td>{{ $counter++ }}</td>
+                <td class="text-left">{{ $data->name }}</td>
+                <td class="text-left">{{ $data->email }}</td>
+                <td>{{ $data->guest }}</td>
+                <td>
+                    @if ($data->arriving == 0)
+                        <div class="badge rounded-pill bg-danger text-white text-center"
+                        style="width: 100px; height: 30px; font-size: 14px; display: flex; align-items: center; justify-content: center;">
+                            <div>
+                                Not Arrived
+                            </div>
+                        </div>
+                    @else
+                    <div class="badge badge-success text-center" 
+                    style="width: 100px; height: 30px; font-size: 14px; display: flex; align-items: center; justify-content: center;">
+                        <div>
+                            Arrived
+                        </div>
+                    </div>
+                    @endif
+                </td>
+                <td>{{ $data->Tables->tables_name }} - {{ $data->Tables->table_guest }} people</td>
+                <td class="text-center">
+                    @if ($data->status == 'done')
+                        <div class="badge badge-success text-center"
+                            style="width: 100px; height: 30px; font-size: 16px;">
+                            {{ $data->status }}
+                        </div>
+                    @else
+                        <div class="badge rounded-pill bg-danger text-white"
+                            style="width: 100px; height: 30px; font-size: 16px;">
+                            {{ $data->status }}
+                        </div>
+                    @endif
+                </td>
+
+                <td>{{ $data->date->format('D d-M-Y') }}</td>
+            </tr>
+        @empty
+            <tr>
+                <td colspan="8" class="text-center">Data Empty</td>
+            </tr>
+        @endforelse
+    </tbody>
+</table>
+{{-- <div class="container">
+    {{ $reservations->links() }}
+</div> --}}

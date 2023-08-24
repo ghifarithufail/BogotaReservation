@@ -10,9 +10,10 @@ class Reservation extends Model
     use HasFactory;
 
     protected $guarded = [];
-    protected $casts = [ 'date'=>'datetime'];
+    protected $casts = [ 'date'=>'datetime', 'created_at'=> 'datetime'];
     protected $dates =[
-        'date'
+        'date',
+        'created_at'
     ];
 
     public function Tables(){

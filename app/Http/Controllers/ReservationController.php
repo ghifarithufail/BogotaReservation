@@ -3,70 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Events\NotifReservation;
-use App\Exports\ReservationExport;
 use App\Models\Reservation;
 use App\Models\Table;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Excel;
 
 class ReservationController extends Controller
 {
     public function index(Request $request)
     {
-        $reservations = Reservation::with('Tables')->OrderBy('created_at', 'desc');
+        $reservations = Reservation::with('Tables')->OrderBy('created_at', 'desc')->where('arriving',[0,1]);
 
+        
+        $today = Carbon::today();
+        $datas = Reservation::sum('guest');
+        $table = Table::orderBy('tables_name', 'asc')->get();
+        
         $this->filter($request, $reservations);
-
-        $today = Carbon::today();
-        $datas = Reservation::sum('guest');
-        $table = Table::orderBy('tables_name', 'asc')->get();
-
         $reservations = $reservations->paginate(5);
 
         $reservations->appends($request->all());
 
+        \Log::info($request);
         return view('Reservations.index', compact('reservations', 'datas', 'table'));
-    }
-
-    public function download()
-    {
-        return Excel::download(new ReservationExport(), 'reservation.xlsx');
-    }
-
-    public function report(Request $request)
-    {
-        $reservations = Reservation::with('tables')->orderBy('created_at', 'desc');
-        $today = Carbon::today();
-        $datas = Reservation::sum('guest');
-        $table = Table::orderBy('tables_name', 'asc')->get();
-        $filter = $this->filter($request, $reservations);
-        
-        $report['sukses'] = Reservation::with('Tables')
-        ->where('status', 'done')
-        ->selectRaw('sum(guest) as total, count(CASE WHEN arriving = "done" THEN 1 ELSE NULL END) as datang, tables.tables_name')
-        ->join('tables', 'reservations.table_id', '=', 'tables.id')
-        ->groupBy('tables.tables_name')
-        ->orderBy('tables.tables_name', 'asc');
-
-        $report['sukses'] = $this->filter($request, $report['sukses'])->get();
-
-        $report['gagal'] = Reservation::with('Tables')
-            ->where('status', 'unpaid')
-            ->selectRaw('sum(guest) as total, count(CASE WHEN arriving = "pre_arrival" THEN 1 ELSE NULL END) as pre_arrival, tables.tables_name')
-            ->join('tables', 'reservations.table_id', '=', 'tables.id')
-            ->groupBy('tables.tables_name')
-            ->orderBy('tables.tables_name', 'asc');
-
-        $report['gagal'] = $this->filter($request, $report['gagal'])->get();
-
-        
-
-        $reservations = $reservations->paginate(5);
-        $reservations->appends($request->all());
-
-        return view('Reservations.report', compact('reservations', 'datas', 'table', 'report'));
     }
 
     private function filter(Request $request, $query)
@@ -78,9 +37,20 @@ class ReservationController extends Controller
 
     if ($request->has('tables')) {
         $tables = $request->tables;
-        $query = $query->whereHas('tables', function ($q) use ($tables) {
+        $query = $query->whereHas('Tables', function ($q) use ($tables) {
             $q->where('tables_name', 'like', '%' . $tables . '%');
         });
+    }
+    
+
+    if ($request->has('date_start')) {
+        $dateStart = date('Y-m-d', strtotime($request->date_start));
+        $query->whereDate('date', '>=', $dateStart);
+    }
+    
+    if ($request->has('date_end')) {
+        $dateEnd = date('Y-m-d', strtotime($request->date_end));
+        $query->whereDate('date', '<=', $dateEnd);
     }
 
     if ($request->has('date')) {
@@ -116,9 +86,9 @@ class ReservationController extends Controller
         // Find the reservation by ID
         $reservation = Reservation::with('Tables')->findOrFail($id);
 
-        if ($reservation->arriving === 'pre_arrival') {
+        if ($reservation->arriving === '0') {
             // Update the status to "done"
-            $reservation->arriving = 'done';
+            $reservation->arriving = '1';
             $reservation->save();
 
             return redirect()->route('reservations.arrival')
@@ -137,6 +107,18 @@ class ReservationController extends Controller
         $tables       = Table::all();
 
         return view('Reservations.update', compact('reservations', 'tables'));
+    }
+
+    public function cencel($id){
+        $reservation = Reservation::findOrFail($id);
+        
+        $data = [
+            'arriving' => 2
+        ];
+
+        $reservation->update($data);
+
+        return redirect()->route('reservations');
     }
 
     public function post(Request $request, $id)
@@ -163,9 +145,9 @@ class ReservationController extends Controller
             return back()->with('limit', 'You have reached the maximum limit of records for today.');
         }
 
-        //validasi bisa reservasi jika h-2
-        if ($daysDifference < 2) {
-            return back()->with('dateReservation', 'Cannot update reservation within 2 days of the reservation date.');
+        //validasi bisa reservasi jika h-1
+        if ($daysDifference < 1) {
+            return back()->with('dateReservation', 'Cannot update reservation within 1 days of the reservation date.');
         }
 
         // validasi untuk table yang terisi
@@ -211,7 +193,7 @@ class ReservationController extends Controller
         return view('Reservations.create', compact('table', 'limit'));
     }
 
-    public function store(Request $request)
+    public function payment(Request $request)
     {
         $this->validate($request, [
             'name' => 'required',
@@ -230,8 +212,8 @@ class ReservationController extends Controller
         //menghitung jumlah limit orang
         $limit = Table::sum('table_guest');
 
-        //code minimum reservasi 2 hari sebelumnya
-        $minimumDate = Carbon::now()->addDays(2)->startOfDay();
+        //code minimum reservasi 1 hari sebelumnya
+        $minimumDate = Carbon::now()->addDays(1)->startOfDay();
 
         //menghitung jumlah tamu
         $recordCount = Reservation::whereDate('date', $date)->sum('guest');
@@ -255,7 +237,7 @@ class ReservationController extends Controller
 
         //validasi untuk minimum reservasi 2 hari sebelumnya
         if (Carbon::parse($date)->isBefore($minimumDate)) {
-            return back()->with('date', 'Minimum reservation is 2 days in advance');
+            return back()->with('date', 'Minimum reservation is 1 days in advance');
         }
 
         //validasi untuk limit reservasi 
@@ -270,7 +252,7 @@ class ReservationController extends Controller
             'date' => $reservasi->date->format('D, d/m/Y'),
         ];
 
-        event(new NotifReservation($dataSend));
+        // event(new NotifReservation($dataSend));
 
         // Set your Merchant Server Key
         \Midtrans\Config::$serverKey = 'SB-Mid-server-474-cvbPRecHyCZZbYja0E-C';
