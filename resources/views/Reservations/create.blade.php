@@ -88,8 +88,7 @@
                     <option value="" selected>Choose Table</option>
                     {{-- <option value="a01" selected>a01</option> --}}
                     @foreach ($table as $data)
-                        <option value="{{ $data->id }}">{{ $data->name }} ({{ $data->table_guest }} people)
-                        </option>
+                        <option value="{{ $data->id }}">{{ $data->name }} ({{ $data->table_guest }} people)</option>
                     @endforeach
                 </select>
             </div>

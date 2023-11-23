@@ -75,7 +75,7 @@
             <div class="col-xs-12 col-sm-6">
                 <div class="card">
                     <div class="card-header">
-                        <h1 class="text-center">Summary Success</h1>
+                        <h1 class="text-center">Customer Success</h1>
                     </div>
                     <div class="col-xs-12 col-sm-12 mt-3" id="report_sukses">
                         <table class="table table-bordered table-striped">
@@ -99,7 +99,7 @@
             <div class="col-xs-12 col-sm-6">
                 <div class="card">
                     <div class="card-header">
-                        <h1 class="text-center">Summary Failed</h1>
+                        <h1 class="text-center">Customer Cancel</h1>
                     </div>
                     <div class="col-xs-12 col-sm-12 mt-3" id="report_gagal">
                         <table class="table table-bordered table-striped">
@@ -107,9 +107,9 @@
                                 <tr>
                                     <th class="text-center">Tables</th>
                                     <th class="text-center">Customer</th>
-                                    <th class="text-center">Not Arrival</th>
+                                    {{-- <th class="text-center">Not Arrival</th>
                                     <th class="text-center">Cenceled</th>
-                                    <th class="text-center">Payment</th>
+                                    <th class="text-center">Payment</th> --}}
                                 </tr>
                             </thead>
                             <tbody id="load_report_gagal">
@@ -152,12 +152,14 @@
                     <table class="table" id="data-table" style="zoom: 0.85;">
                         <thead>
                             <tr>
-                                <th scope="col">ID</th>
+                                <th scope="col">No</th>
                                 <th scope="col" class="text-left">Name</th>
                                 <th scope="col" class="text-left">Email</th>
                                 <th scope="col">Guest</th>
+                                <th scope="col" class="text-center">Arrive</th>
                                 <th scope="col">Reservation Table</th>
-                                <th scope="col" class="text-center">Status</th>
+                                <th scope="col" class="text-center">Payment</th>
+                                <th scope="col" class="text-center">Cancel</th>
                                 <th scope="col">Reservation Date</th>
                                 {{-- <th scope="col">Actions</th> --}}
                             </tr>
@@ -191,7 +193,7 @@
                     e.preventDefault(); // Prevent the default form submission
                     handleFilter();
                 });
-            }, 700);
+            }, 800);
 
             $("#reset_btn").click(function(e) {
                 e.preventDefault();

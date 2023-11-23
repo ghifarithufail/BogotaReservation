@@ -5,9 +5,10 @@
             <th scope="col" class="text-left">Name</th>
             <th scope="col" class="text-left">Email</th>
             <th scope="col">Guest</th>
-            <th scope="col" class="text-center">Status</th>
+            <th scope="col" class="text-center">Status Arriving</th>
             <th scope="col">Reservation Table</th>
             <th scope="col" class="text-center">Payment</th>
+            <th scope="col" class="text-center">Status Reservation</th>
             <th scope="col">Reservation Date</th>
             {{-- <th scope="col">Actions</th> --}}
         </tr>
@@ -16,7 +17,7 @@
         @php
             $counter = 1;
         @endphp
-        @forelse  ($reservations as $data)
+        @forelse ($reservations as $data)
             <tr>
                 <td>{{ $counter++ }}</td>
                 <td class="text-left">{{ $data->name }}</td>
@@ -24,17 +25,17 @@
                 <td>{{ $data->guest }}</td>
                 <td>
                     @if ($data->arriving == 0)
-                        <div class="badge rounded-pill bg-danger text-white text-center"
-                        style="width: 100px; height: 30px; font-size: 14px; display: flex; align-items: center; justify-content: center;">
-                            <div>
+                        <div>
+                            <div style="color:red">
                                 Not Arrived
                             </div>
                         </div>
                     @else
-                    <div class="badge badge-success text-center" 
-                    style="width: 100px; height: 30px; font-size: 14px; display: flex; align-items: center; justify-content: center;">
+                    <div>
                         <div>
-                            Arrived
+                            <b>
+                                Arrived
+                            </b>
                         </div>
                     </div>
                     @endif
@@ -50,6 +51,18 @@
                         <div class="badge rounded-pill bg-danger text-white"
                             style="width: 100px; height: 30px; font-size: 16px;">
                             {{ $data->status }}
+                        </div>
+                    @endif
+                </td>
+
+                <td class="text-center">
+                    @if ($data->cancel == '1')
+                        <div >
+                            Coming
+                        </div>
+                    @else
+                        <div style="color:red">
+                            Canceled
                         </div>
                     @endif
                 </td>

@@ -27,7 +27,7 @@ Route::get('/contoh', [TableController::class, 'contoh']);
 Route::group(['prefix' => 'reservation'], function () {
     Route::get('/', [ReservationController::class, 'index'])->name('reservations');
     Route::get('/create', [ReservationController::class, 'create'])->name('reservations.create');
-    Route::post('/store', [ReservationController::class, 'payment'])->name('reservations.payment');
+    Route::post('/store', [ReservationController::class, 'payment'])->name('reservations.store');
 });
 Route::get('/reservation/update/{id}', [ReservationController::class, 'update'])->name('reservations.update');
 Route::post('/reservation/{id}', [ReservationController::class, 'post'])->name('reservations.post');

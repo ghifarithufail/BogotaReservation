@@ -6,7 +6,8 @@
             <th scope="col" class="text-left">Email</th>
             <th scope="col">Guest</th>
             <th scope="col">Reservation Table</th>
-            <th scope="col" class="text-center">Status</th>
+            <th scope="col" class="text-center">Payment</th>
+            <th scope="col" class="text-center">Cancel</th>
             <th scope="col">Reservation Date</th>
             <th scope="col">Created Date</th>
             {{-- <th scope="col">Actions</th> --}}
@@ -32,6 +33,12 @@
                             {{ $data->status }}
                         </div>
                     @endif
+                </td>
+                <td>@if ($data->cancel == 0)
+                    Canceled
+                @else
+                    Coming
+                @endif
                 </td>
                 <td>{{ $data->date->format('D d-M-Y') }}</td>
                 <td>{{ $data->created_at->format('D d-M-Y') }}</td>

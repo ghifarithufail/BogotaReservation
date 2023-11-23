@@ -12,7 +12,7 @@ class ReservationController extends Controller
 {
     public function index(Request $request)
     {
-        $reservations = Reservation::with('Tables')->OrderBy('created_at', 'desc')->where('arriving',[0,1]);
+        $reservations = Reservation::with('Tables')->OrderBy('created_at', 'desc')->where('cancel',[1]);
 
         
         $today = Carbon::today();
@@ -41,7 +41,7 @@ class ReservationController extends Controller
             $q->where('tables_name', 'like', '%' . $tables . '%');
         });
     }
-    
+
 
     if ($request->has('date_start')) {
         $dateStart = date('Y-m-d', strtotime($request->date_start));
@@ -113,7 +113,7 @@ class ReservationController extends Controller
         $reservation = Reservation::findOrFail($id);
         
         $data = [
-            'arriving' => 2
+            'cancel' => 0
         ];
 
         $reservation->update($data);

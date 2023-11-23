@@ -16,8 +16,7 @@ class Reservation extends Model
         'created_at'
     ];
 
-    public function Tables(){
+    public function parents(){
         return $this->belongsTo(Table::class,'table_id', 'id');
     }
-    
 }
