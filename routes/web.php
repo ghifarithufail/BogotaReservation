@@ -65,6 +65,7 @@ Route::get('/index', [ReportController::class, 'index'])->name('chart');
 
 //home
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', [HomeController::class, 'template'])->name('template');
 Route::get('/homes', [HomeController::class, 'home'])->name('default');
 // Route::get('/table', [TableController::class, 'create'])->name('table.create');
 // Route::post('/table-post', [TableController::class, 'store'])->name('table.store');

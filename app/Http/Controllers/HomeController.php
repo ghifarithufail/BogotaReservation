@@ -75,6 +75,11 @@ class HomeController extends Controller
         return view('frontEnd.index', compact('reservations','datas'));
     }
 
+    public function template(){
+
+        return view('template');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
