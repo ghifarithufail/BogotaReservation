@@ -80,6 +80,11 @@ class HomeController extends Controller
         return view('template');
     }
 
+    public function example(){
+
+        return view('example');
+    }
+
     /**
      * Show the form for creating a new resource.
      */

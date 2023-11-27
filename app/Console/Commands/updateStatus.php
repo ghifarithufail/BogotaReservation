@@ -32,7 +32,7 @@ class updateStatus extends Command
 
         foreach ($allResev as $data){
             if($currentDate > $data->created_at){
-                $data->update(['cancel' => '0']);
+                $data->update(['cancel' => '1']);
             }
         }
     }

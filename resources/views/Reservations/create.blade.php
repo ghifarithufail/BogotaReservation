@@ -83,13 +83,22 @@
 
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Table</label>
-                <select name="table_id" id="dropdown" onchange="disableGuestField()" data-width="100%"
+                <select name="table_id" id="dropdown" data-width="100%"
                     class="form-control" aria-label="Default select example">
                     <option value="" selected>Choose Table</option>
                     {{-- <option value="a01" selected>a01</option> --}}
                     @foreach ($table as $data)
-                        <option value="{{ $data->id }}">{{ $data->name }} ({{ $data->table_guest }} people)</option>
+                        <option value="{{ $data->id }}">{{ $data->tables_name }} ({{ $data->table_guest }} people)</option>
                     @endforeach
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Time</label>
+                <select name="time" class="form-control" aria-label="Default select example">
+                        <option value="" selected>Choose Table</option>
+                        <option value="16.00 - 18.00">16.00 - 18.00</option>
+                        <option value="19.00 - 21.00">19.00 - 21.00</option>
                 </select>
             </div>
 

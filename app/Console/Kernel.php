@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         $schedule->command('reservations:updateStatus')
-                ->at('19:36')
+                ->at('19:52')
                 ->runInBackground();
     }
 

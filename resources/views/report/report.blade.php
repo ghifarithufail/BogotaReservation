@@ -1,7 +1,7 @@
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> --}}
 
 @extends('layout.default')
-@section('content')
+@section('contents')
     <div class="container mt-5">
         <div class="card shadow">
             <div class="card-header">

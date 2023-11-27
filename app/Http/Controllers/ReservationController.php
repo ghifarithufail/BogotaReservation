@@ -12,7 +12,7 @@ class ReservationController extends Controller
 {
     public function index(Request $request)
     {
-        $reservations = Reservation::with('Tables')->OrderBy('created_at', 'desc')->where('cancel',[1]);
+        $reservations = Reservation::with('Tables')->OrderBy('created_at', 'desc')->where('cancel',['0','1']);
 
         
         $today = Carbon::today();
@@ -206,9 +206,11 @@ class ReservationController extends Controller
             'date.required' => 'tanggal harus diisi.',
         ]);
 
+        $paymentAmount = $request->guest * 150000;
+
         //memgambil tanggal
         $date = $request->input('date');
-
+        $time = $request->input('time');
         //menghitung jumlah limit orang
         $limit = Table::sum('table_guest');
 
@@ -223,11 +225,12 @@ class ReservationController extends Controller
         //code untuk mencari table reservasi
         $existingReservation = Reservation::where('table_id', $request->table_id)
             ->whereDate('date', $date)
+            ->where('time', $time)
             ->first();
 
         // validasi untuk table yang sudah di reservasi
         if ($existingReservation) {
-            return back()->with('warning', 'This table is already reserved.');
+            return back()->with('warning', 'This table is already reserved and that time.');
         }
 
         // validasi memilih meja sesuai dengan kapasisatas ornag
@@ -245,7 +248,7 @@ class ReservationController extends Controller
             return back()->with('date', 'You have reached the maximum limit of records for today.');
         }
 
-        $reservasi = Reservation::create($request->all());
+        $reservasi = Reservation::create(array_merge($request->all(), ['price' => $paymentAmount]));
 
         $dataSend = [
             'name' => $reservasi->name,
@@ -266,12 +269,12 @@ class ReservationController extends Controller
         $params = array(
             'transaction_details' => array(
                 'order_id' => $reservasi->id,
-                'gross_amount' => 500000,
+                'gross_amount' => $reservasi->price,
             ),
             'item_details' => [
                 [
                     'id' => 2,
-                    'price' => '350000',
+                    'price' => $reservasi->price,
                     'quantity' => 1,
                     'name' => $reservasi->date->format('D d/M/Y') . ', ' .
                         $reservasi->name,

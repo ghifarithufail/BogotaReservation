@@ -39,7 +39,7 @@
 		<div class="main-panel">
 			<div class="content">
 
-				@yield('content')
+				@yield('contents')
 
 			</div>
 
