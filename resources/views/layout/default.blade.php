@@ -25,6 +25,12 @@
 
 	<!-- CSS Just for demo purpose, don't include it in your project -->
 	<link rel="stylesheet" href="{{asset('atlantis-lite-master/back/css/demo.css')}}">
+
+
+	<!-- Core CSS -->
+    <link rel="stylesheet" href="{{ asset('template_a/assets/vendor/css/core.css')}}" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="{{ asset('template_a/assets/vendor/css/theme-default.css')}}" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="{{ asset('template_a/assets/css/demo.css')}}" />
 </head>
 <body>
 	<div class="wrapper">
