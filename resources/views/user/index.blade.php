@@ -29,8 +29,8 @@
                         <div class="col-sm-2">
                             <select name="payment" style="height: 40px" id="payment" class="form-control">
                                 <option value="">-- Status --</option>
-                                <option value="done" @if(request()->payment == 'done') selected @endif>Done</option>
-                                <option value="unpaid" @if(request()->payment == 'unpaid') selected @endif>Unpaid</option>
+                                <option value="done" @if (request()->payment == 'done') selected @endif>Done</option>
+                                <option value="unpaid" @if (request()->payment == 'unpaid') selected @endif>Unpaid</option>
                             </select>
                         </div>
                         <div class="col-sm-1">
@@ -43,23 +43,55 @@
         </div>
         <div class="card text-center">
             <div class="card-body shadow">
-                <div class="text-right">
-                    <h1>ghifari</h1>
+                <div class="d-flex justify-content-end mb-3" style="zoom: 0.85;">
+                    <a href="{{ route('user/create') }}">
+                        <button type="button" class="btn btn-success rounded">Add +</button>
+                    </a>
                 </div>
-                <table class="table" id="data-table" style="zoom: 0.85;">
+                <table class="table" id="data-table" style="zoom: 0.8;">
                     <thead>
                         <tr>
                             <th scope="col">NO</th>
-                            <th scope="col">ID</th>
-                            <th scope="col" class="text-left">Name</th>
+                            <th scope="col">Name</th>
                             <th scope="col" class="text-left">Email</th>
-                            <th scope="col">Guest</th>
-                            <th scope="col">Reservation Table</th>
-                            <th scope="col">Reservation Date</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Birth of date</th>
+                            <th scope="col" class="text-center">Role</th>
                             <th scope="col" class="text-center">Status</th>
                             <th scope="col">Actions</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        @foreach ($user as $data)
+                        <tr>
+                            <td></td>
+                            <td>{{$data->name}}</td>
+                            <td>{{$data->email}}</td>
+                            <td>{{$data->gender}}</td>
+                            <td>{{$data->phone}}</td>
+                            <td>{{$data->date}}</td>
+                            <td>
+                                @if ($data->role == '1')
+                                    Admin
+                                @elseif ($data->role == '2')
+                                    Employee
+                                @endif
+                            </td>
+                            <td>
+                                @if ($data->status == '1')
+                                    Aktif
+                                @elseif ($data->status == '2')
+                                    Non Aktif
+                                @endif
+                            </td>
+                            <td>
+                                <a href="{{ route('user/edit', $data->id) }}" class="btn btn-warning edit m-1"
+                                    style="width: 90px">Edit</a>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
                 </table>
             </div>
         </div>

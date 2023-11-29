@@ -48,6 +48,10 @@ Route::post('/report_gagal', [ReportController::class, 'report_failed'])->name('
 
 Route::group(['prefix' => 'user'], function () {
     Route::get('/', [UserController::class, 'index'])->name('user');
+    Route::get('/create', [UserController::class, 'create'])->name('user/create');
+    Route::post('/store', [UserController::class, 'store'])->name('user/store');
+    Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user/edit');
+    Route::post('/update/{id}', [UserController::class, 'update'])->name('user/update');
 
 });
 

@@ -1,4 +1,5 @@
-<table class="table" id="data-table" style="zoom: 0.85;">
+{{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css"> --}}
+<table class="table table-responsive" id="data-table" style="zoom: 0.85;">
     <thead>
         <tr>
             <th scope="col">No</th>
@@ -76,6 +77,18 @@
         @endforelse
     </tbody>
 </table>
+<script>
+    $(document).ready(function () {
+        $('#data-table').DataTable({
+            "paging": true,
+            "ordering": true,
+            "lengthChange": false, // Hide the show entries dropdown
+            "searching": false, // Hide the search box
+            "pageLength": 25,
+            // Add more options as needed
+        });
+    });
+</script>
 {{-- <div class="container">
     {{ $reservations->links() }}
 </div> --}}

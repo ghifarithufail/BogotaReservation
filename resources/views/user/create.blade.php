@@ -1,65 +1,116 @@
 @extends('layout.default')
 @section('contents')
     <div class="container mt-5">
-        <div class="card shadow">
+        <div class="card">
             <div class="card-header">
                 <h1 class="text-center">User Create</h1>
             </div>
-            {{-- <form action="">
-                <div class="card-body">
-                    <div class="form-group row ml-3">
-                        <div class="col-sm-3">
-                            <input type="text" style="height: 40px" class="form-control" placeholder="Name" name="search"
-                                id="search">
-                        </div>
-                        <div class="col-sm-3">
-                            <input type="date" style="height: 40px" class="form-control" placeholder="Name"
-                                name="date" id="date">
-                        </div>
-                        <div class="col-sm-2">
-                            <select type="text" style="height: 40px" class="form-control"
-                                placeholder="tables" name="tables" id="tables">
-                                <option value="">-- Table --</option>
-                                @foreach ($table as $data)
-                                    <option value="{{ $data->tables_name }}" @if (request()->tables == $data->tables_name)selected @endif>{{ $data->tables_name }}</option>
-                                @endforeach
-                            </select>
+            <div class="card-body shadow">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <form action="{{ route('user/store') }}"" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="row mb-3 mt-3">
+                                    <div class="col">
+                                        <label for="exampleInputEmail1" class="form-label">Name</label>
+                                        <input type="text" name="name" placeholder="Masukan name Anda" class="form-control"
+                                            aria-describedby="emailHelp">
+                                        @error('name')
+                                            <div class="alert alert-danger mt-1" style="color: red;">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+            
+                                    <div class="col">
+                                        <label for="exampleInputEmail1" class="form-label">Email</label>
+                                        <input type="text" name="email" placeholder="Masukan email" class="form-control"
+                                            aria-describedby="emailHelp">
+                                        @error('email')
+                                            <div class="alert alert-danger mt-1" style="color: red;">{{ $message}}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label for="exampleInputEmail1" class="form-label">Password</label>
+                                        <input type="text" name="password" placeholder="Masukan password Anda" class="form-control"
+                                            aria-describedby="emailHelp">
+                                        @error('password')
+                                            <div class="alert alert-danger mt-1" style="color: red;">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+            
+                                    <div class="col">
+                                        <label for="exampleInputEmail1" class="form-label">Birthday</label>
+                                        <input type="date" name="date" placeholder="Masukan Birth of date" class="form-control"
+                                            aria-describedby="emailHelp">
+                                        @error('date')
+                                            <div class="alert alert-danger mt-1" style="color: red;">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label for="exampleInputEmail1" class="form-label">Gender</label>
+                                            <select class="form-control form-control" id="defaultSelect" name="gender" aria-label="Default select example">
+                                                <option value="" selected>Pilih Gender</option>
+                                                <option value="1">Male</option>
+                                                <option value="2">Female</option>
+                                            </select>
+                                        @error('gender')
+                                            <div class="alert alert-danger mt-1" style="color: red;">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+            
+                                    <div class="col">
+                                        <label for="exampleInputEmail1" class="form-label">Phone</label>
+                                        <input type="text" name="phone" placeholder="Masukan phone Anda" class="form-control"
+                                            aria-describedby="emailHelp">
+                                        @error('phone')
+                                            <div class="alert alert-danger mt-1" style="color: red;">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    
+                                </div>
 
-                        </div>
-                        <div class="col-sm-2">
-                            <select name="payment" style="height: 40px" id="payment" class="form-control">
-                                <option value="">-- Status --</option>
-                                <option value="done" @if(request()->payment == 'done') selected @endif>Done</option>
-                                <option value="unpaid" @if(request()->payment == 'unpaid') selected @endif>Unpaid</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-1">
-                            <button type="submit" class="btn rounded text-white"
-                                style="background-color: #D9B282; height: 40px;">Search</button>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label for="exampleInputEmail1" class="form-label">Role</label>
+                                            <select class="form-control form-control" id="defaultSelect" name="role" aria-label="Default select example">
+                                                <option value="" selected>Pilih Role</option>
+                                                <option value="1">Admin</option>
+                                                <option value="2">Employe</option>
+                                            </select>
+                                        @error('role')
+                                            <div class="alert alert-danger mt-1" style="color: red;">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+            
+                                    <div class="col">
+                                        <label for="exampleInputEmail1" class="form-label">Status</label>
+                                            <select class="form-control form-control" id="defaultSelect" name="status" aria-label="Default select example">
+                                                <option value="" selected>Pilih Status</option>
+                                                <option value="1">Aktif</option>
+                                                <option value="2">Non Aktif</option>
+                                            </select>
+                                        @error('status')
+                                            <div class="alert alert-danger mt-1" style="color: red;">{{ $message}}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+            
+                                <!-- Add similar rows for other form elements here -->
+            
+                                <button type="submit" class="btn form-control text-white" style="background-color: #B38B59">Submit</button>
+                            </form>
                         </div>
                     </div>
                 </div>
-            </form> --}}
-        </div>
-        <div class="card text-center">
-            <div class="card-body shadow">
-                <table class="table" id="data-table" style="zoom: 0.85;">
-                    <thead>
-                        <tr>
-                            <th scope="col">NO</th>
-                            <th scope="col">ID</th>
-                            <th scope="col" class="text-left">Name</th>
-                            <th scope="col" class="text-left">Email</th>
-                            <th scope="col">Guest</th>
-                            <th scope="col">Reservation Table</th>
-                            <th scope="col">Reservation Date</th>
-                            <th scope="col" class="text-center">Status</th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                    </thead>
-                </table>
             </div>
+            
+
         </div>
+    </div>
     </div>
     <div class="container">
         {{-- {{ $reservations->links() }} --}}
