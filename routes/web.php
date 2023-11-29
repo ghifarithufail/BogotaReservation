@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\TableController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,7 +46,10 @@ Route::post('/report_table', [ReportController::class, 'report_table'])->name('r
 Route::post('/report_sukses', [ReportController::class, 'report_success'])->name('reservations.report.sukses');
 Route::post('/report_gagal', [ReportController::class, 'report_failed'])->name('reservations.report.gagal');
 
+Route::group(['prefix' => 'user'], function () {
+    Route::get('/', [UserController::class, 'index'])->name('user');
 
+});
 
 
 //tables
