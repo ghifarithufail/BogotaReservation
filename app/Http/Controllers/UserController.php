@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -14,6 +15,28 @@ class UserController extends Controller
         return view('user.index', [
             'user' => $user
         ]);
+    }
+
+    public function login(){
+        return view('user.login');
+    }
+
+    public function auth(Request $request){
+        $credentials = $request->only('password', 'email');
+    
+        // Attempt to authenticate the user
+        if(Auth::attempt($credentials) && Auth::user()->status == 1){
+            return redirect('/reservation');
+        }
+    
+        // If authentication fails or the status is not 0, redirect back to login
+        return redirect('/login');
+    }
+
+    public function logout(){
+        Auth::logout();
+
+        return redirect('/login');
     }
 
     public function create()
