@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReservationController;
@@ -28,6 +29,9 @@ Route::get('/logout',[UserController::class, 'logout'])->name('logout');
 
 
 Route::group(['middleware' => ['auth']], function () {
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('user');
+
 
     Route::get('/contoh', [TableController::class, 'contoh']);
     // reservations
@@ -79,7 +83,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     //home
     Route::get('/home', [HomeController::class, 'index'])->name('home');
-    Route::get('/dashboard', [HomeController::class, 'template'])->name('template');
+    // Route::get('/dashboard', [HomeController::class, 'template'])->name('template');
     Route::get('/example', [HomeController::class, 'example'])->name('example');
     Route::get('/homes', [HomeController::class, 'home'])->name('default');
     // Route::get('/table', [TableController::class, 'create'])->name('table.create');

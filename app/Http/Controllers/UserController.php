@@ -25,8 +25,14 @@ class UserController extends Controller
         $credentials = $request->only('password', 'email');
     
         // Attempt to authenticate the user
-        if(Auth::attempt($credentials) && Auth::user()->status == 1){
-            return redirect('/reservation');
+        if (Auth::attempt($credentials)) {
+            // Check if the user's status is 0
+            if (Auth::user()->status == '1') {
+                return redirect('/reservation');
+            } else {
+                // If status is not 0, redirect back to login with a statusError message
+                return redirect('/login')->with('statusError', 'Akun anda tidak aktif.');
+            }
         }
     
         // If authentication fails or the status is not 0, redirect back to login

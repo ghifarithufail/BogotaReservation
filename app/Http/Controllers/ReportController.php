@@ -93,7 +93,7 @@ class ReportController extends Controller
     {
         $report['sukses'] = Reservation::with('Tables')
             ->where('status', 'done')
-            ->selectRaw('sum(guest) as total, count(CASE WHEN arriving = "1" THEN 1 ELSE NULL END) as datang, tables.tables_name, count(CASE WHEN cancel = 0 THEN 1 ELSE NULL END) as cancel, sum(CASE WHEN cancel = 0 THEN price ELSE 0 END) as total_price')
+            ->selectRaw('sum(guest) as total, count(CASE WHEN status = "1" THEN 1 ELSE NULL END) as datang, tables.tables_name, count(CASE WHEN cancel = 0 THEN 1 ELSE NULL END) as cancel, sum(CASE WHEN cancel = 0 THEN price ELSE 0 END) as total_price')
             ->join('tables', 'reservations.table_id', '=', 'tables.id')
             ->groupBy('tables.tables_name')
             ->orderBy('tables.tables_name', 'asc');
@@ -106,8 +106,8 @@ class ReportController extends Controller
     public function report_failed(Request $request)
     {
         $report['gagal'] = Reservation::with('Tables')
-            // ->where('status', 'unpaid')
-            ->selectRaw('tables.tables_name, count(CASE WHEN cancel = 0 THEN 1 ELSE NULL END) as cancel')
+            ->where('cancel', '1')
+            ->selectRaw('sum(guest) as total, tables.tables_name, count(CASE WHEN cancel = 1 THEN 1 ELSE NULL END) as cancel')
             ->join('tables', 'reservations.table_id', '=', 'tables.id')
             ->groupBy('tables.tables_name')
             ->orderBy('tables.tables_name', 'asc');

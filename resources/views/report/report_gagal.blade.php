@@ -16,13 +16,13 @@
                 @php
                     $totalCustSum += $data->total;
                     $totalpre_arrival += $data->pre_arrival;
-                    $totalCancel += $data->cancel;
+                    $totalCancel += $data->total;
                 @endphp
                 <tr>
                     <td class="text-center">{{ $data->tables_name }}</td>
                     {{-- <td class="text-right">{{ $data->total }}</td>
                 <td class="text-right">{{ $data->pre_arrival }}</td> --}}
-                    <td class="text-right">{{ $data->cancel }}</td>
+                    <td class="text-right">{{ $data->total }}</td>
                 </tr>
             @Empty
                 <tr>
