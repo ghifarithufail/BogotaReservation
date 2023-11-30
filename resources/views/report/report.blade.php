@@ -166,7 +166,7 @@
                         </thead>
                         <tbody id="load_report_table">
                             <tr>
-                                <td colspan="8">
+                                <td colspan="9">
                                     <i class="fa fa-spinner fa-spin fa-3x" aria-hidden="true"></i>
                                 </td>
                             </tr>
