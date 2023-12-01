@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Events\NotifReservation;
+use App\Models\LogReservation;
 use App\Models\Reservation;
 use App\Models\Table;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
     public function index(Request $request)
     {
-        $reservations = Reservation::with('Tables')->OrderBy('created_at', 'desc')->where('cancel',['0','1']);
+        $reservations = Reservation::with('Tables')->OrderBy('created_at', 'desc')->where('cancel','0');
 
         
         $today = Carbon::today();
@@ -86,10 +88,17 @@ class ReservationController extends Controller
         // Find the reservation by ID
         $reservation = Reservation::with('Tables')->findOrFail($id);
 
-        if ($reservation->arriving === '0') {
+        if ($reservation->arriving == 'pre_arrival') {
             // Update the status to "done"
             $reservation->arriving = '1';
             $reservation->save();
+
+            $log = new LogReservation();
+            
+            $log->user_id = Auth::user()->id;
+            $log->action = 'updaet arriving';
+            $log->doing = 'updaet arriving '. $reservation->name;
+            $log->save();
 
             return redirect()->route('reservations.arrival')
                 ->with('success', 'Reservation marked as done successfully!');
@@ -123,6 +132,9 @@ class ReservationController extends Controller
 
     public function post(Request $request, $id)
     {
+        $oldReservations = Reservation::findOrFail($id);
+
+
         $reservations = Reservation::findOrFail($id);
         $limit = Table::sum('table_guest');
 
@@ -177,6 +189,22 @@ class ReservationController extends Controller
         }
 
         $reservations->update($data);
+
+        $log = new LogReservation();
+
+        $log->user_id = Auth::user()->id;
+        $log->action = 'update reservation';
+        
+        $changes = [];
+        if($oldReservations->name != $reservations->name){
+            $changes[] = 'name from ' . $oldReservations->name . ' to ' . $reservations->name;
+        }
+        if($oldReservations->guest != $reservations->guest){
+            $changes[] = 'guest from ' . $oldReservations->guest . ' to ' . $reservations->guest;
+        }
+
+        $log->doing = 'update data ' . implode(', ', $changes);
+        $log->save();
 
         return redirect()->route('reservations');
     }
