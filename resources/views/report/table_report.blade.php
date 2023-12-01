@@ -67,7 +67,6 @@
                         </div>
                     @endif
                 </td>
-
                 <td>{{ $data->date->format('D d-M-Y') }}</td>
             </tr>
         @empty
@@ -85,7 +84,7 @@
             "lengthChange": false, // Hide the show entries dropdown
             "searching": false, // Hide the search box
             "pageLength": 25,
-            // Add more options as needed
+
         });
     });
 </script>

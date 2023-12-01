@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\MonthlyReservationsChart;
 use App\Models\Reservation;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -11,14 +12,15 @@ class DashboardController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(MonthlyReservationsChart $chart)
     {
         $user = User::count();
         $sukses = Reservation::where('status','done')->count();
-        $gagal = Reservation::where('cancel','1')->sum('guest');
+        $gagal = Reservation::where('cancel','1')->count();
+        $chart = $chart->build();
 
 
-        return view('dashboard.index', compact('user','sukses','gagal'));
+        return view('dashboard.index', compact('user','sukses','gagal','chart'));
     }
 
     /**
