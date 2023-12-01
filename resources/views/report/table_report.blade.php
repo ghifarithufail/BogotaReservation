@@ -6,7 +6,7 @@
             <th scope="col" class="text-left">Name</th>
             <th scope="col" class="text-left">Email</th>
             <th scope="col">Guest</th>
-            <th scope="col" class="text-center">Status Arriving</th>
+            {{-- <th scope="col" class="text-center">Status Arriving</th> --}}
             <th scope="col">Reservation Table</th>
             <th scope="col" class="text-center">Payment</th>
             <th scope="col" class="text-center">Status Reservation</th>
@@ -24,7 +24,7 @@
                 <td class="text-left">{{ $data->name }}</td>
                 <td class="text-left">{{ $data->email }}</td>
                 <td>{{ $data->guest }}</td>
-                <td>
+                {{-- <td>
                     @if ($data->arriving == 0)
                         <div>
                             <div style="color:red">
@@ -40,7 +40,7 @@
                         </div>
                     </div>
                     @endif
-                </td>
+                </td> --}}
                 <td>{{ $data->Tables->tables_name }} - {{ $data->Tables->table_guest }} people</td>
                 <td class="text-center">
                     @if ($data->status == 'done')

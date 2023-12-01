@@ -45,7 +45,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/reservation/{id}', [ReservationController::class, 'post'])->name('reservations.post');
     Route::get('/invoice/{id}', [ReservationController::class, 'invoice'])->name('invoice');
     Route::get('/reservation-arrival', [ReservationController::class, 'arrival'])->name('reservations.arrival');
-    Route::get('/reservation-report', [ReportController::class, 'report'])->name('reservations.report')->middleware('hakakses:1');
+    Route::get('/reservation-report', [ReportController::class, 'report'])->name('reservations.report');
 
     Route::post('/reservation-arrival/{id}', [ReservationController::class, 'updateArriving'])->name('update.reservation.arrival');
     Route::get('/reservation-cencel/{id}', [ReservationController::class, 'cencel'])->name('reservation.cencel');

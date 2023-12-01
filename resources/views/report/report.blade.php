@@ -144,7 +144,7 @@
 
         <div class="card text-center">
             <div class="card-body shadow">
-                <div class="d-flex justify-content-end mb-3">
+                <div class="d-flex justify-content-end mb-3" style="zoom: 0.85">
                     <button type="button" class="btn btn-success" id="download_data">Download</button>
                     {{-- <a href="/reservation/download" class="btn btn-success">Excel</a> --}}
                 </div>
@@ -156,10 +156,10 @@
                                 <th scope="col" class="text-left">Name</th>
                                 <th scope="col" class="text-left">Email</th>
                                 <th scope="col">Guest</th>
-                                <th scope="col" class="text-center">Arrive</th>
+                                {{-- <th scope="col" class="text-center">Status Arriving</th> --}}
                                 <th scope="col">Reservation Table</th>
                                 <th scope="col" class="text-center">Payment</th>
-                                <th scope="col" class="text-center">Cancel</th>
+                                <th scope="col" class="text-center">Status Reservation</th>
                                 <th scope="col">Reservation Date</th>
                                 {{-- <th scope="col">Actions</th> --}}
                             </tr>

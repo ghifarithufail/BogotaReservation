@@ -63,9 +63,12 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                        $startingRow = ($user->currentPage() - 1) * $user->perPage() + 1;
+                    @endphp
                         @foreach ($user as $data)
                         <tr>
-                            <td></td>
+                            <td>{{$startingRow ++}}</td>
                             <td>{{$data->name}}</td>
                             <td>{{$data->email}}</td>
                             <td>{{$data->gender}}</td>
@@ -97,6 +100,6 @@
         </div>
     </div>
     <div class="container">
-        {{-- {{ $reservations->links() }} --}}
+        {{ $user->links() }}
     </div>
 @endsection
