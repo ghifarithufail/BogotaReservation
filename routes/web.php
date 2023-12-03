@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\fe\HomeController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReservationController;
@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/Home', [\App\Http\Controllers\fe\HomeController::class, 'home']);
+Route::get('/home', [HomeController::class, 'home']);
 
 Route::get('/data', [ReservationController::class, 'data']);
 // reservations
@@ -100,18 +100,5 @@ Route::group(['middleware' => ['auth']], function () {
 
     //TEST PUSHER
     Route::get('notif', [ReservationController::class, 'notif']);
-
-
-    //REPORT
-    // Route::get('/report', [ReportController::class, 'index'])->name('report');
-    Route::get('/index', [ReportController::class, 'index'])->name('chart');
-
-    //home
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
-    // Route::get('/dashboard', [HomeController::class, 'template'])->name('template');
-    Route::get('/example', [HomeController::class, 'example'])->name('example');
-    Route::get('/homes', [HomeController::class, 'home'])->name('default');
-    // Route::get('/table', [TableController::class, 'create'])->name('table.create');
-    // Route::post('/table-post', [TableController::class, 'store'])->name('table.store');
 
 });
