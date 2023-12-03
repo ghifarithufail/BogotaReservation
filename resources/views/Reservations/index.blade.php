@@ -3,7 +3,7 @@
     <div class="container mt-5">
         <div class="card shadow">
             <div class="card-header">
-                <h1 class="text-center">Reservations</h1>
+                <h1 class="text-center">Reservations GHIFARI</h1>
             </div>
             <form action="">
                 <div class="card-body">
