@@ -71,7 +71,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if ($data->arriving == "pre_arrival")
+                                    @if ($data->arriving == "0")
                                     <form action="{{ route('update.reservation.arrival', ['id' => $data->id]) }}" method="POST">
                                         @csrf
                                         <button type="submit" class="btn btn text-white" style="background-color: #D9B282 !important; border-radius: 10px;">

@@ -123,7 +123,7 @@ class ReservationController extends Controller
         $reservation = Reservation::findOrFail($id);
 
         $data = [
-            'cancel' => 0
+            'cancel' => 2
         ];
 
         $reservation->update($data);
