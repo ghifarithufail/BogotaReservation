@@ -115,13 +115,13 @@
 
                     <div class="testimonial-slide swiper-slide">
                         <img src="pics/hanida.jpeg" alt="">
-                        <h3>Hanida Adzkia</h3>
+                        <h3>Hanida Adzkiaaa</h3>
                         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora at delectus illum minus, voluptatum perferendis assumenda alias non suscipit exercitationem dolorum cum architecto explicabo aspernatur, ut incidunt? Quibusdam, maxime. Animi aliquam obcaecati mollitia recusandae consequatur veritatis vel alias, nesciunt dolor. Totam expedita culpa praesentium consequatur. Harum perferendis est saepe ullam?</p>
                     </div>
                     
                     <div class="testimonial-slide swiper-slide">
                         <img src="{{asset('fe/asset/bunga.jpg')}}" alt="">
-                        <h3>Bunga Permataa</h3>
+                        <h3>Bunga Permataaa</h3>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium earum excepturi reiciendis aliquam itaque eligendi maiores quas vitae, soluta deleniti impedit ipsam eius doloribus, sunt, reprehenderit eos sed cumque omnis facere aut enim. Unde recusandae sed rerum minus distinctio odio labore at culpa quidem, exercitationem eveniet! Neque deserunt enim obcaecati nihil! Quam delectus asperiores iure assumenda quos facere, exercitationem laborum.</p>
                     </div>
                 </div>
