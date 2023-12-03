@@ -115,7 +115,7 @@
 
                     <div class="testimonial-slide swiper-slide">
                         <img src="pics/hanida.jpeg" alt="">
-                        <h3>Hanida Adzkia</h3>
+                        <h3>Hanida Adzkiaaa</h3>
                         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora at delectus illum minus, voluptatum perferendis assumenda alias non suscipit exercitationem dolorum cum architecto explicabo aspernatur, ut incidunt? Quibusdam, maxime. Animi aliquam obcaecati mollitia recusandae consequatur veritatis vel alias, nesciunt dolor. Totam expedita culpa praesentium consequatur. Harum perferendis est saepe ullam?</p>
                     </div>
                     
