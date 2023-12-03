@@ -21,6 +21,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/Home', [\App\Http\Controllers\fe\HomeController::class, 'home']);
+
 Route::get('/data', [ReservationController::class, 'data']);
 // reservations
 Route::group(['prefix' => 'reservation'], function () {
@@ -49,9 +51,9 @@ Route::get('notif', [ReservationController::class, 'notif']);
 //REPORT
 Route::get('/report', [ReportController::class, 'index'])->name('report');
 
-//home
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/homes', [HomeController::class, 'home'])->name('default');
+// //home
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
+// Route::get('/homes', [HomeController::class, 'home'])->name('default');
 // Route::get('/table', [TableController::class, 'create'])->name('table.create');
 // Route::post('/table-post', [TableController::class, 'store'])->name('table.store');
 
