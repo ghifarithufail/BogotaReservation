@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="{{asset('fe/home.css')}}">
     <!-- link font-awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  
     <!-- scroll reveal  -->
     <script src="https://unpkg.com/scrollreveal@4"></script>
 
@@ -119,11 +118,7 @@
                     </div>
                     
                     <div class="testimonial-slide swiper-slide">
-<<<<<<< HEAD
-                        <img src="pics/bunga.JPG" alt="">
-=======
                         <img src="{{asset('fe/asset/bunga.jpg')}}" alt="">
->>>>>>> cd477127d336e0d0b2cbe0c0060d8b820dbf24a4
                         <h3>Bunga Permataa</h3>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium earum excepturi reiciendis aliquam itaque eligendi maiores quas vitae, soluta deleniti impedit ipsam eius doloribus, sunt, reprehenderit eos sed cumque omnis facere aut enim. Unde recusandae sed rerum minus distinctio odio labore at culpa quidem, exercitationem eveniet! Neque deserunt enim obcaecati nihil! Quam delectus asperiores iure assumenda quos facere, exercitationem laborum.</p>
                     </div>
@@ -149,11 +144,7 @@
 
 
     <!-- custom js -->
-<<<<<<< HEAD
-    <script src="script.js"></script>
-=======
     <script src="{{asset('fe/script.js')}}"></script>
->>>>>>> cd477127d336e0d0b2cbe0c0060d8b820dbf24a4
 
 </body>
 </html>
