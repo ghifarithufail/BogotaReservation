@@ -13,7 +13,7 @@ class Table extends Model
 
     public function Reservations()
     {
-        return $this->hasMany(Reservation::class);
+        return $this->belongsTo(Reservation::class,'id','table_id');
     }
 
 }

@@ -53,7 +53,7 @@
                     </tr>
                     <tr>
                         <td>Table</td>
-                        <td>: {{ $reservasi->Tables->name }} </td>
+                        <td>: {{ $reservasi->Tables->tables_name }} </td>
                     </tr>
                     <tr>
                         <td>Status</td>
@@ -62,8 +62,10 @@
                 </table>
             </div>
             <div class="text-center mb-3">
+                <a href="{{ route('invoice/download', $reservasi->id) }}" target="_blank" id="pdfLink">
                 <button type="submit" id="pay-button" class="btn btn-warning text-center"
                     style="width: 18rem">Download</button>
+                </a>
             </div>
         </div>
     </div>
@@ -75,6 +77,18 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
         integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous">
+    </script>
+    <script>
+        document.getElementById('pdfLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            const pdfUrl = this.getAttribute('href');
+
+            const newWindow = window.open(pdfUrl, '_blank');
+
+            newWindow.addEventListener('load', function() {
+                newWindow.print();
+            });
+        });
     </script>
 </body>
 
