@@ -3,64 +3,106 @@
 namespace App\Http\Controllers;
 
 use App\Events\NotifReservation;
+use App\Models\LogReservation;
 use App\Models\Reservation;
 use App\Models\Table;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
     public function index(Request $request)
     {
-        $reservations = Reservation::with('Tables')->OrderBy('created_at', 'desc');
+        $reservations = Reservation::with('Tables')->OrderBy('created_at', 'desc')->where('cancel', '0');
 
+
+        $today = Carbon::today();
         $datas = Reservation::sum('guest');
+        $table = Table::orderBy('tables_name', 'asc')->get();
 
+        $this->filter($request, $reservations);
+        $reservations = $reservations->paginate(5);
+
+        $reservations->appends($request->all());
+
+        \Log::info($request);
+        return view('Reservations.index', compact('reservations', 'datas', 'table'));
+    }
+
+    private function filter(Request $request, $query)
+    {
         if ($request->has('search')) {
             $search = $request->search;
-            $reservations = $reservations->where(function ($query) use ($search) {
-                $query->where('name', 'like', '%' . $search . '%')
-                    ->orWhere(function ($query) use ($search) {
-                        $query->whereHas('Tables', function ($Tables) use ($search) {
-                            $Tables->where('name', 'like', '%' . $search . '%');
-                        });
-                    });
-            });
+            $query = $query->where('name', 'like', '%' . $search . '%');
         }
 
         if ($request->has('tables')) {
             $tables = $request->tables;
-            $reservations = $reservations->whereHas('Tables', function ($query) use ($tables) {
-                $query->where('name', 'like', '%' . $tables . '%');
+            $query = $query->whereHas('Tables', function ($q) use ($tables) {
+                $q->where('tables_name', 'like', '%' . $tables . '%');
             });
+        }
+
+
+        if ($request->has('date_start')) {
+            $dateStart = date('Y-m-d', strtotime($request->date_start));
+            $query->whereDate('date', '>=', $dateStart);
+        }
+
+        if ($request->has('date_end')) {
+            $dateEnd = date('Y-m-d', strtotime($request->date_end));
+            $query->whereDate('date', '<=', $dateEnd);
         }
 
         if ($request->has('date')) {
             $date = $request->date;
-            $reservations = $reservations->where('date', 'like', '%' . $date . '%');
+            $query = $query->where('date', 'like', '%' . $date . '%');
         }
 
         if ($request->has('payment')) {
             $payment = $request->payment;
-            $reservations = $reservations->where('status', 'like', '%' . $payment . '%');
+            $query = $query->where('status', 'like', '%' . $payment . '%');
         }
+
+        return $query;
+    }
+
+    public function arrival(Request $request)
+    {
+        $today = Carbon::today();
+        $reservations = Reservation::with('Tables')->where('date', '>=', $today)->where('status', 'done')->OrderBy('name', 'asc');
+        $this->filter($request, $reservations);
+
+        $datas = Reservation::sum('guest');
+        $table = Table::orderBy('tables_name', 'asc')->get();
 
         $reservations = $reservations->paginate(5);
+        $reservations->appends($request->all());
 
-        if ($request->has('search')) {
-            $reservations->appends(['search' => $search]);
-        }
-        if ($request->has('tables')) {
-            $reservations->appends(['tables' => $tables]);
-        }
-        if ($request->has('date')) {
-            $reservations->appends(['date' => $date]);
-        }
-        if ($request->has('payment')) {
-            $reservations->appends(['payment' => $payment]);
-        }
+        return view('Reservations.arrival', compact('reservations', 'datas', 'table'));
+    }
 
-        return view('Reservations.index', compact('reservations', 'datas'));
+    public function updateArriving($id)
+    {
+        // Find the reservation by ID
+        $reservation = Reservation::with('Tables')->findOrFail($id);
+
+        if ($reservation->arriving == '0') {
+            // Update the status to "done"
+            $reservation->arriving = '1';
+            $reservation->save();
+
+            $log = new LogReservation();
+
+            $log->user_id = Auth::user()->id;
+            $log->action = 'updaet arriving';
+            $log->doing = 'updaet arriving ' . $reservation->name;
+            $log->save();
+
+            return redirect()->route('reservations.arrival')
+                ->with('success', 'Reservation marked as done successfully!');
+        }
     }
 
     public function notif()
@@ -76,8 +118,24 @@ class ReservationController extends Controller
         return view('Reservations.update', compact('reservations', 'tables'));
     }
 
+    public function cencel($id)
+    {
+        $reservation = Reservation::findOrFail($id);
+
+        $data = [
+            'cancel' => 0
+        ];
+
+        $reservation->update($data);
+
+        return redirect()->route('reservations');
+    }
+
     public function post(Request $request, $id)
     {
+        $oldReservations = Reservation::findOrFail($id);
+
+
         $reservations = Reservation::findOrFail($id);
         $limit = Table::sum('table_guest');
 
@@ -90,22 +148,27 @@ class ReservationController extends Controller
         $currentDate = Carbon::now();
         $daysDifference = $currentDate->diffInDays($reservationDate);
 
+        // code untuk mencari table yang terisi
         $existingReservation = Reservation::where('table_id', $request->table_id)
             ->whereDate('date', $date)
             ->first();
 
+        //validasi limit orang
         if ($recordCount + $request->guest > $limit) {
             return back()->with('limit', 'You have reached the maximum limit of records for today.');
         }
 
-        if ($daysDifference < 2) {
-            return back()->with('dateReservation', 'Cannot update reservation within 2 days of the reservation date.');
+        //validasi bisa reservasi jika h-1
+        if ($daysDifference < 1) {
+            return back()->with('dateReservation', 'Cannot update reservation within 1 days of the reservation date.');
         }
 
+        // validasi untuk table yang terisi
         if ($existingReservation) {
             return back()->with('warning', 'This table is already reserved.');
         }
 
+        //validasi untuk tidak lebih dari limit table
         if ($request->guest > $table->table_guest) {
             return back()->with('guest', 'please choose the table base on guest.');
         }
@@ -128,6 +191,35 @@ class ReservationController extends Controller
 
         $reservations->update($data);
 
+        $log = new LogReservation();
+
+        $log->user_id = Auth::user()->id;
+        $log->action = 'update reservation ' . $reservations->name;
+
+        $changes = [];
+        if ($oldReservations->name != $reservations->name) {
+            $changes[] = 'name from ' . $oldReservations->name . ' to ' . $reservations->name;
+        }
+        if ($oldReservations->guest != $reservations->guest) {
+            $changes[] = 'guest from ' . $oldReservations->guest . ' to ' . $reservations->guest;
+        }
+        if ($oldReservations->table_id != $reservations->table_id) {
+            $oldTableName = Table::find($oldReservations->table_id)->tables_name; // Assuming 'name' is the column in the 'Table' model
+            $newTableName = Table::find($reservations->table_id)->tables_name;
+
+            $changes[] = 'Table from ' . $oldTableName . ' to ' . $newTableName;
+        }
+
+        if ($oldReservations->date != $reservations->date) {
+            $oldDate = Carbon::parse($oldReservations->date)->toDateString();
+            $newDate = Carbon::parse($reservations->date)->toDateString();
+
+            $changes[] = 'Date from ' . $oldDate . ' To ' . $newDate;
+        }
+
+        $log->doing = 'update data ' . implode(', ', $changes);
+        $log->save();
+
         return redirect()->route('reservations');
     }
 
@@ -143,7 +235,7 @@ class ReservationController extends Controller
         return view('Reservations.create', compact('table', 'limit'));
     }
 
-    public function store(Request $request)
+    public function payment(Request $request)
     {
         $this->validate($request, [
             'name' => 'required',
@@ -156,41 +248,57 @@ class ReservationController extends Controller
             'date.required' => 'tanggal harus diisi.',
         ]);
 
+        $paymentAmount = $request->guest * 150000;
+
+        //memgambil tanggal
         $date = $request->input('date');
+        $time = $request->input('time');
+        //menghitung jumlah limit orang
         $limit = Table::sum('table_guest');
-        $minimumDate = Carbon::now()->addDays(2)->startOfDay();
+
+        //code minimum reservasi 1 hari sebelumnya
+        $minimumDate = Carbon::now()->addDays(1)->startOfDay();
+
+        //menghitung jumlah tamu
         $recordCount = Reservation::whereDate('date', $date)->sum('guest');
+
         $table = Table::findOrFail($request->table_id);
 
+        //code untuk mencari table reservasi
         $existingReservation = Reservation::where('table_id', $request->table_id)
             ->whereDate('date', $date)
+            ->where('time', $time)
             ->first();
 
+        // validasi untuk table yang sudah di reservasi
         if ($existingReservation) {
-            return back()->with('warning', 'This table is already reserved.');
+            return back()->with('warning', 'This table is already reserved and that time.');
         }
 
+        // validasi memilih meja sesuai dengan kapasisatas ornag
         if ($request->guest > $table->table_guest) {
             return back()->with('guest', 'please choose the table base on guest.');
         }
 
+        //validasi untuk minimum reservasi 2 hari sebelumnya
         if (Carbon::parse($date)->isBefore($minimumDate)) {
-            return back()->with('date', 'Minimum reservation is 2 days in advance');
+            return back()->with('date', 'Minimum reservation is 1 days in advance');
         }
 
-        // Check if the count exceeds the limit of 10
+        //validasi untuk limit reservasi 
         if ($recordCount + $request->guest > $limit) {
             return back()->with('date', 'You have reached the maximum limit of records for today.');
         }
 
-        $reservasi = Reservation::create($request->all());
+        $reservasi = Reservation::create(array_merge($request->all(), ['price' => $paymentAmount]));
 
         $dataSend = [
             'name' => $reservasi->name,
+            'email' => $reservasi->email,
             'date' => $reservasi->date->format('D, d/m/Y'),
         ];
 
-        event(new NotifReservation($dataSend));
+        // event(new NotifReservation($dataSend));
 
         // Set your Merchant Server Key
         \Midtrans\Config::$serverKey = 'SB-Mid-server-474-cvbPRecHyCZZbYja0E-C';
@@ -204,25 +312,16 @@ class ReservationController extends Controller
         $params = array(
             'transaction_details' => array(
                 'order_id' => $reservasi->id,
-                'gross_amount' => 500000,
+                'gross_amount' => $reservasi->price,
             ),
             'item_details' => [
                 [
                     'id' => 2,
-                    'price' => '350000',
+                    'price' => $reservasi->price,
                     'quantity' => 1,
                     'name' => $reservasi->date->format('D d/M/Y') . ', ' .
                         $reservasi->name,
                     'date' => $reservasi->date,
-                ],
-            ],
-            'customer_details' => [
-                [
-                    'name'     => $reservasi->name,
-                    'email'    => $reservasi->email,
-                    'guest'    => $reservasi->guest,
-                    'date'     => $reservasi->date,
-                    'table_id' => $reservasi->table_id,
                 ],
             ],
         );
@@ -264,5 +363,11 @@ class ReservationController extends Controller
     {
         $reservasi = Reservation::find($id);
         return view('Reservations.invoice', compact('reservasi'));
+    }
+
+    function download($id)
+    {
+        $reservasi = Reservation::find($id);
+        return view('Reservations.download', compact('reservasi'));
     }
 }

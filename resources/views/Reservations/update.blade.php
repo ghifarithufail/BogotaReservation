@@ -83,8 +83,7 @@
                 <select name="table_id" id="kecamatan" data-width="100%"
                     class="js-example-basic-multiple js-states form-control" aria-label="Default select example">
 
-                    <option value="{{ $reservations->table_id }}">--
-                        {{ $reservations->Tables->name }} ({{ $reservations->Tables->table_guest }} people) --
+                    <option value="{{ $reservations->table_id }}"> -- {{ $reservations->Tables->name }} ({{ $reservations->Tables->table_guest }} people) --
                     </option>
                     @foreach ($tables as $data)
                         <option value="{{ $data->id }}">{{ $data->name }} ({{ $data->table_guest }} people)

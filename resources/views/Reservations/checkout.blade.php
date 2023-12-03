@@ -57,7 +57,7 @@
                     </tr>
                     <tr>
                         <td>Table</td>
-                        <td>: {{ $reservasi->Tables->name }} </td>
+                        <td>: {{ $reservasi->Tables->tables_name }} </td>
                     </tr>
                 </table>
             </div>
