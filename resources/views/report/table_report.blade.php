@@ -57,7 +57,7 @@
                 </td>
 
                 <td class="text-center">
-                    @if ($data->cancel == '1')
+                    @if ($data->cancel == '0')
                         <div >
                             Coming
                         </div>
