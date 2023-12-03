@@ -14,13 +14,13 @@ class ReservationController extends Controller
 {
     public function index(Request $request)
     {
-        $reservations = Reservation::with('Tables')->OrderBy('created_at', 'desc')->where('cancel','0');
+        $reservations = Reservation::with('Tables')->OrderBy('created_at', 'desc')->where('cancel', '0');
 
-        
+
         $today = Carbon::today();
         $datas = Reservation::sum('guest');
         $table = Table::orderBy('tables_name', 'asc')->get();
-        
+
         $this->filter($request, $reservations);
         $reservations = $reservations->paginate(5);
 
@@ -31,42 +31,42 @@ class ReservationController extends Controller
     }
 
     private function filter(Request $request, $query)
-{
-    if ($request->has('search')) {
-        $search = $request->search;
-        $query = $query->where('name', 'like', '%' . $search . '%');
-    }
+    {
+        if ($request->has('search')) {
+            $search = $request->search;
+            $query = $query->where('name', 'like', '%' . $search . '%');
+        }
 
-    if ($request->has('tables')) {
-        $tables = $request->tables;
-        $query = $query->whereHas('Tables', function ($q) use ($tables) {
-            $q->where('tables_name', 'like', '%' . $tables . '%');
-        });
-    }
+        if ($request->has('tables')) {
+            $tables = $request->tables;
+            $query = $query->whereHas('Tables', function ($q) use ($tables) {
+                $q->where('tables_name', 'like', '%' . $tables . '%');
+            });
+        }
 
 
-    if ($request->has('date_start')) {
-        $dateStart = date('Y-m-d', strtotime($request->date_start));
-        $query->whereDate('date', '>=', $dateStart);
-    }
-    
-    if ($request->has('date_end')) {
-        $dateEnd = date('Y-m-d', strtotime($request->date_end));
-        $query->whereDate('date', '<=', $dateEnd);
-    }
+        if ($request->has('date_start')) {
+            $dateStart = date('Y-m-d', strtotime($request->date_start));
+            $query->whereDate('date', '>=', $dateStart);
+        }
 
-    if ($request->has('date')) {
-        $date = $request->date;
-        $query = $query->where('date', 'like', '%' . $date . '%');
-    }
+        if ($request->has('date_end')) {
+            $dateEnd = date('Y-m-d', strtotime($request->date_end));
+            $query->whereDate('date', '<=', $dateEnd);
+        }
 
-    if ($request->has('payment')) {
-        $payment = $request->payment;
-        $query = $query->where('status', 'like', '%' . $payment . '%');
-    }
+        if ($request->has('date')) {
+            $date = $request->date;
+            $query = $query->where('date', 'like', '%' . $date . '%');
+        }
 
-    return $query;
-}
+        if ($request->has('payment')) {
+            $payment = $request->payment;
+            $query = $query->where('status', 'like', '%' . $payment . '%');
+        }
+
+        return $query;
+    }
 
     public function arrival(Request $request)
     {
@@ -88,16 +88,16 @@ class ReservationController extends Controller
         // Find the reservation by ID
         $reservation = Reservation::with('Tables')->findOrFail($id);
 
-        if ($reservation->arriving == 'pre_arrival') {
+        if ($reservation->arriving == '0') {
             // Update the status to "done"
             $reservation->arriving = '1';
             $reservation->save();
 
             $log = new LogReservation();
-            
+
             $log->user_id = Auth::user()->id;
             $log->action = 'updaet arriving';
-            $log->doing = 'updaet arriving '. $reservation->name;
+            $log->doing = 'updaet arriving ' . $reservation->name;
             $log->save();
 
             return redirect()->route('reservations.arrival')
@@ -118,9 +118,10 @@ class ReservationController extends Controller
         return view('Reservations.update', compact('reservations', 'tables'));
     }
 
-    public function cencel($id){
+    public function cencel($id)
+    {
         $reservation = Reservation::findOrFail($id);
-        
+
         $data = [
             'cancel' => 0
         ];
@@ -193,14 +194,27 @@ class ReservationController extends Controller
         $log = new LogReservation();
 
         $log->user_id = Auth::user()->id;
-        $log->action = 'update reservation';
-        
+        $log->action = 'update reservation ' . $reservations->name;
+
         $changes = [];
-        if($oldReservations->name != $reservations->name){
+        if ($oldReservations->name != $reservations->name) {
             $changes[] = 'name from ' . $oldReservations->name . ' to ' . $reservations->name;
         }
-        if($oldReservations->guest != $reservations->guest){
+        if ($oldReservations->guest != $reservations->guest) {
             $changes[] = 'guest from ' . $oldReservations->guest . ' to ' . $reservations->guest;
+        }
+        if ($oldReservations->table_id != $reservations->table_id) {
+            $oldTableName = Table::find($oldReservations->table_id)->tables_name; // Assuming 'name' is the column in the 'Table' model
+            $newTableName = Table::find($reservations->table_id)->tables_name;
+
+            $changes[] = 'Table from ' . $oldTableName . ' to ' . $newTableName;
+        }
+
+        if ($oldReservations->date != $reservations->date) {
+            $oldDate = Carbon::parse($oldReservations->date)->toDateString();
+            $newDate = Carbon::parse($reservations->date)->toDateString();
+
+            $changes[] = 'Date from ' . $oldDate . ' To ' . $newDate;
         }
 
         $log->doing = 'update data ' . implode(', ', $changes);
@@ -280,6 +294,7 @@ class ReservationController extends Controller
 
         $dataSend = [
             'name' => $reservasi->name,
+            'email' => $reservasi->email,
             'date' => $reservasi->date->format('D, d/m/Y'),
         ];
 
@@ -307,15 +322,6 @@ class ReservationController extends Controller
                     'name' => $reservasi->date->format('D d/M/Y') . ', ' .
                         $reservasi->name,
                     'date' => $reservasi->date,
-                ],
-            ],
-            'customer_details' => [
-                [
-                    'name'     => $reservasi->name,
-                    'email'    => $reservasi->email,
-                    'guest'    => $reservasi->guest,
-                    'date'     => $reservasi->date,
-                    'table_id' => $reservasi->table_id,
                 ],
             ],
         );
@@ -357,5 +363,11 @@ class ReservationController extends Controller
     {
         $reservasi = Reservation::find($id);
         return view('Reservations.invoice', compact('reservasi'));
+    }
+
+    function download($id)
+    {
+        $reservasi = Reservation::find($id);
+        return view('Reservations.download', compact('reservasi'));
     }
 }

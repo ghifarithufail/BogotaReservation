@@ -128,7 +128,7 @@ class UserController extends Controller
 
         $log = new LogUser();
         $log->user_id = Auth::user()->id;
-        $log->action = 'update';
+        $log->action = 'update '. $user->name;
 
         // Compare each attribute and add changes to the log message
         $changes = [];

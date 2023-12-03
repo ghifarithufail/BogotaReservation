@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\TableController;
@@ -34,6 +35,8 @@ Route::group(['middleware' => ['auth']], function () {
 
 
     Route::get('/contoh', [TableController::class, 'contoh']);
+    Route::get('/log/user', [LogController::class, 'logUser'])->name('log/user');
+    Route::get('/log/reservation', [LogController::class, 'logReservation'])->name('log/reservation');
     // reservations
     Route::group(['prefix' => 'reservation'], function () {
         Route::get('/', [ReservationController::class, 'index'])->name('reservations');
@@ -44,6 +47,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/reservation/update/{id}', [ReservationController::class, 'update'])->name('reservations.update');
     Route::post('/reservation/{id}', [ReservationController::class, 'post'])->name('reservations.post');
     Route::get('/invoice/{id}', [ReservationController::class, 'invoice'])->name('invoice');
+    Route::get('/invoice/download/{id}', [ReservationController::class, 'download'])->name('invoice/download');
     Route::get('/reservation-arrival', [ReservationController::class, 'arrival'])->name('reservations.arrival');
     Route::get('/reservation-report', [ReportController::class, 'report'])->name('reservations.report');
 

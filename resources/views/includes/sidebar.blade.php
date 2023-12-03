@@ -41,6 +41,25 @@
                     <span class="sidebar-mini-icon">
                         <i class="fa fa-ellipsis-h"></i>
                     </span>
+                    <h4 class="text-section">Log</h4>
+                </li>
+                <li class="nav-item">
+                    <a href="/log/user" class="collapsed" aria-expanded="false">
+                        <i class="fas fa-home"></i>
+                        <p>User Log</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/log/reservation" class="collapsed" aria-expanded="false">
+                        <i class="fas fa-home"></i>
+                        <p>Reservation Log</p>
+                    </a>
+                </li>
+
+                <li class="nav-section">
+                    <span class="sidebar-mini-icon">
+                        <i class="fa fa-ellipsis-h"></i>
+                    </span>
                     <h4 class="text-section">User</h4>
                 </li>
 

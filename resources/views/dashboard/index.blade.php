@@ -3,7 +3,7 @@
     <div class="container mt-4">
         <div class="card shadow">
             <div class="card-header">
-                <h1 class="text-center">Dashboard</h1>
+                <h1 class="text-center">Dashboard GHIFARI</h1>
             </div>
             <form>
                 <div class="card-body">
