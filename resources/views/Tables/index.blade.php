@@ -67,7 +67,7 @@
                                 <td class="text-left">{{ $data->tables_name }}</td>
                                 <td class="text-left">{{ $data->table_guest }}</td>
                                 <td>
-                                    <a href="{{ route('reservations.update', $data->id) }}"
+                                    <a href="{{ route('table/edit', $data->id) }}"
                                         class="btn btn-warning edit m-1" style="width: 90px">Edit</a>
                                     <a href="{{ route('reservation.cencel', $data->id) }}" class="btn btn-danger delete m-1"
                                         data-id="{{ $data->id }}">Delete</a>

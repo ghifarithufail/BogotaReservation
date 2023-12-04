@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LogTable;
 use App\Models\Table;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TableController extends Controller
 {
@@ -43,11 +45,17 @@ class TableController extends Controller
             'table_guest.required' => 'Guest harus di isi.',
         ]);
         
-
         Table::create([
             'tables_name' => $request->tables_name,
             'table_guest' => $request->table_guest
         ]);
+
+        $log = new LogTable();
+        $log->user_id = Auth::user()->id;
+        $log->action = 'create';
+        $log->log = 'Create Table ' . $request->tables_name . ' And guest is ' .$request->table_guest ;
+        $log->save();
+
 
         return redirect()->route('tables')->with('success', 'Reservation created successfully.');
     }
@@ -63,18 +71,53 @@ class TableController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Table $table)
+    public function edit($id)
     {
-        //
+        $table = Table::find($id);
+
+        return view('Tables.edit', [
+            'table' => $table
+        ]);
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Table $table)
-    {
-        //
+   public function update(Request $request, $id)
+{
+    $oldTable = Table::find($id);
+
+    $validatedData = $request->validate([
+        'tables_name' => 'required|unique:tables,tables_name,' . $id,
+        'table_guest' => 'required',
+    ], [
+        'tables_name.required' => 'Table Harus diisi.',
+        'tables_name.unique' => 'Nama table ini sudah ada.',
+        'table_guest.required' => 'Guest harus di isi.',
+    ]);
+    
+    $table = Table::find($id);
+    $table->update($validatedData);
+
+    $log = new LogTable();
+    $log->user_id = Auth::user()->id;
+    $log->action = 'update';
+
+    $changes = [];
+    if ($oldTable->tables_name != $table->tables_name) {
+        $changes[] = 'name table from ' . $oldTable->tables_name . ' to ' . $table->tables_name;
     }
+    if ($oldTable->table_guest != $table->table_guest) {
+        $changes[] = 'guest from ' . $oldTable->table_guest . ' to ' . $table->table_guest;
+    }
+
+    $log->log = 'update data ' . implode(', ', $changes);
+    $log->save();
+
+    return redirect()->route('tables');
+}
+
 
     /**
      * Remove the specified resource from storage.

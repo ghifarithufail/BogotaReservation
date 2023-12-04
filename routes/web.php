@@ -75,6 +75,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/', [TableController::class, 'index'])->name('tables');
         Route::get('/create', [TableController::class, 'create'])->name('table.create');
         Route::post('/post', [TableController::class, 'store'])->name('table.store');
+        Route::get('/edit/{id}', [TableController::class, 'edit'])->name('table/edit');
+        Route::post('/update/{id}', [TableController::class, 'update'])->name('table/update');
+
     });
 
     //TEST PUSHER
