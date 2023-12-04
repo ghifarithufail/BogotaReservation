@@ -41,6 +41,20 @@
                     <span class="sidebar-mini-icon">
                         <i class="fa fa-ellipsis-h"></i>
                     </span>
+                    <h4 class="text-section">User</h4>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/user" class="collapsed" aria-expanded="false">
+                        <i class="fa fa-user"></i>
+                        <p>User</p>
+                    </a>
+                </li>
+
+                <li class="nav-section">
+                    <span class="sidebar-mini-icon">
+                        <i class="fa fa-ellipsis-h"></i>
+                    </span>
                     <h4 class="text-section">Log</h4>
                 </li>
                 <li class="nav-item">
@@ -53,20 +67,6 @@
                     <a href="/log/reservation" class="collapsed" aria-expanded="false">
                         <i class="fa fa-file-code" aria-hidden="true"></i>
                         <p>Reservation Log</p>
-                    </a>
-                </li>
-
-                <li class="nav-section">
-                    <span class="sidebar-mini-icon">
-                        <i class="fa fa-ellipsis-h"></i>
-                    </span>
-                    <h4 class="text-section">User</h4>
-                </li>
-
-                <li class="nav-item">
-                    <a href="/user" class="collapsed" aria-expanded="false">
-                        <i class="fa fa-user"></i>
-                        <p>User</p>
                     </a>
                 </li>
 
@@ -105,7 +105,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('reservations.report') }}" class="collapsed" aria-expanded="false">
-                        <i class="fa fa-file-text" aria-hidden="true"></i>
+                        <i class="fa fa-file" aria-hidden="true"></i>
                         <p>Report</p>
                     </a>
                 </li>
@@ -142,32 +142,6 @@
                 </div>
             </div>
             <ul class="nav nav-primary">
-                {{-- <li class="nav-section">
-                    <span class="sidebar-mini-icon">
-                        <i class="fa fa-ellipsis-h"></i>
-                    </span>
-                    <h4 class="text-section"> Home</h4>
-                </li>
-                <li class="nav-item">
-                    <a href="/dashboard" class="collapsed" aria-expanded="false">
-                        <i class="fas fa-home"></i>
-                        <p>Dashboard</p>
-                    </a>
-                </li>
-
-                <li class="nav-section">
-                    <span class="sidebar-mini-icon">
-                        <i class="fa fa-ellipsis-h"></i>
-                    </span>
-                    <h4 class="text-section">User</h4>
-                </li>
-
-                <li class="nav-item">
-                    <a href="/user" class="collapsed" aria-expanded="false">
-                        <i class="fa fa-user"></i>
-                        <p>User</p>
-                    </a>
-                </li> --}}
                 <li class="nav-section">
                     <span class="sidebar-mini-icon">
                         <i class="fa fa-ellipsis-h"></i>
@@ -177,19 +151,19 @@
 
                 <li class="nav-item">
                     <a href="{{ route('reservations.arrival') }}" class="collapsed" aria-expanded="false">
-                        <i class="fa fa-user"></i>
+                        <i class="fa fa-car" aria-hidden="true"></i>
                         <p>Arrival</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('reservations') }}" class="collapsed" aria-expanded="false">
-                        <i class="fa fa-user"></i>
+                        <i class="fa fa-users" aria-hidden="true"></i>
                         <p>Data</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('reservations.report') }}" class="collapsed" aria-expanded="false">
-                        <i class="fa fa-user"></i>
+                        <i class="fa fa-file" aria-hidden="true"></i>
                         <p>Report</p>
                     </a>
                 </li>

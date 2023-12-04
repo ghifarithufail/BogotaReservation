@@ -70,7 +70,7 @@
                                     <a href="{{ route('reservations.update', $data->id) }}"
                                         class="btn btn-warning edit m-1" style="width: 90px">Edit</a>
                                     <a href="{{ route('reservation.cencel', $data->id) }}" class="btn btn-danger delete m-1"
-                                        data-id="{{ $data->id }}">Cencel</a>
+                                        data-id="{{ $data->id }}">Delete</a>
                                 </td>
                             </tr>
                         @empty
