@@ -3,7 +3,7 @@
     <div class="container mt-4">
         <div class="card shadow">
             <div class="card-header">
-                <h1 class="text-center">Log User</h1>
+                <h1 class="text-center">Log Table</h1>
             </div>
             {{-- <form action="">
                 <div class="card-body">
@@ -37,7 +37,7 @@
                             <button type="submit" class="btn rounded text-white"
                                 style="background-color: #D9B282; height: 40px;">Search</button>
                         </div>
-                    </div>
+                    </div>  
                 </div>
             </form> --}}
         </div>
@@ -60,16 +60,15 @@
                     </thead>
                     <tbody>
                         @php
-                            $startingRow = ($logUser->currentPage() - 1) * $logUser->perPage() + 1;
+                            $startingRow = ($logTable->currentPage() - 1) * $logTable->perPage() + 1;
                         @endphp
-                        @foreach ($logUser as $data)
+                        @foreach ($logTable as $data)
                             <tr class="text-left">
                                 <td>{{ $startingRow++ }}</td>
                                 <td>{{ $data->users->name }}</td>
                                 <td>{{ $data->action }}</td>
-                                <td>{{ $data->doing }}</td>
+                                <td>{{ $data->log }}</td>
                                 <td>{{ $data->created_at->format('d-m-y H:i:s') }}</td>
-                                <td>{{ $data->date }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -78,6 +77,6 @@
         </div>
     </div>
     <div class="container">
-        {{ $logUser->links() }}
+        {{ $logTable->links() }}
     </div>
 @endsection

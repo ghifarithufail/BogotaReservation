@@ -62,6 +62,12 @@
                         <p>User Log</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="/log/table" class="collapsed" aria-expanded="false">
+                        <i class="fa fa-file-code" aria-hidden="true"></i>
+                        <p>Table Log</p>
+                    </a>
+                </li>
 
                 <li class="nav-item">
                     <a href="/log/reservation" class="collapsed" aria-expanded="false">

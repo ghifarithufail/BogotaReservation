@@ -54,7 +54,7 @@
                             <th scope="col">NO</th>
                             <th scope="col">User</th>
                             <th scope="col" class="text-left">Action</th>
-                            <th scope="col">Doing</th>
+                            <th scope="col">Log</th>
                             <th scope="col">Created_at</th>
                         </tr>
                     </thead>

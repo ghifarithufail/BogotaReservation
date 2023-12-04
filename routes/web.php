@@ -37,6 +37,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/contoh', [TableController::class, 'contoh']);
     Route::get('/log/user', [LogController::class, 'logUser'])->name('log/user');
     Route::get('/log/reservation', [LogController::class, 'logReservation'])->name('log/reservation');
+    Route::get('/log/table', [LogController::class, 'logTable'])->name('log/table');
     // reservations
     Route::group(['prefix' => 'reservation'], function () {
         Route::get('/', [ReservationController::class, 'index'])->name('reservations');
