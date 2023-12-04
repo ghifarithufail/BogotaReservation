@@ -24,7 +24,6 @@
                                     <option value="{{ $data->tables_name }}" @if (request()->tables == $data->tables_name)selected @endif>{{ $data->tables_name }}</option>
                                 @endforeach
                             </select>
-
                         </div>
                         <div class="col-sm-2">
                             <select name="payment" style="height: 40px" id="payment" class="form-control">

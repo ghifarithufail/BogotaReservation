@@ -12,7 +12,7 @@ class TableController extends Controller
      */
     public function index()
     {
-        $tables = Table::all();
+        $tables = Table::orderBy('tables_name', 'asc')->paginate('15');
 
         return view('Tables.index', compact('tables'));
     }
@@ -35,16 +35,21 @@ class TableController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
-            'table_guest'   => 'required',
+            'tables_name' => 'required|unique:tables',
+            'table_guest' => 'required',
+        ], [
+            'tables_name.required' => 'Table Harus diisi.',
+            'tables_name.unique' => 'Nama table ini sudah ada.',
+            'table_guest.required' => 'Guest harus di isi.',
         ]);
+        
 
         Table::create([
-            'name' => $request->name,
+            'tables_name' => $request->tables_name,
             'table_guest' => $request->table_guest
         ]);
 
-        return redirect()->route('table.create')->with('success', 'Reservation created successfully.');
+        return redirect()->route('tables')->with('success', 'Reservation created successfully.');
     }
 
     /**

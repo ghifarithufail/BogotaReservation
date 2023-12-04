@@ -43,46 +43,29 @@
         </div>
         <div class="card text-center">
             <div class="card-body shadow">
+                <div class="d-flex justify-content-end mb-3" style="zoom: 0.85;">
+                    <a href="{{ route('table.create') }}">
+                        <button type="button" class="btn btn-success rounded">Add +</button>
+                    </a>
+                </div>
                 <table class="table" id="data-table" style="zoom: 0.85;">
                     <thead>
                         <tr>
                             <th scope="col">NO</th>
-                            <th scope="col">ID</th>
-                            <th scope="col" class="text-left">Name</th>
-                            <th scope="col" class="text-left">Email</th>
-                            <th scope="col">Guest</th>
-                            <th scope="col">Reservation Table</th>
-                            <th scope="col">Reservation Date</th>
-                            <th scope="col" class="text-center">Status</th>
+                            <th scope="col" class="text-left">Tables Name</th>
+                            <th scope="col" class="text-left">Guest</th>
                             <th scope="col">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @php
-                            $startingRow = ($reservations->currentPage() - 1) * $reservations->perPage() + 1;
+                        @php
+                            $startingRow = ($tables->currentPage() - 1) * $tables->perPage() + 1;
                         @endphp
-                        @forelse  ($reservations as $data)
+                        @forelse  ($tables as $data)
                             <tr>
                                 <td>{{$startingRow ++}}</td>
-                                <td>{{ $data->id }}</td>
-                                <td class="text-left">{{ $data->name }}</td>
-                                <td class="text-left">{{ $data->email }}</td>
-                                <td>{{ $data->guest }}</td>
-                                <td>{{ $data->Tables->tables_name }} - {{ $data->Tables->table_guest }} people</td>
-                                <td>{{ $data->date->format('D d-M-Y') }}</td>
-                                <td class="text-center">
-                                    @if ($data->status == 'done')
-                                        <div class="badge badge-success text-center"
-                                            style="width: 100px; height: 30px; font-size: 16px;">
-                                            {{ $data->status }}
-                                        </div>
-                                    @else
-                                        <div class="badge rounded-pill bg-danger text-white"
-                                            style="width: 100px; height: 30px; font-size: 16px;">
-                                            {{ $data->status }}
-                                        </div>
-                                    @endif
-                                </td>
+                                <td class="text-left">{{ $data->tables_name }}</td>
+                                <td class="text-left">{{ $data->table_guest }}</td>
                                 <td>
                                     <a href="{{ route('reservations.update', $data->id) }}"
                                         class="btn btn-warning edit m-1" style="width: 90px">Edit</a>
@@ -94,7 +77,7 @@
                             <tr>
                                 <td colspan="8" class="text-center">Data Empty</td>
                             </tr>
-                        @endforelse --}}
+                        @endforelse
                     </tbody>
                 </table>
             </div>

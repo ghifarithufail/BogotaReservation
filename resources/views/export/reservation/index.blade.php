@@ -34,7 +34,7 @@
                         </div>
                     @endif
                 </td>
-                <td>@if ($data->cancel == 0)
+                <td>@if ($data->cancel == 1)
                     Canceled
                 @else
                     Coming
