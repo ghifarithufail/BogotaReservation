@@ -52,14 +52,14 @@
                                     id="date_end">
                             </div>
 
-                            <div class="col-sm-4 mt-3 d-flex justify-content-center flex-column">
+                            {{-- <div class="col-sm-4 mt-3 d-flex justify-content-center flex-column">
                                 <label for="date1">Arrival:</label>
                                 <select name="arrival" style="height: 40px" id="arrival" class="form-control">
                                     <option value="">-- Status --</option>
                                     <option value="1" @if (request()->payment == '1') selected @endif>Arrived</option>
                                     <option value="0" @if (request()->payment == '0') selected @endif>Not Arrived</option>
                                 </select>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="col mt-3 d-flex justify-content-center">
