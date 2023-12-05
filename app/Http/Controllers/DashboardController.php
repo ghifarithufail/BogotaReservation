@@ -16,7 +16,7 @@ class DashboardController extends Controller
     {
         $user = User::count();
         $sukses = Reservation::where('status','done')->where('cancel','0')->count();
-        $price = Reservation::where('status','done')->sum('price');
+        $price = Reservation::where('status','done')->where('cancel','0')->sum('price');
         $gagal = Reservation::where('cancel','1')->count();
         $chart = $chart->build();
 

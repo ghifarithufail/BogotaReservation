@@ -93,7 +93,8 @@ class ReportController extends Controller
     {
         $report['sukses'] = Reservation::with('Tables')
             ->where('status', 'done')
-            ->selectRaw('sum(guest) as total, count(CASE WHEN status = "1" THEN 1 ELSE NULL END) as datang, tables.tables_name, count(CASE WHEN cancel = 0 THEN 1 ELSE NULL END) as cancel, sum(CASE WHEN cancel = 0 THEN price ELSE 0 END) as total_price')
+            ->where('cancel','0')
+            ->selectRaw('count(guest) as total, tables.tables_name, sum(price) as totals',)
             ->join('tables', 'reservations.table_id', '=', 'tables.id')
             ->groupBy('tables.tables_name')
             ->orderBy('tables.tables_name', 'asc');
@@ -107,7 +108,7 @@ class ReportController extends Controller
     {
         $report['gagal'] = Reservation::with('Tables')
             ->where('cancel', '1')
-            ->selectRaw('sum(guest) as total, tables.tables_name, count(CASE WHEN cancel = 1 THEN 1 ELSE NULL END) as cancel')
+            ->selectRaw('count(guest) as total, tables.tables_name, count(CASE WHEN cancel = 1 THEN 1 ELSE NULL END) as cancel')
             ->join('tables', 'reservations.table_id', '=', 'tables.id')
             ->groupBy('tables.tables_name')
             ->orderBy('tables.tables_name', 'asc');

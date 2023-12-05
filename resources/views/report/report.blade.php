@@ -75,15 +75,14 @@
             <div class="col-xs-12 col-sm-6">
                 <div class="card">
                     <div class="card-header">
-                        <h1 class="text-center">Customer Success</h1>
+                        <h1 class="text-center">Reservation Success</h1>
                     </div>
                     <div class="col-xs-12 col-sm-12 mt-3" id="report_sukses">
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th class="text-center">Tables</th>
-                                    <th class="text-center">Customer</th>
-                                    <th class="text-center">Arrival</th>
+                                    <th class="text-center">Reservation</th>
                                     <th class="text-center">Payment</th>
                                 </tr>
                             </thead>
@@ -99,14 +98,14 @@
             <div class="col-xs-12 col-sm-6">
                 <div class="card">
                     <div class="card-header">
-                        <h1 class="text-center">Customer Cancel</h1>
+                        <h1 class="text-center">Reservation Cancel</h1>
                     </div>
                     <div class="col-xs-12 col-sm-12 mt-3" id="report_gagal">
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th class="text-center">Tables</th>
-                                    <th class="text-center">Customer</th>
+                                    <th class="text-center">Reservation</th>
                                     {{-- <th class="text-center">Not Arrival</th>
                                     <th class="text-center">Cenceled</th>
                                     <th class="text-center">Payment</th> --}}

@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th class="text-center">Tables</th>
-                <th class="text-center">Customer</th>
+                <th class="text-center">Reservation</th>
             </tr>
         </thead>
         <tbody id="load_report_gagal">
