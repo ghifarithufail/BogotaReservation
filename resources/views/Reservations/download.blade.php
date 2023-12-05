@@ -56,10 +56,10 @@
                             <tr>
                                 <td class="center">1</td>
                                 {{-- <td class="left strong">Origin License</td> --}}
-                                <td class="left">Making Reservation in Date 
+                                <td class="left">Making Reservation in,
                                     {{$reservasi->date->format('D d-M-Y')}}
                                     <div>
-                                        The table in {{$reservasi->Tables->tables_name}} And Time {{$reservasi->time}}
+                                        table {{$reservasi->Tables->tables_name}}, guest {{$reservasi->guest}} people and time {{$reservasi->time}}
                                     </div>
                                 </td>
 

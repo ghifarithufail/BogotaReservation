@@ -47,8 +47,7 @@
                                     <div class="col">
                                         <label for="exampleInputEmail1" class="form-label">Name</label>
                                         <input type="text" class="form-control" name="name"
-                                            value="{{ $reservations->name }}" id="name"
-                                            aria-describedby="emailHelp">
+                                            value="{{ $reservations->name }}" id="name" aria-describedby="emailHelp">
                                         @error('name')
                                             <div class="alert alert-danger">{{ $pesan = 'Kolom name tidak boleh kosong' }}
                                             </div>
@@ -79,8 +78,8 @@
                                     <div class="col">
                                         <label for="exampleInputEmail1" class="form-label">Guest</label>
                                         <input type="text" class="form-control mb-2" name="guest"
-                                            value="{{ $reservations->guest }}" value="{{ old('guest') }}"
-                                            id="guest" aria-describedby="emailHelp">
+                                            value="{{ $reservations->guest }}" value="{{ old('guest') }}" id="guest"
+                                            aria-describedby="emailHelp">
                                         @error('guest')
                                             <div class="alert alert-danger">{{ $pesan = 'Kolom bulan tidak boleh kosong' }}
                                             </div>
@@ -88,7 +87,8 @@
                                     </div>
                                     <div class="col">
                                         <label for="exampleInputEmail1" class="form-label">Date</label>
-                                        <input type="date" class="form-control mb-2" name="date" value="{{ $reservations->date }}" id="date">
+                                        <input type="date" class="form-control mb-2" name="date"
+                                            value="{{ $reservations->date }}" id="date">
                                         <p>Current Reservation Date: {{ $reservations->date->format('D d-M-Y') }}</p>
                                         @error('date')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -107,10 +107,7 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
-    </div>
     </div>
     <div class="container">
         {{-- {{ $reservations->links() }} --}}

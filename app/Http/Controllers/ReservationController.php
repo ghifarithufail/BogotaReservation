@@ -138,6 +138,8 @@ class ReservationController extends Controller
 
         $reservations = Reservation::findOrFail($id);
         $limit = Table::sum('table_guest');
+        $time = $request->input('time');
+
 
         $date = $request->input('date');
         $table = Table::findOrFail($request->table_id);
@@ -151,6 +153,7 @@ class ReservationController extends Controller
         // code untuk mencari table yang terisi
         $existingReservation = Reservation::where('table_id', $request->table_id)
             ->whereDate('date', $date)
+            ->where('time', $time)
             ->first();
 
         //validasi limit orang
