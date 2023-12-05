@@ -47,8 +47,8 @@
                                 <th class="center">#</th>
                                 {{-- <th>Item</th> --}}
                                 <th>Description</th>
-                                <th class="right">Unit Cost</th>
-                                <th class="center">Qty</th>
+                                <th class="right">Price</th>
+                                <th class="center">Guest</th>
                                 <th class="right">Total</th>
                             </tr>
                         </thead>
