@@ -100,9 +100,6 @@
                                         @endif
                                     </div>
                                 </div>
-
-                                <!-- Add similar rows for other form elements here -->
-
                                 <button type="submit" class="btn form-control text-white"
                                     style="background-color: #B38B59">Submit</button>
                             </form>
