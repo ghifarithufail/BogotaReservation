@@ -15,7 +15,7 @@ class DashboardController extends Controller
     public function index(MonthlyReservationsChart $chart)
     {
         $user = User::count();
-        $sukses = Reservation::where('status','done')->count();
+        $sukses = Reservation::where('status','done')->where('cancel','0')->count();
         $price = Reservation::where('status','done')->sum('price');
         $gagal = Reservation::where('cancel','1')->count();
         $chart = $chart->build();
