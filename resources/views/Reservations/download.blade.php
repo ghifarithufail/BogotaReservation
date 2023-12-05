@@ -34,10 +34,6 @@
                         <div>Email: info@webz.com.pl</div>
                         <div>Phone: +48 444 666 3333</div> --}}
                     </div>
-
-
-
-
                 </div>
 
                 <div class="table-responsive-sm">
