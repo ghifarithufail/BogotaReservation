@@ -16,11 +16,12 @@ class DashboardController extends Controller
     {
         $user = User::count();
         $sukses = Reservation::where('status','done')->count();
+        $price = Reservation::where('status','done')->sum('price');
         $gagal = Reservation::where('cancel','1')->count();
         $chart = $chart->build();
 
 
-        return view('dashboard.index', compact('user','sukses','gagal','chart'));
+        return view('dashboard.index', compact('user','sukses','gagal','chart','price'));
     }
 
     /**

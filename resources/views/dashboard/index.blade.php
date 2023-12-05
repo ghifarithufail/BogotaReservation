@@ -3,7 +3,7 @@
     <div class="container mt-4">
         <div class="card shadow">
             <div class="card-header">
-                <h1 class="text-center">Dashboard GHIFARI dan bunga</h1>
+                <h1 class="text-center">Dashboard</h1>
             </div>
             <form>
                 <div class="card-body">
@@ -29,6 +29,21 @@
                                     <div class="h1 fw-bold float-right text-white">{{$sukses}}</div>
                                     <i class="fa fa-user-plus fa-2x ml-1" aria-hidden="true"></i>
                                     <h2 class="mt-2 sub-judul text-white">Reservation Success</h2>
+                                    <div class="pull-in sparkline-fix chart-as-background">
+                                        <div id="lineChart"><canvas width="327" height="70"
+                                                style="display: inline-block; width: 327px; height: 70px; vertical-align: top;"></canvas>
+                                        </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card card-dark bg-warning-gradient">
+                                <div class="card-body pb-0 kartu">
+                                    <div class="h1 fw-bold float-right text-white">{{number_format($price)}}</div>
+                                    <i class="fa fa-credit-card fa-2x ml-1" aria-hidden="true"></i>
+                                    <h2 class="mt-2 sub-judul text-white">Payment</h2>
                                     <div class="pull-in sparkline-fix chart-as-background">
                                         <div id="lineChart"><canvas width="327" height="70"
                                                 style="display: inline-block; width: 327px; height: 70px; vertical-align: top;"></canvas>
