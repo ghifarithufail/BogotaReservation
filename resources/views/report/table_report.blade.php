@@ -11,6 +11,7 @@
             <th scope="col" class="text-center">Payment</th>
             <th scope="col" class="text-center">Status Reservation</th>
             <th scope="col">Reservation Date</th>
+            <th scope="col">Price</th>
             {{-- <th scope="col">Actions</th> --}}
         </tr>
     </thead>
@@ -46,7 +47,7 @@
                     @if ($data->status == 'done')
                         <div class="badge badge-success text-center"
                             style="width: 100px; height: 30px; font-size: 16px;">
-                            {{ $data->status }}
+                           Paid 
                         </div>
                     @else
                         <div class="badge rounded-pill bg-danger text-white"
@@ -68,6 +69,7 @@
                     @endif
                 </td>
                 <td>{{ $data->date->format('D d-M-Y') }}</td>
+                <td>{{ number_format($data->price) }}</td>
             </tr>
         @empty
             <tr>

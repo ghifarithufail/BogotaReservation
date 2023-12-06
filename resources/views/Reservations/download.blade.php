@@ -17,7 +17,12 @@
             <div class="card-header">
                 Invoice
                 <strong>{{$reservasi->created_at->format('D d-M-Y')}}</strong>
-                <span class="float-right "> <strong>Status :</strong> {{strtoupper($reservasi->status)}}</span>
+                <span class="float-right "> <strong>Status :</strong>
+                    @if ($reservasi->status == 'done')
+                        PAID
+                    @endif
+                    {{-- {{strtoupper($reservasi->status)}} --}}
+                </span>
             </div>
             <div class="card-body">
                 <div class="row mb-4">
@@ -75,10 +80,8 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-4 col-sm-5">
-
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
