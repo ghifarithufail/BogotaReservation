@@ -80,7 +80,9 @@
                                                     Employe
                                                 @endif
                                             </option>
-                                            <option value="1">Super Admin</option>
+                                            @if (Auth::user()->role = '1')
+                                                <option value="1">Super Admin</option>
+                                            @endif
                                             <option value="2">Admin</option>
                                             <option value="3">Employe</option>
                                         </select>
@@ -91,7 +93,6 @@
                                 </div>
 
                                 <div class="row mb-3">
-
                                     <div class="col">
                                         <label for="exampleInputEmail1" class="form-label">Status</label>
                                         <select class="form-control form-control" id="defaultSelect" name="status"
@@ -111,6 +112,7 @@
                                         @enderror
                                     </div>
                                 </div>
+
 
                                 <!-- Add similar rows for other form elements here -->
 
