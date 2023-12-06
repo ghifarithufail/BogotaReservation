@@ -27,7 +27,6 @@ class LogController extends Controller
 
         $logUser = $query->paginate('25');
 
-
         return view('log.user', [
             'request' => [
                 'date_start' => $date_start,
@@ -62,7 +61,7 @@ class LogController extends Controller
             'logReservation' => $logReservation
         ]);
     }
-
+ 
     public function logTable(Request $request)
     {
         $date_start = $request->input('date_start', now()->format('Y-m-d'));
