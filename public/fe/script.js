@@ -23,22 +23,22 @@ toggleBtn.onclick = function (){
 
 };
 
-// scroll reveal 
-ScrollReveal ({
-  reset : true, 
-  distance : '80px',
-  duration : 2000,
-  delay: 200
-});
+// // scroll reveal 
+// ScrollReveal ({
+//   reset : true, 
+//   distance : '80px',
+//   duration : 2000,
+//   delay: 200
+// });
 
-ScrollReveal().reveal('.hero, img', {origin : 'left'});
-ScrollReveal().reveal('.heading, p', {origin : 'right'});
-ScrollReveal().reveal('.btn, .int-btn', {origin : 'bottom'});
+// ScrollReveal().reveal('.hero', {origin : 'left'});
+// ScrollReveal().reveal('.heading', {origin : 'right'});
+// ScrollReveal().reveal('.btn, .int-btn', {origin : 'bottom'});
 
 // swiper 
 var swiper = new Swiper(".mySwiper", {
   slidesPerView: 1,
-  spaceBetween: 30,
+  spaceBetween: 50,
   loop: true,
   grabCursor: true,
   pagination: {

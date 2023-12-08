@@ -60,7 +60,7 @@
 
     <section class="about" id="about">
         <div class="about-img">
-            <img src="pics/lights.png" alt="">
+            <img src="{{asset('fe/asset/lights.png')}}" alt="">
         </div>
 
         <div class="about-content">
@@ -81,7 +81,7 @@
         </div>
 
         <div class="menu-img">
-            <img src="pics/steik.jpg" alt="">
+            <img src="{{asset('fe/asset/steik.jpg')}}" alt="">
         </div>
     </section>
 
@@ -89,12 +89,12 @@
     <!-- section interested  -->
     <section class="interest" id="int">
         <div class="int-img">
-            <img src="pics/int.png" alt="">
+            <img src="{{asset('fe/asset/int.png')}}" alt="">
         </div>
 
         <div class="int-content">
             <h2 class="heading">Interested?</h2>
-            <a href="#" class="int-btn">RESERVATION NOW!</a>
+            <a href="{{asset('frondEnd/rsvp.blade.php')}}" class="int-btn">RESERVATION NOW!</a>
         </div>
     </section>
 
@@ -106,27 +106,25 @@
         <div class="testimonial-wrapper">
             <div class="testimonial-box mySwiper">
                 <div class="testimonial-content swiper-wrapper">
-                    <div class="testimonial-slide swiper-slide">
-                        <img src="pics/ojan.jpeg" alt="">
-                        <h3>Fauzan Azmi</h3>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae impedit minus praesentium possimus illo modi ipsam provident facere fugiat atque sequi commodi ea ipsa nobis sed asperiores cupiditate est natus nulla perferendis vitae nemo, animi fugit aut? Quaerat, error inventore officiis perspiciatis, magni eaque, iusto illum eligendi enim quisquam unde! Veniam molestiae quos illo deserunt consequatur, delectus inventore dolorem corrupti. </p>
-                    </div>
+                        <div class="testimonial-slide swiper-slide">
+                            <img src="{{asset('fe/asset/ojan.jpg')}}" alt="">
+                            <h3>Fauzan Azmi</h3>
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae impedit minus praesentium possimus illo modi ipsam provident facere fugiat atque sequi commodi ea ipsa nobis sed asperiores cupiditate est natus nulla perferendis vitae nemo, animi fugit aut? Quaerat, error inventore officiis perspiciatis, magni eaque, iusto illum eligendi enim quisquam unde! Veniam molestiae quos illo deserunt consequatur, delectus inventore dolorem corrupti. </p>
+                        </div>
 
-                    <div class="testimonial-slide swiper-slide">
-                        <img src="pics/hanida.jpeg" alt="">
-                        <h3>Hanida Adzkia</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora at delectus illum minus, voluptatum perferendis assumenda alias non suscipit exercitationem dolorum cum architecto explicabo aspernatur, ut incidunt? Quibusdam, maxime. Animi aliquam obcaecati mollitia recusandae consequatur veritatis vel alias, nesciunt dolor. Totam expedita culpa praesentium consequatur. Harum perferendis est saepe ullam?</p>
-                    </div>
+                        <div class="testimonial-slide swiper-slide">
+                            <img src="{{asset('fe/asset/hanida.jpeg')}}" alt="">
+                            <h3>Hanida Adzkia</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora at delectus illum minus, voluptatum perferendis assumenda alias non suscipit exercitationem dolorum cum architecto explicabo aspernatur, ut incidunt? Quibusdam, maxime. Animi aliquam obcaecati mollitia recusandae consequatur veritatis vel alias, nesciunt dolor. Totam expedita culpa praesentium consequatur. Harum perferendis est saepe ullam?</p>
+                        </div>
+                        
+                        <div class="testimonial-slide swiper-slide">
+                            <img src="{{asset('fe/asset/bunga.jpg')}}" alt="">
+                            <h3>Bunga Permata Hilias</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora at delectus illum minus, voluptatum perferendis assumenda alias non suscipit exercitationem dolorum cum architecto explicabo aspernatur, ut incidunt? Quibusdam, maxime. Animi aliquam obcaecati mollitia recusandae consequatur veritatis vel alias, nesciunt dolor. Totam expedita culpa praesentium consequatur. Harum perferendis est saepe ullam?</p>
+                        </div>
                     
-                    <div class="testimonial-slide swiper-slide">
-<<<<<<< HEAD
-                        <img src="pics/bunga.JPG" alt="">
-=======
-                        <img src="{{asset('fe/asset/bunga.jpg')}}" alt="">
->>>>>>> cd477127d336e0d0b2cbe0c0060d8b820dbf24a4
-                        <h3>Bunga Permataa</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium earum excepturi reiciendis aliquam itaque eligendi maiores quas vitae, soluta deleniti impedit ipsam eius doloribus, sunt, reprehenderit eos sed cumque omnis facere aut enim. Unde recusandae sed rerum minus distinctio odio labore at culpa quidem, exercitationem eveniet! Neque deserunt enim obcaecati nihil! Quam delectus asperiores iure assumenda quos facere, exercitationem laborum.</p>
-                    </div>
+                    
                 </div>
 
                 <div class="swiper-button-next"></div>
@@ -136,24 +134,48 @@
         </div>
     </section>
 
-    <!-- section footer 
+    <!-- section footer  -->
+
 
     <footer>
+        <h1>Bogota Jakarta</h1>
         <div class="containerf">
-            .sec
+            <div class="sec address">
+                <h2>Address</h2>
+                <p>Jalan Sudirman no.123, <br>South Central Business District, Jakarta Selatan, DKI Jakarta, Indonesia</p>
+            </div>
+
+            <div class="sec contact">
+                <h2>Contact Us</h2>
+                <ul class="info">
+                    <li><a href="#"><i class="fa-brands fa-facebook-f"></i>  Bogota Jakarta</a></li>
+                    <li><a href="#"><i class="fa-brands fa-twitter"></i>  @bogota.jkt</a></li>
+                    <li><a href="#"><i class="fa-brands fa-square-instagram"></i>  @bogota.jkt</a></li>
+                </ul>
+            </div>
+
+            <div class="sec working hour">
+                <h2>Working Hour</h2>
+                <ul>
+                    <li><p>Tuesday - Sunday</p></li>
+                    <li><p>17.00 - 21.00</p></li>
+                    <li><p>For special reservation <br>please call us on 082132364617</p></li>
+                </ul>
+            </div>
         </div>
-    </footer> -->
+    </footer>
+
+    <div class="copyrightText">
+        <p>Copyright 2023, Bogota Jakarta. All Rights Reserved.</p>
+    </div>
+
+
 
     <!-- swiper js  -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 
     <!-- custom js -->
-<<<<<<< HEAD
-    <script src="script.js"></script>
-=======
     <script src="{{asset('fe/script.js')}}"></script>
->>>>>>> cd477127d336e0d0b2cbe0c0060d8b820dbf24a4
-
 </body>
 </html>
