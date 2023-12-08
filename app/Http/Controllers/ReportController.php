@@ -49,7 +49,7 @@ class ReportController extends Controller
     //             if ($user->month == $i) {
     //                 array_push($data, $user->count);
     //                 // $count = $user->count();
-    //                 // dd($users);
+    //                // dd($users);
     //                 break;
     //             }
     //         }
