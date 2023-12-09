@@ -206,13 +206,14 @@ a{
     width: 100%;
     display: flex;
 }
-#hero{
-    background-image: url('fe/asset/contact.png');
+#hero {
+    background-image: url('../fe/asset/contact.png');
     background-size: cover;
     background-position: top center;
     position: relative;
     z-index: 1;
 }
+
 
 #hero::after{
     content: '';

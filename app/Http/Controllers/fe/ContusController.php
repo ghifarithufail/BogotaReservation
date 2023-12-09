@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 
 class ContusController extends Controller
 {
-    public function contus(){
-        return view("frondEnd.contus");
+    public function index(){
+
+        return view("frontEnd.contus");
     }
 }

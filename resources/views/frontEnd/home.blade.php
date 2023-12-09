@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Bogota Restaurant</title>
 
     <!-- link css -->
     <link rel="stylesheet" href="{{asset('fe/home.css')}}">
@@ -106,7 +106,7 @@
             <div class="testimonial-box mySwiper">
                 <div class="testimonial-content swiper-wrapper">
                         <div class="testimonial-slide swiper-slide">
-                            <img src="{{asset('fe/asset/ojan.jpg')}}" alt="">
+                            <img src="{{asset('fe/asset/ojan.jpeg')}}" alt="">
                             <h3>Fauzan Azmi</h3>
                             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae impedit minus praesentium possimus illo modi ipsam provident facere fugiat atque sequi commodi ea ipsa nobis sed asperiores cupiditate est natus nulla perferendis vitae nemo, animi fugit aut? Quaerat, error inventore officiis perspiciatis, magni eaque, iusto illum eligendi enim quisquam unde! Veniam molestiae quos illo deserunt consequatur, delectus inventore dolorem corrupti. </p>
                         </div>

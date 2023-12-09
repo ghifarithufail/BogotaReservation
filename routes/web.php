@@ -30,10 +30,10 @@ use Illuminate\Support\Facades\Route;
 
 // front-end 
 Route::get('/home', [HomeController::class, 'home']);
-Route::get('/contact us', [ContusController::class, 'contus']);
+Route::get('/contact-us', [ContusController::class, 'index']);
 Route::get('/payment', [PaymentController::class, 'payment']);
-Route::get('/reservation', [RsvpController::class, 'rsvp']);
-Route::get('/our story', [StoryController::class, 'story']);
+Route::get('/reservations', [RsvpController::class, 'rsvp']);
+Route::get('/our-story', [StoryController::class, 'story']);
 
 
 
