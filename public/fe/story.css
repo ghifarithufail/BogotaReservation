@@ -339,10 +339,6 @@ footer .containerf{
     .hero{
         height: 700px;
     }
-
-    #hero h1{
-        margin-top: 500px;
-    }
     
 }
 
@@ -382,10 +378,6 @@ footer .containerf{
     .container{
         justify-content: center;
         text-align: center;
-    }
-
-    #hero h1{
-        margin-top: 300px;
     }
 
     .about{

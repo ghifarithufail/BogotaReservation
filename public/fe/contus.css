@@ -211,7 +211,7 @@ a{
 }
 
 #hero {
-    background-image: url('../fe/asset/story.jpg');
+    background-image: url('../fe/asset/contact.png');
     background-size: cover;
     background-position: top center;
     position: relative;
@@ -435,19 +435,9 @@ footer .containerf{
     .hero{
         height: 700px;
     }
-
-    #hero h1{
-        margin-top: 300px;
-        margin-left: 650px;
-    }
-    
 }
 
 @media (max-width :1024px){
-    #hero h1{
-        margin-left: 380px;
-    }
-
     .cont{
         margin-left: 100px;
     }
@@ -463,10 +453,6 @@ footer .containerf{
     .navbar .toggle_btn{
         display: block;
 
-    }
-
-    #hero h1{
-        margin-left: 300px;
     }
 
     .dropdown_menu{
@@ -531,11 +517,6 @@ footer .containerf{
         text-align: center;
     }
 
-    #hero h1{
-        margin-top: 250px;
-        margin-left: 60px;
-    }
-
     footer .containerf{
         width: 100%;
         display: grid;
@@ -554,12 +535,6 @@ footer .containerf{
 @media (max-width: 450px){
     .container{
         height: 550px;
-    }
-
-    #hero h1{
-        font-size: 38px;
-        margin-left: 30px;
-        /* justify-content: ; */
     }
 
     .cont{
