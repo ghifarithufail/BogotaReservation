@@ -19,30 +19,30 @@
 
 <body>
 
-    <!-- navbar  -->
+    <!-- navbar  -->    
     <section id="header">
         <div class="navbar">
-            <div class="logo"><a href="home.html">LOGO</a></div>
+            <div class="logo"><a href="{{ route('home') }}">LOGO</a></div>
             
             <ul class="links">
-                <li><a href="home.html" class="active">Home</a></li>
-                <li><a href="story.html">Our Story</a></li>
+                <li><a href="{{ route('home') }}" class="active">Home</a></li>
+                <li><a href="{{ route('story') }}">Our Story</a></li>
                 <li><a href="menu.html">Menu</a></li>
-                <li><a href="contus.html">Contact Us</a></li>
+                <li><a href="{{ route('contact') }}">Contact Us</a></li>
             </ul>
 
-            <a href="" class="action_btn">RESERVE</a>
+            <a href="{{ route('rsvp') }}"  class="action_btn">RESERVE</a>
             <div class="toggle_btn">
                 <i class="fa-solid fa-bars"></i>
             </div>
         </div>
 
         <div class="dropdown_menu">
-            <li><a href="home.html">Home</a></li>
-            <li><a href="story.html">Our Story</a></li>
+            <li><a href="{{ route('home') }}">Home</a></li>
+            <li><a href="{{ route('story') }}">Our Story</a></li>
             <li><a href="menu.html">Menu</a></li>
-            <li><a href="contus.html">Contact Us</a></li>
-            <li><a href="rsvp.html" class="action_btn">Reservation</a></li>
+            <li><a href="{{ route('contact') }}">Contact Us</a></li>
+            <li><a href="{{ route('rsvp') }}" class="action_btn">Reservation</a></li>
         </div>
     </section>
 

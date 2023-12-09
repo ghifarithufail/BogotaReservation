@@ -207,7 +207,7 @@ a{
     display: flex;
 }
 #hero{
-    background-image: url(pics/home.jpg);
+    background-image: url('../fe/asset/home.jpg');
     background-size: cover;
     background-position: top center;
     position: relative;

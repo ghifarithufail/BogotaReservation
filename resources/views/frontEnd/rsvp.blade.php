@@ -27,27 +27,27 @@
     <!-- navbar  -->
     <section id="header">
         <div class="navbar">
-            <div class="logo"><a href="home.html">LOGO</a></div>
+            <div class="logo"><a href="{{ route('home') }}">LOGO</a></div>
             
             <ul class="links">
-                <li><a href="home.html">Home</a></li>
-                <li><a href="story.html">Our Story</a></li>
+                <li><a href="{{ route('home') }}" class="active">Home</a></li>
+                <li><a href="{{ route('story') }}">Our Story</a></li>
                 <li><a href="menu.html">Menu</a></li>
-                <li><a href="contus.html" class="active">Contact Us</a></li>
+                <li><a href="{{ route('contact') }}">Contact Us</a></li>
             </ul>
 
-            <a href="rsvp.html" class="action_btn">RESERVE</a>
+            <a href="{{ route('rsvp') }}"  class="action_btn active">RESERVE</a>
             <div class="toggle_btn">
                 <i class="fa-solid fa-bars"></i>
             </div>
         </div>
 
         <div class="dropdown_menu">
-            <li><a href="home.html">Home</a></li>
-            <li><a href="story.html">Our Story</a></li>
+            <li><a href="{{ route('home') }}">Home</a></li>
+            <li><a href="{{ route('story') }}">Our Story</a></li>
             <li><a href="menu.html">Menu</a></li>
-            <li><a href="contus.html">Contact Us</a></li>
-            <li><a href="rsvp.html" class="action_btn">Reservation</a></li>
+            <li><a href="{{ route('contact') }}">Contact Us</a></li>
+            <li><a href="{{ route('rsvp') }}" class="action_btn">Reservation</a></li>
         </div>
     </section>
 
@@ -56,7 +56,7 @@
 
     <section class="form">
         <div class="form-text">
-            <h1><span><img src="pics/art-1.png" alt=""></span> Book Now <span><img src="pics/art-1.png" alt=""></span></h1>
+            <h1><span><img src="{{asset('fe/asset/art-1.png')}}" alt=""></span> Book Now <span><img src="{{asset('fe/asset/art-1.png')}}" alt=""></span></h1>
             <p>Book Your Table Now And Have A Great Meal!</p>
         </div>
 

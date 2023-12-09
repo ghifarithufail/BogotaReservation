@@ -207,7 +207,7 @@ a{
     display: flex;
 }
 #hero{
-    background-image: url(pics/story.jpg);
+    background-image: url('../fe/asset/story.jpg');
     background-size: cover;
     background-position: top center;
     position: relative;

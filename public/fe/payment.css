@@ -82,7 +82,7 @@ a{
     display: flex;
 }
 #hero{
-    background-image: url(pics/payment.png);
+    background-image: url('../fe/asset/payment.png');
     background-size: cover;
     background-position: top center;
     position: relative;

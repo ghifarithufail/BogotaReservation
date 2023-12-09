@@ -29,11 +29,11 @@ use Illuminate\Support\Facades\Route;
 // });
 
 // front-end 
-Route::get('/home', [HomeController::class, 'home']);
-Route::get('/contact-us', [ContusController::class, 'index']);
-Route::get('/payment', [PaymentController::class, 'payment']);
-Route::get('/reservations', [RsvpController::class, 'rsvp']);
-Route::get('/our-story', [StoryController::class, 'story']);
+Route::get('/home', [HomeController::class, 'home'])->name('home');
+Route::get('/contact-us', [ContusController::class, 'index'])->name('contact');
+Route::get('/payment', [PaymentController::class, 'payment'])->name('payment');
+Route::get('/reservations', [RsvpController::class, 'rsvp'])->name('rsvp');
+Route::get('/our-story', [StoryController::class, 'story'])-> name('story');
 
 
 
