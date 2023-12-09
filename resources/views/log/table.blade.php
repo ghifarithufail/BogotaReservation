@@ -3,7 +3,7 @@
     <div class="container mt-4">
         <div class="card shadow">
             <div class="card-header">
-                <h1 class="text-center">Log Reservation</h1>
+                <h1 class="text-center">Log Table</h1>
             </div>
             <form>
                 <div class="card-body">
@@ -30,11 +30,6 @@
         </div>
         <div class="card text-center">
             <div class="card-body shadow">
-                {{-- <div class="d-flex justify-content-end mb-3" style="zoom: 0.85;">
-                    <a href="{{ route('user/create') }}">
-                        <button type="button" class="btn btn-success rounded">Add +</button>
-                    </a>
-                </div> --}}
                 <table class="table" id="data-table" style="zoom: 0.8;">
                     <thead>
                         <tr class="text-left">
@@ -47,14 +42,14 @@
                     </thead>
                     <tbody>
                         @php
-                            $startingRow = ($logReservation->currentPage() - 1) * $logReservation->perPage() + 1;
+                            $startingRow = ($logTable->currentPage() - 1) * $logTable->perPage() + 1;
                         @endphp
-                        @foreach ($logReservation as $data)
+                        @foreach ($logTable as $data)
                             <tr class="text-left">
                                 <td>{{ $startingRow++ }}</td>
                                 <td>{{ $data->users->name }}</td>
                                 <td>{{ $data->action }}</td>
-                                <td>{{ $data->doing }}</td>
+                                <td>{{ $data->log }}</td>
                                 <td>{{ $data->created_at->format('d-m-y H:i:s') }}</td>
                             </tr>
                         @endforeach
@@ -64,6 +59,6 @@
         </div>
     </div>
     <div class="container">
-        {{ $logReservation->links() }}
+        {{ $logTable->links() }}
     </div>
 @endsection

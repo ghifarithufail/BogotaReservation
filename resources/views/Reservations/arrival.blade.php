@@ -61,7 +61,7 @@
                                     @if ($data->status == 'done')
                                         <div class="badge badge-success text-center"
                                             style="width: 100px; height: 30px; font-size: 16px;">
-                                            {{ $data->status }}
+                                            PAID
                                         </div>
                                     @else
                                         <div class="badge rounded-pill bg-danger text-white"

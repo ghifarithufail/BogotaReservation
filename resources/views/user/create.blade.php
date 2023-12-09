@@ -70,7 +70,6 @@
                                             <div class="alert alert-danger mt-1" style="color: red;">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    
                                 </div>
 
                                 <div class="row mb-3">
@@ -78,8 +77,9 @@
                                         <label for="exampleInputEmail1" class="form-label">Role</label>
                                             <select class="form-control form-control" id="defaultSelect" name="role" aria-label="Default select example">
                                                 <option value="" selected>Pilih Role</option>
-                                                <option value="1">Admin</option>
-                                                <option value="2">Employe</option>
+                                                <option value="1">Super Admin</option>
+                                                <option value="2">Admin</option>
+                                                <option value="3">Employe</option>
                                             </select>
                                         @error('role')
                                             <div class="alert alert-danger mt-1" style="color: red;">{{ $message }}</div>

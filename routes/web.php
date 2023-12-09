@@ -34,7 +34,7 @@ Route::get('/contact-us', [ContusController::class, 'index'])->name('contact');
 Route::get('/payment', [PaymentController::class, 'payment'])->name('payment');
 Route::get('/reservations', [RsvpController::class, 'rsvp'])->name('rsvp');
 Route::get('/our-story', [StoryController::class, 'story'])-> name('story');
-Route::get('/status', [RsvpController::class, 'status'])-> name('');
+Route::get('/status/{id}', [RsvpController::class, 'status'])-> name('');
 
 
 
@@ -57,12 +57,12 @@ Route::get('/logout',[UserController::class, 'logout'])->name('logout');
 
 Route::group(['middleware' => ['auth']], function () {
 
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('user');
-
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('user')->middleware('hakakses:1');
 
     Route::get('/contoh', [TableController::class, 'contoh']);
-    Route::get('/log/user', [LogController::class, 'logUser'])->name('log/user');
-    Route::get('/log/reservation', [LogController::class, 'logReservation'])->name('log/reservation');
+    Route::get('/log/user', [LogController::class, 'logUser'])->name('log/user')->middleware('hakakses:1');
+    Route::get('/log/reservation', [LogController::class, 'logReservation'])->name('log/reservation')->middleware('hakakses:1');
+    Route::get('/log/table', [LogController::class, 'logTable'])->name('log/table')->middleware('hakakses:1');
     // reservations
     Route::group(['prefix' => 'reservation'], function () {
         Route::get('/', [ReservationController::class, 'index'])->name('reservations');
@@ -88,11 +88,11 @@ Route::group(['middleware' => ['auth']], function () {
 
 
     Route::group(['prefix' => 'user'], function () {
-        Route::get('/', [UserController::class, 'index'])->name('user');
-        Route::get('/create', [UserController::class, 'create'])->name('user/create');
-        Route::post('/store', [UserController::class, 'store'])->name('user/store');
-        Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user/edit');
-        Route::post('/update/{id}', [UserController::class, 'update'])->name('user/update');
+        Route::get('/', [UserController::class, 'index'])->name('user')->middleware('hakakses:1,2');
+        Route::get('/create', [UserController::class, 'create'])->name('user/create')->middleware('hakakses:1,2');
+        Route::post('/store', [UserController::class, 'store'])->name('user/store')->middleware('hakakses:1,2');
+        Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user/edit')->middleware('hakakses:1,2');
+        Route::post('/update/{id}', [UserController::class, 'update'])->name('user/update')->middleware('hakakses:1,2');
     });
 
 
@@ -105,9 +105,12 @@ Route::group(['middleware' => ['auth']], function () {
 
     //tables
     Route::group(['prefix' => 'table'], function () {
-        Route::get('/', [TableController::class, 'index'])->name('tables');
-        Route::get('/create', [TableController::class, 'create'])->name('table.create');
-        Route::post('/post', [TableController::class, 'store'])->name('table.store');
+        Route::get('/', [TableController::class, 'index'])->name('tables')->middleware('hakakses:1,2,3');
+        Route::get('/create', [TableController::class, 'create'])->name('table.create')->middleware('hakakses:1,2,3');
+        Route::post('/post', [TableController::class, 'store'])->name('table.store')->middleware('hakakses:1,2,3');
+        Route::get('/edit/{id}', [TableController::class, 'edit'])->name('table/edit')->middleware('hakakses:1,2,3');
+        Route::post('/update/{id}', [TableController::class, 'update'])->name('table/update')->middleware('hakakses:1,2,3');
+
     });
 
     //TEST PUSHER

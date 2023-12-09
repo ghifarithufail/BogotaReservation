@@ -3,8 +3,8 @@
         <thead>
             <tr>
                 <th class="text-center">Tables</th>
-                <th class="text-center">Customer</th>
-                <th class="text-center">Arrival</th>
+                <th class="text-center">Reservation</th>
+                {{-- <th class="text-center">Arrival</th> --}}
                 {{-- <th class="text-center">Cancel</th> --}}
                 <th class="text-center">Payment</th>
             </tr>
@@ -19,16 +19,16 @@
             @forelse ($report['sukses'] as $data)
                 @php
                     $totalCustSum += $data->total;
-                    $totalArrive += $data->datang;
+                    // $totalArrive += $data->datang;
                     $totalCancel += $data->cancel;
-                    $totalPrice += $data->total * 150000;
+                    $totalPrice += $data->totals;
                 @endphp
                 <tr>
                     <td class="text-center">{{ $data->tables_name }}</td>
                     <td class="text-right">{{ $data->total }}</td>
-                    <td class="text-right">{{ $data->datang }}</td>
+                    {{-- <td class="text-right">{{ $data->datang }}</td> --}}
                     {{-- <td class="text-right">{{ $data->cancel }}</td> --}}
-                    <td class="text-right">{{ number_format($data->total * 150000) }}</td>
+                    <td class="text-right">{{ number_format($data->totals) }}</td>
                 </tr>
             @Empty
                 <tr>
@@ -39,7 +39,7 @@
         <tfoot>
             <th class="text-right">Total : </th>
             <th class="text-right bold">{{ $totalCustSum }}</th>
-            <th class="text-right bold">{{ $totalArrive }}</th>
+            {{-- <th class="text-right bold">{{ $totalArrive }}</th> --}}
             {{-- <th class="text-right bold">{{ $totalCancel }}</th> --}}
             <th class="text-right bold">{{ number_format($totalPrice) }}</th>
         </tfoot>

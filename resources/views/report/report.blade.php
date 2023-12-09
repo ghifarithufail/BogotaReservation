@@ -34,7 +34,7 @@
                                 <label for="date1">Status:</label>
                                 <select name="payment" style="height: 40px" id="payment" class="form-control">
                                     <option value="">-- Status --</option>
-                                    <option value="done" @if (request()->payment == 'done') selected @endif>Done</option>
+                                    <option value="done" @if (request()->payment == 'done') selected @endif>Paid</option>
                                     <option value="unpaid" @if (request()->payment == 'unpaid') selected @endif>Unpaid</option>
                                 </select>
                             </div>
@@ -52,14 +52,14 @@
                                     id="date_end">
                             </div>
 
-                            <div class="col-sm-4 mt-3 d-flex justify-content-center flex-column">
+                            {{-- <div class="col-sm-4 mt-3 d-flex justify-content-center flex-column">
                                 <label for="date1">Arrival:</label>
                                 <select name="arrival" style="height: 40px" id="arrival" class="form-control">
                                     <option value="">-- Status --</option>
                                     <option value="1" @if (request()->payment == '1') selected @endif>Arrived</option>
                                     <option value="0" @if (request()->payment == '0') selected @endif>Not Arrived</option>
                                 </select>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="col mt-3 d-flex justify-content-center">
@@ -75,15 +75,14 @@
             <div class="col-xs-12 col-sm-6">
                 <div class="card">
                     <div class="card-header">
-                        <h1 class="text-center">Customer Success</h1>
+                        <h1 class="text-center">Reservation Success</h1>
                     </div>
                     <div class="col-xs-12 col-sm-12 mt-3" id="report_sukses">
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th class="text-center">Tables</th>
-                                    <th class="text-center">Customer</th>
-                                    <th class="text-center">Arrival</th>
+                                    <th class="text-center">Reservation</th>
                                     <th class="text-center">Payment</th>
                                 </tr>
                             </thead>
@@ -99,14 +98,14 @@
             <div class="col-xs-12 col-sm-6">
                 <div class="card">
                     <div class="card-header">
-                        <h1 class="text-center">Customer Cancel</h1>
+                        <h1 class="text-center">Reservation Cancel</h1>
                     </div>
                     <div class="col-xs-12 col-sm-12 mt-3" id="report_gagal">
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th class="text-center">Tables</th>
-                                    <th class="text-center">Customer</th>
+                                    <th class="text-center">Reservation</th>
                                     {{-- <th class="text-center">Not Arrival</th>
                                     <th class="text-center">Cenceled</th>
                                     <th class="text-center">Payment</th> --}}
@@ -161,6 +160,7 @@
                                 <th scope="col" class="text-center">Payment</th>
                                 <th scope="col" class="text-center">Status Reservation</th>
                                 <th scope="col">Reservation Date</th>
+                                <th scope="col">Price</th>
                                 {{-- <th scope="col">Actions</th> --}}
                             </tr>
                         </thead>

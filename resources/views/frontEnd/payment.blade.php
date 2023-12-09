@@ -20,6 +20,9 @@
     <!-- swiper js  -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
+    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key="SB-Mid-client-YtRQ82UkuKWPQUJG"></script>
+
     </head>
 
 <body>
@@ -48,27 +51,27 @@
             <div class="details">
                 <div class="nama">
                     <h3>Name :</h3>
-                    <p>Bunga Permata Hilias</p>
+                    <p>{{ $reservasi->name }}</p>
                 </div>
                 <div class="email">
                     <h3>Email :</h3>
-                    <p>bungaaaph@gmail.com</p>
+                    <p>{{ $reservasi->email }}</p>
                 </div>
                 <div class="date">
                     <h3>Reservation Date :</h3>
-                    <p>15-Des-2023</p>
+                    <p>{{ $reservasi->date->format('D d-M-Y') }}</p>
                 </div>
                 <div class="time">
                     <h3>Time Reservation :</h3>
-                    <p>16.00-18.00</p>
+                    <p>{{ $reservasi->time }}</p>
                 </div>
                 <div class="number">
                     <h3>Table Number :</h3>
-                    <p>A01</p>
+                    <p>{{ $reservasi->Tables->tables_name }}</p>
                 </div>
                 <div class="people">
                     <h3>Total Guest :</h3>
-                    <p>2 People</p>
+                    <p>{{ $reservasi->guest }} Orang</p>
                 </div>
             </div>
 
@@ -80,7 +83,7 @@
 
                 <div class="total">
                     <h3>Total :</h3>
-                    <p>Rp300.000</p>
+                    <p>Rp{{ $reservasi->price }}</p>
                 </div>
 
             <div class="notes">
@@ -90,7 +93,7 @@
             </div>
 
             <div id="submit">
-                <button type="submit" class="btn" id="payment">Payment</button>
+                <button type="submit" class="btn" id="pay-button">Payment</button>
             </div>
 
         </div>
@@ -134,6 +137,43 @@
 
     <!-- custom js -->
     <script src="{{asset('fe/script.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
+        integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
+        integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript">
+        // For example trigger on button clicked, or any time you need
+        var payButton = document.getElementById('pay-button');
+        payButton.addEventListener('click', function() {
+            // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
+            window.snap.pay('{{ $snapToken }}', {
+                onSuccess: function(result) {
+                    /* You may add your own implementation here */
+                    //   alert("payment success!"); console.log(result);
+                    window.location.href = '/status/{{ $reservasi->id }}';
+                },
+                onPending: function(result) {
+                    /* You may add your own implementation here */
+                    alert("wating your payment!");
+                    console.log(result);
+                },
+                onError: function(result) {
+                    /* You may add your own implementation here */
+                    alert("payment failed!");
+                    console.log(result);
+                },
+                onClose: function() {
+                    /* You may add your own implementation here */
+                    alert('you closed the popup without finishing the payment');
+                }
+            })
+        });
+    </script>
 
 </body>
 </html>

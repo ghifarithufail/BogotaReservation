@@ -10,17 +10,19 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
 </head>
-
 <body>
     <div class="container">
         <div class="card">
             <div class="card-header">
                 Invoice
                 <strong>{{$reservasi->created_at->format('D d-M-Y')}}</strong>
-                <span class="float-right "> <strong>Status :</strong> {{strtoupper($reservasi->status)}}</span>
-
+                <span class="float-right "> <strong>Status :</strong>
+                    @if ($reservasi->status == 'done')
+                        PAID
+                    @endif
+                    {{-- {{strtoupper($reservasi->status)}} --}}
+                </span>
             </div>
             <div class="card-body">
                 <div class="row mb-4">
@@ -34,10 +36,6 @@
                         <div>Email: info@webz.com.pl</div>
                         <div>Phone: +48 444 666 3333</div> --}}
                     </div>
-
-
-
-
                 </div>
 
                 <div class="table-responsive-sm">
@@ -47,8 +45,8 @@
                                 <th class="center">#</th>
                                 {{-- <th>Item</th> --}}
                                 <th>Description</th>
-                                <th class="right">Unit Cost</th>
-                                <th class="center">Qty</th>
+                                <th class="right">Price</th>
+                                <th class="center">Guest</th>
                                 <th class="right">Total</th>
                             </tr>
                         </thead>
@@ -56,10 +54,10 @@
                             <tr>
                                 <td class="center">1</td>
                                 {{-- <td class="left strong">Origin License</td> --}}
-                                <td class="left">Making Reservation in Date 
+                                <td class="left">Making Reservation in,
                                     {{$reservasi->date->format('D d-M-Y')}}
                                     <div>
-                                        The table in {{$reservasi->Tables->tables_name}} And Time {{$reservasi->time}}
+                                        table {{$reservasi->Tables->tables_name}}, guest {{$reservasi->guest}} people and time {{$reservasi->time}}
                                     </div>
                                 </td>
 
@@ -82,10 +80,8 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-4 col-sm-5">
-
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

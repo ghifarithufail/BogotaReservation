@@ -48,31 +48,31 @@
             <div class="details">
                 <div class="nama">
                     <h3>Name :</h3>
-                    <p>Bunga Permata Hilias</p>
+                    <p>{{ $reservasi->name }}</p>
                 </div>
                 <div class="email">
                     <h3>Email :</h3>
-                    <p>bungaaaph@gmail.com</p>
+                    <p>{{ $reservasi->email }}</p>
                 </div>
                 <div class="date">
                     <h3>Reservation Date :</h3>
-                    <p>15-Des-2023</p>
+                    <p>{{ $reservasi->date->format('D d-M-Y') }}</p>
                 </div>
                 <div class="time">
                     <h3>Time Reservation :</h3>
-                    <p>16.00-18.00</p>
+                    <p>{{ $reservasi->time }}</p>
                 </div>
                 <div class="number">
                     <h3>Table Number :</h3>
-                    <p>A01</p>
+                    <p>{{ $reservasi->Tables->tables_name }}</p>
                 </div>
                 <div class="people">
                     <h3>Total Guest :</h3>
-                    <p>2 People</p>
+                    <p>{{ $reservasi->guest }} Orang</p>
                 </div>
                 <div class="status">
                     <h3>Status :</h3>
-                    <p>Paid</p>
+                    <p>{{ $reservasi->status }}</p>
                 </div>
             </div>
 
@@ -84,7 +84,7 @@
 
                 <div class="total">
                     <h3>Total :</h3>
-                    <p>Rp300.000</p>
+                    <p>Rp{{ $reservasi->price }}</p>
                 </div>
 
             <div class="notes">
@@ -94,7 +94,9 @@
             </div>
 
             <div id="status">
-                <button type="submit" class="btn" id="status">Download</button>
+                <a href="{{ route('invoice/download', $reservasi->id) }}" target="_blank" id="pdfLink">
+                    <button type="submit" class="btn" id="status">Download</button>
+                </a>
             </div>
 
         </div>
@@ -138,6 +140,18 @@
 
     <!-- custom js -->
     <script src="{{asset('fe/script.js')}}"></script>
+    <script>
+        document.getElementById('pdfLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            const pdfUrl = this.getAttribute('href');
+
+            const newWindow = window.open(pdfUrl, '_blank');
+
+            newWindow.addEventListener('load', function() {
+                newWindow.print();
+            });
+        });
+    </script>
 
 </body>
 </html>

@@ -76,8 +76,10 @@
                             <td>{{$data->date}}</td>
                             <td>
                                 @if ($data->role == '1')
-                                    Admin
+                                    Super Admin
                                 @elseif ($data->role == '2')
+                                    Admin
+                                @elseif ($data->role == '3')
                                     Employee
                                 @endif
                             </td>

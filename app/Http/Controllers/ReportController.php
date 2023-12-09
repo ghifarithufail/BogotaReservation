@@ -29,45 +29,45 @@ class ReportController extends Controller
         return view('report.report', compact('table', 'request'));
     }
 
-    public function index()
-    {
-        $users = Reservation::selectRaw('MONTH(date) as month, COUNT(*) as count')
-            ->whereYear('date', date('Y'))
-            ->groupBy('month')
-            ->orderBy('month')
-            ->get();
+    // public function index()
+    // {
+    //     $users = Reservation::selectRaw('MONTH(date) as month, COUNT(*) as count')
+    //         ->whereYear('date', date('Y'))
+    //         ->groupBy('month')
+    //         ->orderBy('month')
+    //         ->get();
 
-        $labels = [];
-        $data = [];
-        $colors = ['#FF6384', '#36A2EB', '#FFCE56', '#8BC34A', '#FF5722', '#009688', '#795548', '#9C27B0', '#2196F3', 'FF9800', '#CDDC39', '#607D8B'];
+    //     $labels = [];
+    //     $data = [];
+    //     $colors = ['#FF6384', '#36A2EB', '#FFCE56', '#8BC34A', '#FF5722', '#009688', '#795548', '#9C27B0', '#2196F3', 'FF9800', '#CDDC39', '#607D8B'];
 
-        for ($i = 1; $i <= 12; $i++) {
-            $month = date('F', mktime(0, 0, 0, $i, 1));
-            $count = [];
+    //     for ($i = 1; $i <= 12; $i++) {
+    //         $month = date('F', mktime(0, 0, 0, $i, 1));
+    //         $count = [];
 
-            foreach ($users as $user) {
-                if ($user->month == $i) {
-                    array_push($data, $user->count);
-                    // $count = $user->count();
-                    // dd($users);
-                    break;
-                }
-            }
+    //         foreach ($users as $user) {
+    //             if ($user->month == $i) {
+    //                 array_push($data, $user->count);
+    //                 // $count = $user->count();
+    //                // dd($users);
+    //                 break;
+    //             }
+    //         }
 
-            array_push($labels, $month);
-            // array_push($data, $count);
-        }
+    //         array_push($labels, $month);
+    //         // array_push($data, $count);
+    //     }
 
-        $datasets = [
-            [
-                'label' => 'Reservasi',
-                'data' => $data,
-                'backgroundColor' => $colors,
-            ]
-        ];
-        \Log::info($users);
-        return view('report.index', compact('datasets', 'labels', 'data', 'users'));
-    }
+    //     $datasets = [
+    //         [
+    //             'label' => 'Reservasi',
+    //             'data' => $data,
+    //             'backgroundColor' => $colors,
+    //         ]
+    //     ];
+    //     \Log::info($users);
+    //     return view('report.index', compact('datasets', 'labels', 'data', 'users'));
+    // }
 
     public function download(Request $request)
     {
@@ -93,7 +93,8 @@ class ReportController extends Controller
     {
         $report['sukses'] = Reservation::with('Tables')
             ->where('status', 'done')
-            ->selectRaw('sum(guest) as total, count(CASE WHEN status = "1" THEN 1 ELSE NULL END) as datang, tables.tables_name, count(CASE WHEN cancel = 0 THEN 1 ELSE NULL END) as cancel, sum(CASE WHEN cancel = 0 THEN price ELSE 0 END) as total_price')
+            ->where('cancel','0')
+            ->selectRaw('count(guest) as total, tables.tables_name, sum(price) as totals',)
             ->join('tables', 'reservations.table_id', '=', 'tables.id')
             ->groupBy('tables.tables_name')
             ->orderBy('tables.tables_name', 'asc');
@@ -107,7 +108,7 @@ class ReportController extends Controller
     {
         $report['gagal'] = Reservation::with('Tables')
             ->where('cancel', '1')
-            ->selectRaw('sum(guest) as total, tables.tables_name, count(CASE WHEN cancel = 1 THEN 1 ELSE NULL END) as cancel')
+            ->selectRaw('count(guest) as total, tables.tables_name, count(CASE WHEN cancel = 1 THEN 1 ELSE NULL END) as cancel')
             ->join('tables', 'reservations.table_id', '=', 'tables.id')
             ->groupBy('tables.tables_name')
             ->orderBy('tables.tables_name', 'asc');

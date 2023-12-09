@@ -3,7 +3,7 @@
     <div class="container mt-5">
         <div class="card shadow">
             <div class="card-header">
-                <h1 class="text-center">Reservations PROD</h1>
+                <h1 class="text-center">Reservations</h1>
             </div>
             <form action="">
                 <div class="card-body">
@@ -24,12 +24,11 @@
                                     <option value="{{ $data->tables_name }}" @if (request()->tables == $data->tables_name)selected @endif>{{ $data->tables_name }}</option>
                                 @endforeach
                             </select>
-
                         </div>
                         <div class="col-sm-2">
                             <select name="payment" style="height: 40px" id="payment" class="form-control">
                                 <option value="">-- Status --</option>
-                                <option value="done" @if(request()->payment == 'done') selected @endif>Done</option>
+                                <option value="done" @if(request()->payment == 'done') selected @endif>Paid</option>
                                 <option value="unpaid" @if(request()->payment == 'unpaid') selected @endif>Unpaid</option>
                             </select>
                         </div>
@@ -74,7 +73,7 @@
                                     @if ($data->status == 'done')
                                         <div class="badge badge-success text-center"
                                             style="width: 100px; height: 30px; font-size: 16px;">
-                                            {{ $data->status }}
+                                            Paid
                                         </div>
                                     @else
                                         <div class="badge rounded-pill bg-danger text-white"
