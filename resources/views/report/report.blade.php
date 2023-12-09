@@ -34,7 +34,7 @@
                                 <label for="date1">Status:</label>
                                 <select name="payment" style="height: 40px" id="payment" class="form-control">
                                     <option value="">-- Status --</option>
-                                    <option value="done" @if (request()->payment == 'done') selected @endif>Done</option>
+                                    <option value="done" @if (request()->payment == 'done') selected @endif>Paid</option>
                                     <option value="unpaid" @if (request()->payment == 'unpaid') selected @endif>Unpaid</option>
                                 </select>
                             </div>
@@ -160,6 +160,7 @@
                                 <th scope="col" class="text-center">Payment</th>
                                 <th scope="col" class="text-center">Status Reservation</th>
                                 <th scope="col">Reservation Date</th>
+                                <th scope="col">Price</th>
                                 {{-- <th scope="col">Actions</th> --}}
                             </tr>
                         </thead>
