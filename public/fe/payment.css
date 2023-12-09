@@ -211,34 +211,34 @@ a{
     margin-bottom: 25px;
 }
 
-#submit button{
-    margin-top: 30px;
+#submit button {
     width: 440px;
     height: 60px;
     font-size: 20px;
     background-color: transparent !important;
-    color: whitesmoke !important;
+    color: var(--white-color) !important;
     transition: all .3s;
     border: 3px solid var(--white-color);
     border-radius: 10px;
     font-weight: 600;
     letter-spacing: 1px;
-    /* text-align: center; */
-    padding-left: 170px;
-    padding-top: 10px;
+    text-align: center; /* Center text horizontally */
+    line-height: 60px; /* Center text vertically */
+    padding: 0; /* Remove padding to center text properly */
 }
 
-
-#submit button:hover{
+#submit button:hover {
     background-color: var(--white-color) !important;
     color: var(--green-pastel) !important;
 }
 
-#submit button:active{
+#submit button:active {
     font-size: 19px;
     background-color: rgb(46, 20, 5);
     color: var(--white-color) !important;
 }
+
+
 
 .container2 .notes{
     margin-top: 40px;

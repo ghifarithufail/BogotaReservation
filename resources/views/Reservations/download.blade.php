@@ -20,6 +20,8 @@
                 <span class="float-right "> <strong>Status :</strong>
                     @if ($reservasi->status == 'done')
                         PAID
+                    @elseif ($reservasi->status == 'unpaid')
+                        UNPAID
                     @endif
                     {{-- {{strtoupper($reservasi->status)}} --}}
                 </span>
