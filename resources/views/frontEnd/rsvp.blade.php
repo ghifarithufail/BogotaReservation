@@ -60,50 +60,87 @@
             <p>Book Your Table Now And Have A Great Meal!</p>
         </div>
 
+        @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if (session('guest'))
+        <div class="alert alert-danger">
+            {{ session('guest') }}
+        </div>
+    @endif
+
+    @if (session('warning'))
+        <div class="alert alert-danger">
+            {{ session('warning') }}
+        </div>
+    @endif
+
         <div class="main-form">
-            <form action="" method="get">
+            <form action="{{ route('reservations.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div>
                     <span>Full Name</span>
-                    <input type="text" name="name" placeholder="Enter Your Name" required>
+                    <input type="text" name="name" value="{{ old('name') }}" placeholder="Enter Your Name">
+                    @error('name')
+                    <div class="alert alert-danger">{{ $pesan = 'Kolom name tidak boleh kosong' }}</div>
+                @enderror
                 </div>
 
                 <div>
                     <span>Email</span>
-                    <input type="email" name="email" placeholder="Enter Your Email" required>
+                    <input type="email" name="email" value="{{ old('email') }}" placeholder="Enter Your Email" required>
+                    @error('email')
+                    <div class="alert alert-danger">{{ $pesan = 'Kolom email tidak boleh kosong' }}</div>
+                @enderror
                 </div>
 
                 <div>
                     <span>Reservation Date</span>
-                    <input type="date" name="date" placeholder="Enter Your Reservation Date" required>
+                    <input type="date" value="{{ old('date') }}" name="date" placeholder="Enter Your Reservation Date" required>
+                    @error('date')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+                @if (session('date'))
+                    <div class="alert alert-danger">
+                        {{ session('date') }}
+                    </div>
+                @endif
                 </div>
 
                 <div>
                     <span>Time Reservation</span>
                     <select name="time" id="time" required>
-                        <option value="">--Time Reservation--</option>
-                        <option value="1">16.00 - 18.00</option>
-                        <option value="2">19.00 - 21.00</option>
+                        <option value="" selected>Choose Table</option>
+                        <option value="16.00 - 18.00">16.00 - 18.00</option>
+                        <option value="19.00 - 21.00">19.00 - 21.00</option>
                     </select>
                 </div>
 
                 <div>
-                    <span>Time Reservation</span>
-                    <select name="table" id="table" required>
-                        <option value="">--Table Reservation--</option>
-                        <option value="1">A1</option>
-                        <option value="2">A2</option>
-                        <option value="3">A3</option>
+                    <span>Table Reservation</span>
+                    <select name="table_id"" id="table" required>
+                        <option value="" selected>Choose Table</option>
+                    @foreach ($table as $data)
+                        <option value="{{ $data->id }}">{{ $data->tables_name }} ({{ $data->table_guest }} people)</option>
+                    @endforeach
                     </select>
                 </div>
 
                 <div>
                     <span>Total Guest</span>
-                    <select name="people" id="people" required>
-                        <option value="">--People--</option>
-                        <option value="1">2 People</option>
-                        <option value="2">3 People</option>
-                        <option value="3">4 People</option>
-                    </select>
+                    <input type="text" name="guest" value="{{ old('guest') }}" placeholder="Enter Your Name">
+                    @error('guest')
+                    <div class="alert alert-danger">{{ $pesan = 'Kolom bulan tidak boleh kosong' }}</div>
+                @enderror
                 </div>
 
                 <!-- <div class="input-box message-box">

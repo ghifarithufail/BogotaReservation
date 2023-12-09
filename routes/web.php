@@ -34,7 +34,7 @@ Route::get('/contact-us', [ContusController::class, 'index'])->name('contact');
 Route::get('/payment', [PaymentController::class, 'payment'])->name('payment');
 Route::get('/reservations', [RsvpController::class, 'rsvp'])->name('rsvp');
 Route::get('/our-story', [StoryController::class, 'story'])-> name('story');
-Route::get('/status', [RsvpController::class, 'status'])-> name('');
+Route::get('/status/{id}', [RsvpController::class, 'status'])-> name('');
 
 
 

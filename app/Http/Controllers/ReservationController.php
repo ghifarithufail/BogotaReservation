@@ -333,7 +333,7 @@ class ReservationController extends Controller
 
         // dd($snapToken);
         // return redirect()->route('reservations.create')->with('success', 'Reservation created successfully.');
-        return view('Reservations.checkout', compact('snapToken', 'reservasi'));
+        return view('frontEnd.payment', compact('snapToken', 'reservasi'));
     }
 
     function callback(Request $request)

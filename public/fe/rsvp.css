@@ -205,58 +205,58 @@ a{
 
 /* isinya  */
 
-.form{
+.form {
     margin-top: 80px;
-    margin-left: 240px;
-    width: 700px;
-    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.form-text{
+.form-text {
     text-align: center;
     margin: 0 10px;
 }
 
-.form-text h1{
+.form-text h1 {
     color: var(--main-color);
     font-size: 40px;
     margin-bottom: 20px;
 }
 
-.form-text p{
+.form-text p {
     color: var(--main-color);
     font-size: 35px;
 }
 
-.main-form div{
-    margin: 10px 20px;
-    width: 300px;
-    display: inline-block;
+.main-form {
+    width: 100%;
+    max-width: 700px;
 }
 
-.main-form div input{
+.main-form form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.main-form div {
+    margin: 10px 20px;
+    width: 300px;
+}
+
+.main-form div input,
+.main-form div select {
     width: 100%;
     height: 30px;
     background: none;
     border: 3px solid var(--main-color);
     font-size: 14px;
-    color: var(--white-color);
+    color: var(--main-color);
     border-radius: 4px;
     outline: none;
     padding: 3px 0 3px 10px;
     margin-top: 10px;
     font-weight: 600;
-}
-
-.main-form div select{
-    width: 100%;
-    height: 40px;
-    background: transparent;
-    border: 3px solid var(--main-color);
-    font-size: 14px;
-    color: var(--white-color);
-    padding: 3px 0 3px 10px;
-    margin-top: 10px;
 }
 
 .main-form div span{
@@ -265,8 +265,8 @@ a{
     font-size: 18px;
 }
 
-.main-form div textarea{
-    width: 630px;
+/* .main-form div textarea {
+    width: 100%;
     font-size: 14px;
     font-weight: 500;
     background: transparent;
@@ -277,7 +277,7 @@ a{
     min-height: 110px;
     margin-top: 10px;
     border: 3px solid var(--main-color);
-}
+} */
 
 #submit{
     width: 100%;
