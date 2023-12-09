@@ -106,10 +106,10 @@
                     </select>
                 </div>
 
-                <div class="input-box message-box">
+                <!-- <div class="input-box message-box">
                     <span>Note</span>
                     <textarea placeholder="Enter Your Note"></textarea>
-                </div>
+                </div> -->
 
                 <div id="submit">
                     <button type="submit" id="submit">Next</button>

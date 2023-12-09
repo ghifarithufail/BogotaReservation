@@ -229,10 +229,8 @@ a{
 #hero h1{
     display: block;
     position: relative;
-    margin-top: 200px;
     font-size: 50px;
     color: var(--white-color);
-    margin-left: 600px;
 }
 
 
