@@ -1,7 +1,11 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\fe\ContusController;
 use App\Http\Controllers\fe\HomeController;
+use App\Http\Controllers\fe\PaymentController;
+use App\Http\Controllers\fe\RsvpController;
+use App\Http\Controllers\fe\StoryController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReservationController;
@@ -24,7 +28,14 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+// front-end 
 Route::get('/home', [HomeController::class, 'home']);
+Route::get('/contact us', [ContusController::class, 'contus']);
+Route::get('/payment', [PaymentController::class, 'payment']);
+Route::get('/reservation', [RsvpController::class, 'rsvp']);
+Route::get('/our story', [StoryController::class, 'story']);
+
+
 
 Route::get('/data', [ReservationController::class, 'data']);
 // reservations
