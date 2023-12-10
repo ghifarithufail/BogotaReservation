@@ -27,12 +27,12 @@
     <!-- navbar  -->
     <section id="header">
         <div class="navbar">
-            <div class="logo"><a href="{{ route('home') }}">LOGO</a></div>
+            <div class="logo"><a href="{{ route('home') }}">BOGOTA</a></div>
             
             <ul class="links">
                 <li><a href="{{ route('home') }}" class="active">Home</a></li>
                 <li><a href="{{ route('story') }}">Our Story</a></li>
-                <li><a href="menu.html">Menu</a></li>
+                {{-- <li><a href="menu.html">Menu</a></li> --}}
                 <li><a href="{{ route('contact') }}">Contact Us</a></li>
             </ul>
 
@@ -45,7 +45,7 @@
         <div class="dropdown_menu">
             <li><a href="{{ route('home') }}">Home</a></li>
             <li><a href="{{ route('story') }}">Our Story</a></li>
-            <li><a href="menu.html">Menu</a></li>
+            {{-- <li><a href="menu.html">Menu</a></li> --}}
             <li><a href="{{ route('contact') }}">Contact Us</a></li>
             <li><a href="{{ route('rsvp') }}" class="action_btn">Reservation</a></li>
         </div>

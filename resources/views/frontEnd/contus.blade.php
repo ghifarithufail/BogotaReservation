@@ -27,7 +27,7 @@
     <!-- navbar  -->
     <section id="header">
         <div class="navbar">
-            <div class="logo"><a href="{{ route('home') }}">LOGO</a></div>
+            <div class="logo"><a href="{{ route('home') }}">BOGOTA</a></div>
             
             <ul class="links">
                 <li><a href="{{ route('home') }}">Home</a></li>

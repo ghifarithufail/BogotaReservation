@@ -22,7 +22,7 @@
     <!-- navbar  -->    
     <section id="header">
         <div class="navbar">
-            <div class="logo"><a href="{{ route('home') }}">LOGO</a></div>
+            <div class="logo"><a href="{{ route('home') }}">BOGOTA</a></div>
             
             <ul class="links">
                 <li><a href="{{ route('home') }}" class="active">Home</a></li>
@@ -40,7 +40,7 @@
         <div class="dropdown_menu">
             <li><a href="{{ route('home') }}">Home</a></li>
             <li><a href="{{ route('story') }}">Our Story</a></li>
-            <li><a href="menu.html">Menu</a></li>
+            {{-- <li><a href="menu.html">Menu</a></li> --}}
             <li><a href="{{ route('contact') }}">Contact Us</a></li>
             <li><a href="{{ route('rsvp') }}" class="action_btn">Reservation</a></li>
         </div>
@@ -73,9 +73,9 @@
 
     <section class="menu" id="menu">
         <div class="menu-content">
-            <h2 class="heading">Menu</h2>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit in rem error omnis doloremque, aspernatur maiores magnam ratione facilis repudiandae ut consequuntur saepe et ullam dolorem, maxime sint provident quae!</p>
-            <p><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam libero ratione pariatur quod, similique saepe est quasi maiores perferendis officia.</br></p>
+            <h2 class="heading">Prime Tenderness Reserve</h2>
+            <p>Prime Tenderness Reserve is one of the menus that we will serve to you. Prime Tenderness Reserve is highlighting the prime quality and exceptional tenderness of the steak, this name conveys a sense of exclusivity and premium dining.</p>
+            <p>Indulge your palate in the extraordinary tenderness that defines our selection of prime cuts, carefully sourced and expertly prepared to deliver a sublime dining sensation. Our crown jewel is the renowned filet mignon, a masterpiece of culinary craftsmanship that promises a melt-in-your-mouth experience. Each bite is a celebration of tenderness, as our chefs meticulously handle and prepare the cuts to preserve the natural succulence.</p>
         </div>
 
         <div class="menu-img">
@@ -107,21 +107,20 @@
                         <div class="testimonial-slide swiper-slide">
                             <img src="{{asset('fe/asset/ojan.jpeg')}}" alt="">
                             <h3>Fauzan Azmi</h3>
-                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae impedit minus praesentium possimus illo modi ipsam provident facere fugiat atque sequi commodi ea ipsa nobis sed asperiores cupiditate est natus nulla perferendis vitae nemo, animi fugit aut? Quaerat, error inventore officiis perspiciatis, magni eaque, iusto illum eligendi enim quisquam unde! Veniam molestiae quos illo deserunt consequatur, delectus inventore dolorem corrupti. </p>
+                            <p>My evening at Bogota Restaurant was nothing short of extraordinary. From the moment I walked in, the ambiance exuded elegance and sophistication. The attention to detail in the decor set the tone for a memorable dining experience. The service was impeccable, with a staff that was not only knowledgeable about the menu but also genuinely passionate about ensuring our satisfaction. </p>
                         </div>
 
                         <div class="testimonial-slide swiper-slide">
                             <img src="{{asset('fe/asset/hanida.jpeg')}}" alt="">
                             <h3>Hanida Adzkia</h3>
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora at delectus illum minus, voluptatum perferendis assumenda alias non suscipit exercitationem dolorum cum architecto explicabo aspernatur, ut incidunt? Quibusdam, maxime. Animi aliquam obcaecati mollitia recusandae consequatur veritatis vel alias, nesciunt dolor. Totam expedita culpa praesentium consequatur. Harum perferendis est saepe ullam?</p>
+                            <p>Dining at Bogota Restaurant was an absolute delight. The atmosphere was enchanting, striking the perfect balance between opulence and warmth. The prime tenderness of the steaks was unlike anything I've experienced before. Each bite was a revelation, a testament to the chef's dedication to perfection. The staff's attentiveness and knowledge of the menu added to the overall enjoyment of the night.</p>
                         </div>
                         
                         <div class="testimonial-slide swiper-slide">
                             <img src="{{asset('fe/asset/bunga.jpg')}}" alt="">
                             <h3>Bunga Permata Hilias</h3>
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora at delectus illum minus, voluptatum perferendis assumenda alias non suscipit exercitationem dolorum cum architecto explicabo aspernatur, ut incidunt? Quibusdam, maxime. Animi aliquam obcaecati mollitia recusandae consequatur veritatis vel alias, nesciunt dolor. Totam expedita culpa praesentium consequatur. Harum perferendis est saepe ullam?</p>
+                            <p>Celebrating our anniversary at Bogota Restaurant was a decision we'll cherish forever. The restaurant's intimate and sophisticated ambiance provided the perfect backdrop for our special occasion. From the moment we were seated, the staff went above and beyond to make us feel celebrated. Bogota Restaurant turned a memorable day into an unforgettable celebration of love, and we can't wait to return for more special moments.</p>
                         </div>
-                    
                     
                 </div>
 
