@@ -59,4 +59,5 @@
 	{{-- js --}}
 	@include('includes.js')
 </body>
+
 </html>

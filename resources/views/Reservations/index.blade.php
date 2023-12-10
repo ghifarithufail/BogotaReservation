@@ -99,8 +99,20 @@
             </div>
         </div>
     </div>
-    asjfkbfk
     <div class="container">
         {{ $reservations->links() }}
     </div>
+    <script>
+        document.addEventListener('contextmenu', function (e) {
+          // Mencegah menu klik kanan
+          e.preventDefault();
+        });
+    
+        document.addEventListener('keydown', function (e) {
+          // Mencegah kombinasi tombol keyboard untuk memicu pencetakan (Ctrl+C, Cmd+C)
+          if ((e.ctrlKey || e.metaKey) && e.key === 'c') {
+            e.preventDefault();
+          }
+        });
+      </script>
 @endsection
