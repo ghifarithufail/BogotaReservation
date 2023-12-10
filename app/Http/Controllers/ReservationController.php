@@ -257,7 +257,8 @@ class ReservationController extends Controller
         $date = $request->input('date');
         $time = $request->input('time');
         //menghitung jumlah limit orang
-        $limit = Table::sum('table_guest');
+        $sum = Table::sum('table_guest');
+        $limit = $sum * 2;
 
         //code minimum reservasi 1 hari sebelumnya
         $minimumDate = Carbon::now()->addDays(1)->startOfDay();

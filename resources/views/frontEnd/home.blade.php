@@ -27,7 +27,7 @@
             <ul class="links">
                 <li><a href="{{ route('home') }}" class="active">Home</a></li>
                 <li><a href="{{ route('story') }}">Our Story</a></li>
-                <li><a href="menu.html">Menu</a></li>
+                {{-- <li><a href="menu.html">Menu</a></li> --}}
                 <li><a href="{{ route('contact') }}">Contact Us</a></li>
             </ul>
 
@@ -64,8 +64,7 @@
 
         <div class="about-content">
             <h2 class="heading">Our Story</h2>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit in rem error omnis doloremque, aspernatur maiores magnam ratione facilis repudiandae ut consequuntur saepe et ullam dolorem, maxime sint provident quae!</p>
-            <p><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam libero ratione pariatur quod, similique saepe est quasi maiores perferendis officia.</br></p>
+            <p>Bogotá, the capital city of Colombia, has a vibrant and evolving culinary scene that includes a range of fine dining options. Fine dining establishments in Bogotá often combine traditional Colombian flavors with modern and international culinary techniques, resulting in a unique and delightful dining experience.</p>
             <a href="#" class="btn">Read More</a>
         </div>
     </section>
@@ -93,7 +92,7 @@
 
         <div class="int-content">
             <h2 class="heading">Interested?</h2>
-            <a href="{{asset('frondEnd/rsvp.blade.php')}}" class="int-btn">RESERVATION NOW!</a>
+            <a href="{{ route('rsvp') }}" class="int-btn">RESERVATION NOW!</a>
         </div>
     </section>
 

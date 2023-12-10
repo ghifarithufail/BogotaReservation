@@ -29,13 +29,12 @@ use Illuminate\Support\Facades\Route;
 // });
 
 // front-end 
-Route::get('/home', [HomeController::class, 'home'])->name('home');
+Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/contact-us', [ContusController::class, 'index'])->name('contact');
 Route::get('/payment', [PaymentController::class, 'payment'])->name('payment');
 Route::get('/fixpayment', [PaymentController::class, 'fixPayment'])->name('fixPayment');
 Route::get('/reservations', [RsvpController::class, 'rsvp'])->name('rsvp');
 Route::get('/our-story', [StoryController::class, 'story'])-> name('story');
-Route::get('/status/{id}', [RsvpController::class, 'status'])-> name('');
 
 
 
@@ -50,6 +49,11 @@ Route::group(['prefix' => 'reservation'], function () {
 Route::get('/reservation/update/{id}', [ReservationController::class, 'update'])->name('reservations.update');
 Route::post('/reservation/{id}', [ReservationController::class, 'post'])->name('reservations.post');
 Route::get('/invoice/{id}', [ReservationController::class, 'invoice'])->name('invoice');
+Route::post('/reservation/store', [ReservationController::class, 'payment'])->name('reservations.store');
+Route::get('/status/{id}', [RsvpController::class, 'status'])-> name('');
+Route::get('/invoice/download/{id}', [ReservationController::class, 'download'])->name('invoice/download');
+
+
 Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::post('/login/auth', [UserController::class, 'auth'])->name('login/auth');
 Route::get('/logout',[UserController::class, 'logout'])->name('logout');
@@ -68,13 +72,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'reservation'], function () {
         Route::get('/', [ReservationController::class, 'index'])->name('reservations');
         Route::get('/create', [ReservationController::class, 'create'])->name('reservations.create');
-        Route::post('/store', [ReservationController::class, 'payment'])->name('reservations.store');
+        // Route::post('/store', [ReservationController::class, 'payment'])->name('reservations.store');
     });
 
     Route::get('/reservation/update/{id}', [ReservationController::class, 'update'])->name('reservations.update');
     Route::post('/reservation/{id}', [ReservationController::class, 'post'])->name('reservations.post');
     Route::get('/invoice/{id}', [ReservationController::class, 'invoice'])->name('invoice');
-    Route::get('/invoice/download/{id}', [ReservationController::class, 'download'])->name('invoice/download');
     Route::get('/reservation-arrival', [ReservationController::class, 'arrival'])->name('reservations.arrival');
     Route::get('/reservation-report', [ReportController::class, 'report'])->name('reservations.report');
 

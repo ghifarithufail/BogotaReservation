@@ -32,7 +32,7 @@
             <ul class="links">
                 <li><a href="{{ route('home') }}" class="active">Home</a></li>
                 <li><a href="{{ route('story') }}" class="active" >Our Story</a></li>
-                <li><a href="menu.html">Menu</a></li>
+                {{-- <li><a href="menu.html">Menu</a></li> --}}
                 <li><a href="{{ route('contact') }}">Contact Us</a></li>
             </ul>
 
@@ -68,8 +68,7 @@
 
         <div class="about-content">
             <h2 class="heading">Bogota Jakarta</h2>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit in rem error omnis doloremque, aspernatur maiores magnam ratione facilis repudiandae ut consequuntur saepe et ullam dolorem, maxime sint provident quae!</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam libero ratione pariatur quod, similique saepe est quasi maiores perferendis officia.</p>
+            <p>Fine dining in Bogotá is a sophisticated and vibrant experience that blends traditional Colombian flavors with modern and international culinary techniques. These establishments offer an elegant ambiance, diverse menus featuring creative interpretations of local dishes, and a focus on fresh, locally sourced ingredients. The culinary scene in Bogotá embraces cultural influences, and chefs are known for their creativity and commitment to providing impeccable service. Wine and cocktail pairings complement the high-quality dining experience, making it a memorable exploration of Colombia's rich culinary heritage in a refined setting.</p>
         </div>
     </section>
 
