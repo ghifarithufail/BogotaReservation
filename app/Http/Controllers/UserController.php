@@ -53,7 +53,7 @@ class UserController extends Controller
     {
         Auth::logout();
 
-        return redirect('/login');
+        return redirect('/');
     }
 
     public function create()
