@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 // front-end 
-Route::get('/', [HomeController::class, 'home'])->name('home');
+// Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/contact-us', [ContusController::class, 'index'])->name('contact');
 Route::get('/payment', [PaymentController::class, 'payment'])->name('payment');
 Route::get('/fixpayment', [PaymentController::class, 'fixPayment'])->name('fixPayment');
@@ -54,7 +54,7 @@ Route::get('/status/{id}', [RsvpController::class, 'status'])-> name('');
 Route::get('/invoice/download/{id}', [ReservationController::class, 'download'])->name('invoice/download');
 
 
-Route::get('/login', [UserController::class, 'login'])->name('login');
+Route::get('/', [UserController::class, 'login'])->name('login');
 Route::get('/logins', [UserController::class, 'logins'])->name('logins');
 Route::post('/login/auth', [UserController::class, 'auth'])->name('login/auth');
 Route::get('/logout',[UserController::class, 'logout'])->name('logout');
