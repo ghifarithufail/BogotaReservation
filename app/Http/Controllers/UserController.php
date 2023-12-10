@@ -41,12 +41,12 @@ class UserController extends Controller
                 return redirect('/reservation');
             } else {
                 // If status is not 0, redirect back to login with a statusError message
-                return redirect('/login')->with('statusError', 'Akun anda tidak aktif.');
+                return redirect('/')->with('statusError', 'Akun anda tidak aktif.');
             }
         }
 
         // If authentication fails or the status is not 0, redirect back to login
-        return redirect('/login');
+        return redirect('/')->with('loginError', 'Username atau Password salah.');
     }
 
     public function logout()
