@@ -276,7 +276,7 @@ class ReservationController extends Controller
 
         // validasi untuk table yang sudah di reservasi
         if ($existingReservation) {
-            return back()->with('warning', 'This table is already reserved and that time.');
+            return back()->with('warning', 'This table is already reserved in that time.');
         }
 
         // validasi memilih meja sesuai dengan kapasisatas ornag

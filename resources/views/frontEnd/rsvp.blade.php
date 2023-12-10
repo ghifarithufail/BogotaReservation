@@ -20,6 +20,12 @@
     swiper js 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> -->
 
+    <style>
+        .alert.alert-danger.gagal {
+            color: red;
+        }
+    </style>
+
     </head>
 
 <body class="main-bg">
@@ -61,7 +67,7 @@
         </div>
 
         @if (session('error'))
-        <div class="alert alert-danger">
+        <div class="alert alert-danger gagal">
             {{ session('error') }}
         </div>
     @endif
@@ -73,13 +79,13 @@
     @endif
 
     @if (session('guest'))
-        <div class="alert alert-danger">
+        <div class="alert alert-danger gagal">
             {{ session('guest') }}
         </div>
     @endif
 
     @if (session('warning'))
-        <div class="alert alert-danger">
+        <div class="alert alert-danger gagal">
             {{ session('warning') }}
         </div>
     @endif
@@ -91,7 +97,7 @@
                     <span>Full Name</span>
                     <input type="text" name="name" value="{{ old('name') }}" placeholder="Enter Your Name">
                     @error('name')
-                    <div class="alert alert-danger">{{ $pesan = 'Kolom name tidak boleh kosong' }}</div>
+                    <div class="alert alert-danger gagal">{{ $pesan = 'Kolom name tidak boleh kosong' }}</div>
                 @enderror
                 </div>
 
@@ -99,7 +105,7 @@
                     <span>Email</span>
                     <input type="email" name="email" value="{{ old('email') }}" placeholder="Enter Your Email" required>
                     @error('email')
-                    <div class="alert alert-danger">{{ $pesan = 'Kolom email tidak boleh kosong' }}</div>
+                    <div class="alert alert-danger gagal">{{ $pesan = 'Kolom email tidak boleh kosong' }}</div>
                 @enderror
                 </div>
 
@@ -107,10 +113,10 @@
                     <span>Reservation Date</span>
                     <input type="date" value="{{ old('date') }}" name="date" placeholder="Enter Your Reservation Date" required>
                     @error('date')
-                    <div class="alert alert-danger">{{ $message }}</div>
+                    <div class="alert alert-danger gagal">{{ $message }}</div>
                 @enderror
                 @if (session('date'))
-                    <div class="alert alert-danger">
+                    <div class="alert alert-danger gagal">
                         {{ session('date') }}
                     </div>
                 @endif
@@ -127,7 +133,7 @@
 
                 <div>
                     <span>Table Reservation</span>
-                    <select name="table_id"" id="table" required>
+                    <select name="table_id" id="table" required>
                         <option value="" selected>Choose Table</option>
                     @foreach ($table as $data)
                         <option value="{{ $data->id }}">{{ $data->tables_name }} ({{ $data->table_guest }} people)</option>
@@ -139,7 +145,7 @@
                     <span>Total Guest</span>
                     <input type="text" name="guest" value="{{ old('guest') }}" placeholder="Enter Your Name">
                     @error('guest')
-                    <div class="alert alert-danger">{{ $pesan = 'Kolom bulan tidak boleh kosong' }}</div>
+                    <div class="alert alert-danger gagal">{{ $pesan = 'Kolom bulan tidak boleh kosong' }}</div>
                 @enderror
                 </div>
 
