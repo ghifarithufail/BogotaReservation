@@ -143,7 +143,7 @@
 
                 <div>
                     <span>Total Guest</span>
-                    <input type="text" name="guest" value="{{ old('guest') }}" placeholder="Enter Your Name">
+                    <input type="text" name="guest" value="{{ old('guest') }}" placeholder="Enter Your Guest">
                     @error('guest')
                     <div class="alert alert-danger gagal">{{ $pesan = 'Kolom bulan tidak boleh kosong' }}</div>
                 @enderror
