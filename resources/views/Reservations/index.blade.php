@@ -46,7 +46,7 @@
                     <thead>
                         <tr>
                             <th scope="col">NO</th>
-                            <th scope="col">ID</th>
+                            {{-- <th scope="col">ID</th> --}}
                             <th scope="col" class="text-left">Name</th>
                             <th scope="col" class="text-left">Email</th>
                             <th scope="col">Guest</th>
@@ -63,7 +63,7 @@
                         @forelse  ($reservations as $data)
                             <tr>
                                 <td>{{$startingRow ++}}</td>
-                                <td>{{ $data->id }}</td>
+                                {{-- <td>{{ $data->id }}</td> --}}
                                 <td class="text-left">{{ $data->name }}</td>
                                 <td class="text-left">{{ $data->email }}</td>
                                 <td>{{ $data->guest }}</td>
