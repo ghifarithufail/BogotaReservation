@@ -18,9 +18,16 @@ class UserController extends Controller
         ]);
     }
 
+    
+
     public function login()
     {
         return view('user.login');
+    }
+
+    public function logins()
+    {
+        return view('user.logins');
     }
 
     public function auth(Request $request)

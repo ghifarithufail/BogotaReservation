@@ -55,6 +55,7 @@ Route::get('/invoice/download/{id}', [ReservationController::class, 'download'])
 
 
 Route::get('/login', [UserController::class, 'login'])->name('login');
+Route::get('/logins', [UserController::class, 'logins'])->name('logins');
 Route::post('/login/auth', [UserController::class, 'auth'])->name('login/auth');
 Route::get('/logout',[UserController::class, 'logout'])->name('logout');
 

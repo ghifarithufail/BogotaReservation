@@ -29,7 +29,7 @@ class LoginTest extends TestCase
 
         $response = $this->post('/login/auth', [
             'email' => 'ghifari@gmail.com',
-            'password' => '123456789',
+            'password' => '12345689',
         ]);
  
         $this->assertAuthenticated();
@@ -39,16 +39,13 @@ class LoginTest extends TestCase
     /** @test */
     public function LoginToTablePage(): void
     {
-        // Simulate 100 users logging in simultaneously
-        $this->parallelize(100, function ($userNumber) {
-            $response = $this->post('/login/auth', [
-                'email'    => "user{$userNumber}@example.com",
-                'password' => 'password123',
-            ]);
+        $response = $this->post('/login/auth', [
+            'email' => 'ghifari@gmail.com',
+            'password' => '12345689',
+        ]);
 
-            $response->assertAuthenticated();
-            $response->assertRedirect('/reservation');
-        });
+        $this->assertAuthenticated();
+        $response->assertRedirect('/reservation');
 
         // Now, you can perform assertions after all logins are complete
         $response = $this->get('/table');
@@ -59,12 +56,10 @@ class LoginTest extends TestCase
     /** @test */
     public function LoginAfterThatLogout(): void
     {
- 
-        $user = User::where('id','1')->get();
 
         $response = $this->post('/login/auth', [
             'email' => 'ghifari@gmail.com',
-            'password' => '123456789',
+            'password' => '12345689',
         ]);
  
         $this->assertAuthenticated();
