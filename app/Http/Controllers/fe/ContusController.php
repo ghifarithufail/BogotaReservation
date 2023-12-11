@@ -13,8 +13,10 @@ class ContusController extends Controller
         return view("frontEnd.contus");
     }
 
-    public function data(){
+    public function data()
+    {
+        $critics = Critic::orderBy('created_at','desc')->paginate(15);
 
-        return view("frontEnd.contus");
+        return view('critics.index',compact('critics'));
     }
 }

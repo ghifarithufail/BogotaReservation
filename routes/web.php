@@ -100,6 +100,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/update/{id}', [UserController::class, 'update'])->name('user/update')->middleware('hakakses:1,2');
     });
 
+    Route::group(['prefix' => 'critics'], function () {
+        Route::get('/', [ContusController::class, 'data'])->name('critics')->middleware('hakakses:1,2,3');
+
+    });
+
 
 // //home
 // Route::get('/home', [HomeController::class, 'index'])->name('home');

@@ -77,6 +77,19 @@
                         <p>Reservation Log</p>
                     </a>
                 </li>
+                <li class="nav-section">
+                    <span class="sidebar-mini-icon">
+                        <i class="fa fa-ellipsis-h"></i>
+                    </span>
+                    <h4 class="text-section">Critics</h4>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('critics') }}" class="collapsed" aria-expanded="false">
+                        <i class="fa fa-table" aria-hidden="true"></i>
+                        <p>Data</p>
+                    </a>
+                </li>
 
                 <li class="nav-section">
                     <span class="sidebar-mini-icon">
