@@ -350,7 +350,7 @@ a{
     margin-top: 15px;
 }
 
-.right-side .button input[type="button"]{
+.right-side .button button[type="submit"]{
     display: inline-block;
     color: var(--white-color);
     font-size: 15px;
@@ -363,7 +363,7 @@ a{
     border: 2px solid var(--white-color);
 }
 
-.button input[type="button"]:hover{
+.button button[type="submit"]:hover{
     background: var(--white-color);
     color: var(--green-pastel);
 }

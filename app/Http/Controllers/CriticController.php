@@ -3,17 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Critic;
-use App\Models\Times;
 use Illuminate\Http\Request;
 
-class TimesController extends Controller
+class CriticController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('times.index');
+        $critics = Critic::orderBy('created_at','desc')->paginate(15);
+
+        return view('critics.index',compact('critics'));
     }
 
     /**
@@ -29,25 +30,13 @@ class TimesController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'tables_name' => 'required|unique:tables',
-            'table_guest' => 'required',
-        ], [
-            'tables_name.required' => 'Table Harus diisi.',
-            'tables_name.unique' => 'Nama table ini sudah ada.',
-            'table_guest.required' => 'Guest harus di isi.',
-        ]);
-        
-        Critic::create([
-            'tables_name' => $request->tables_name,
-            'table_guest' => $request->table_guest
-        ]);
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Times $times)
+    public function show(Critic $critic)
     {
         //
     }
@@ -55,7 +44,7 @@ class TimesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Times $times)
+    public function edit(Critic $critic)
     {
         //
     }
@@ -63,7 +52,7 @@ class TimesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Times $times)
+    public function update(Request $request, Critic $critic)
     {
         //
     }
@@ -71,7 +60,7 @@ class TimesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Times $times)
+    public function destroy(Critic $critic)
     {
         //
     }

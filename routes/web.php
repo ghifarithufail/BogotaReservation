@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CriticController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\fe\ContusController;
 use App\Http\Controllers\fe\HomeController;
@@ -35,6 +36,8 @@ Route::get('/payment', [PaymentController::class, 'payment'])->name('payment');
 Route::get('/fixpayment', [PaymentController::class, 'fixPayment'])->name('fixPayment');
 Route::get('/reservations', [RsvpController::class, 'rsvp'])->name('rsvp');
 Route::get('/our-story', [StoryController::class, 'story'])-> name('story');
+Route::post('critics/post', [ContusController::class, 'critics'])->name('critic.store');
+
 
 
 
@@ -101,6 +104,10 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
 
+    Route::group(['prefix' => 'critics'], function () {
+        Route::get('/', [CriticController::class, 'index'])->name('critics')->middleware('hakakses:1,2,3');
+
+    });
 // //home
 // Route::get('/home', [HomeController::class, 'index'])->name('home');
 // Route::get('/homes', [HomeController::class, 'home'])->name('default');

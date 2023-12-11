@@ -88,18 +88,19 @@
                 <div class="topic-text">Send Us Suggestion</div>
                 <p>JIf you have criticism and suggestions or complaints that you have at Bogota Restaurant, you can directly send it through the form below. We are happy to read and accept your feedback to help us build Bogota Restaurant ahead.</p>
 
-                <form action="#">
+                <form action="{{ route('critic.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
                     <div class="input-box">
-                        <input type="text" placeholder="Enter your name here">
+                        <input type="text" name="name" placeholder="Enter your name here">
                     </div>
                     <div class="input-box">
-                        <input type="text" placeholder="Enter your email here">
+                        <input type="email" name="email" placeholder="Enter your email here">
                     </div>
                     <div class="input-box messsage-box">
-                        <textarea placeholder="Enter your suggestion here"></textarea>
+                        <input name="critics" placeholder="Enter your suggestion here">
                     </div>
                     <div class="button">
-                        <input type="button" value="Send Now">
+                        <button type="submit">Send Now</button>
                     </div>
                 </form>
             </div>
