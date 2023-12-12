@@ -125,7 +125,7 @@
                 <div>
                     <span>Time Reservation</span>
                     <select name="time" id="time" required>
-                        <option value="" selected>Choose Table</option>
+                        <option value="" selected>Choose Time</option>
                         <option value="16.00 - 18.00">16.00 - 18.00</option>
                         <option value="19.00 - 21.00">19.00 - 21.00</option>
                     </select>

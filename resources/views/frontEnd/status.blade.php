@@ -72,7 +72,11 @@
                 </div>
                 <div class="status">
                     <h3>Status :</h3>
-                    <p>{{ $reservasi->status }}</p>
+                    <p>
+                        @if ($reservasi->status == 'done')
+                            PAID
+                        @endif
+                    </p>
                 </div>
             </div>
 
