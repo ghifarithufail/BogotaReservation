@@ -153,7 +153,6 @@ class ReservationController extends Controller
         // code untuk mencari table yang terisi
         $existingReservation = Reservation::where('table_id', $request->table_id)
             ->whereDate('date', $date)
-            ->where('time', $time)
             ->first();
 
         //validasi limit orang
