@@ -30,6 +30,6 @@ class ContusController extends Controller
             'critics' => $request->critics
         ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('success','your criticism and suggestions have been successfully');
     }
 }
