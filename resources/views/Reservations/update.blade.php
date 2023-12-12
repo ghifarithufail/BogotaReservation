@@ -29,6 +29,11 @@
                                 {{ session('dateReservation') }}
                             </div>
                         @endif
+                        @if (session('existingReservation'))
+                        <div class="alert alert-danger">
+                            {{ session('existingReservation') }}
+                        </div>
+                    @endif
                         @if (session('warning'))
                             <div class="alert alert-danger">
                                 {{ session('warning') }}
@@ -88,11 +93,11 @@
                                         <input type="date" class="form-control mb-2" name="date"
                                             value="{{ $reservations->date }}" id="date">
                                         <p>Current Reservation Date: {{ $reservations->date->format('D d-M-Y') }}</p>
-                                        {{-- @if (session('dateReservation'))
+                                        @if (session('dateReservation'))
                                             <div class="alert alert-danger">
                                                 {{ session('dateReservation') }}
                                             </div>
-                                        @endif --}}
+                                        @endif
                                         @error('date')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
@@ -118,11 +123,6 @@
                                             <option value="16.00 - 18.00">16.00 - 18.00</option>
                                             <option value="19.00 - 21.00">19.00 - 21.00</option>
                                         </select>
-                                        @if (session('time'))
-                                        <div class="alert alert-danger">
-                                            {{ session('time') }}
-                                        </div>
-                                    @endif
                                     </div>
                                 </div>
                                 <button type="submit" class="btn form-control text-white"
