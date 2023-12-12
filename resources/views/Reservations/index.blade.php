@@ -50,6 +50,7 @@
                             <th scope="col" class="text-left">Name</th>
                             <th scope="col" class="text-left">Email</th>
                             <th scope="col">Guest</th>
+                            <th scope="col">Time</th>
                             <th scope="col">Reservation Table</th>
                             <th scope="col">Reservation Date</th>
                             <th scope="col" class="text-center">Status</th>
@@ -67,6 +68,7 @@
                                 <td class="text-left">{{ $data->name }}</td>
                                 <td class="text-left">{{ $data->email }}</td>
                                 <td>{{ $data->guest }}</td>
+                                <td>{{ $data->time }}</td>
                                 <td>{{ $data->Tables->tables_name }} - {{ $data->Tables->table_guest }} people</td>
                                 <td>{{ $data->date->format('D d-M-Y') }}</td>
                                 <td class="text-center">

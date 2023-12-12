@@ -150,6 +150,12 @@ class ReservationController extends Controller
         $currentDate = Carbon::now();
         $daysDifference = $currentDate->diffInDays($reservationDate);
 
+        $existingTime = Reservation::where('time', $request->time)
+            ->whereDate('date', $date)
+            ->where('time', $time)
+            ->first();
+
+
         // code untuk mencari table yang terisi
         $existingReservation = Reservation::where('table_id', $request->table_id)
             ->whereDate('date', $date)
@@ -159,6 +165,10 @@ class ReservationController extends Controller
         //validasi limit orang
         if ($recordCount + $request->guest > $limit) {
             return back()->with('limit', 'You have reached the maximum limit of records for today.');
+        }
+
+        if($existingTime){
+            return back()->with('time', 'This time is already reserved.');
         }
 
         //validasi bisa reservasi jika h-1
@@ -180,11 +190,13 @@ class ReservationController extends Controller
         $guest = $request->input('guest');
         $date = $request->input('date');
         $table_id = $request->input('table_id');
+        $time = $request->input('time');
 
         $data = [
             'name' => $name,
             'guest' => $guest,
-            'table_id' => $table_id
+            'table_id' => $table_id,
+            'time' => $time
         ];
 
 
